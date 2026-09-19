@@ -9,4 +9,20 @@ export default defineNuxtConfig({
       strapiUrl: '',
     },
   },
+  app: {
+    head: {
+      title: 'Hard Hit Magazine',
+      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+      htmlAttrs: {
+        lang: 'en',
+      },
+    },
+  },
+  image: {
+    dir: 'assets/images',
+  },
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark',
+  },
 })
