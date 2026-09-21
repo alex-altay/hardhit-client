@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui';
+import type { NavigationMenuItem } from '@nuxt/ui'
 
 const linkClass = [
   'h-24 px-6 font-bold before:hidden',
@@ -45,10 +45,10 @@ const items = computed<NavigationMenuItem[]>(() =>
   [
     { label: 'Photos', to: '/photos' },
     { label: 'About', to: '/about' },
-  ].map(item => ({ ...item, active: route.path.startsWith(item.to) }))
+  ].map((item) => ({ ...item, active: route.path.startsWith(item.to) })),
 )
 
 const desktopItems = computed<NavigationMenuItem[]>(() =>
-  items.value.map(item => ({ ...item, class: item.active ? activeClass : '' }))
+  items.value.map((item) => ({ ...item, class: item.active ? activeClass : '' })),
 )
 </script>

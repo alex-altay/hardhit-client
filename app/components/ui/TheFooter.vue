@@ -1,6 +1,6 @@
 <template>
   <UFooter>
-   <template #right>
+    <template #right>
       <UColorModeButton />
     </template>
   </UFooter>
