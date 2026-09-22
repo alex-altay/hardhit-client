@@ -28,13 +28,16 @@
         @keydown.space.prevent="isFullscreen = true"
       />
     </div>
-    <div class="relative grid grid-cols-5 gap-5 pt-4 w-full">
+    <div
+      ref="previewStrip"
+      class="relative flex gap-5 pt-4 w-full overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden"
+    >
       <NuxtPicture
         v-for="(item, index) in images"
         :key="index"
         :src="item"
-        :class="{ 'opacity-100': activeIndex === index }"
-        class="w-full cursor-pointer"
+        :class="{ 'opacity-100!': activeIndex === index }"
+        class="shrink-0 basis-[calc((100%-5rem)/5)] cursor-pointer opacity-30"
         :img-attrs="{ class: 'w-full object-cover aspect-square' }"
         sizes="sm:128px md:179px lg:228px"
         loading="lazy"
@@ -131,11 +134,10 @@
 <script setup lang="ts">
 import ExpandIcon from '@/components/ui/ExpandIcon.vue'
 
-const props = defineProps<{
-  images: string[]
-}>()
+const props = defineProps<{ images: string[] }>()
 
 const carousel = useTemplateRef('carousel')
+const previewStrip = useTemplateRef('previewStrip')
 const activeIndex = ref(0)
 const isFullscreen = ref(false)
 
@@ -167,6 +169,19 @@ function onFullscreenKeydown(event: KeyboardEvent) {
   }
 }
 
+function revealThumb(index: number) {
+  const strip = previewStrip.value
+  const preview = strip?.children[index] as HTMLElement | undefined
+  if (!strip || !preview) {
+    return
+  }
+
+  const centered = preview.offsetLeft - (strip.clientWidth - preview.offsetWidth) / 2
+  const max = strip.scrollWidth - strip.clientWidth
+  strip.scrollTo({ left: Math.min(Math.max(centered, 0), max), behavior: 'smooth' })
+}
+
+watch(activeIndex, revealThumb)
 onMounted(() => window.addEventListener('keydown', onFullscreenKeydown))
 onBeforeUnmount(() => window.removeEventListener('keydown', onFullscreenKeydown))
 </script>
