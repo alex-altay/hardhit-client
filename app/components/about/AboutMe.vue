@@ -12,19 +12,13 @@ import PhotoGallery from '@/components/ui/PhotoGallery.vue'
 type About = {
   title: string
   description: string
-  fotos:
-    | {
-        id: number
-        url: string
-        name: string
-      }[]
-    | null
+  fotos: StrapiMedia[]
 }
 
 const {
   public: { strapiUrl },
 } = useRuntimeConfig()
-const { data: about } = await useFetch<{ data: About }>('/api/strapi/about', {
+const { data: about } = await useFetch<StrapiResponse<About>>('/api/strapi/about', {
   query: { populate: '*' },
 })
 
