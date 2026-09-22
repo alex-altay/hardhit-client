@@ -8,7 +8,12 @@
     }"
   >
     <template #title>
-      <NuxtImg class="relative top-0.5 h-9 w-auto light:invert" src="logo.png" />
+      <NuxtImg
+        class="relative top-0.5 h-9 w-auto light:invert"
+        src="/images/logo.png"
+        format="webp"
+        alt=""
+      />
     </template>
 
     <template #right>

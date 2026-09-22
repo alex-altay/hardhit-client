@@ -19,7 +19,8 @@ export default defineNuxtConfig({
     },
   },
   image: {
-    dir: 'assets/images',
+    format: ['webp'],
+    domains: [process.env.NUXT_PUBLIC_STRAPI_URL] as string[],
   },
   colorMode: {
     preference: 'dark',

@@ -9,7 +9,11 @@
         @select="onSelect"
       >
         <div class="w-full aspect-3/2 overflow-hidden">
-          <NuxtImg :src="item" class="w-full h-full object-cover" />
+          <NuxtPicture
+            :src="item"
+            class="contents"
+            :img-attrs="{ class: 'w-full h-full object-cover' }"
+          />
         </div>
       </UCarousel>
       <ExpandIcon
@@ -23,11 +27,12 @@
       />
     </div>
     <div class="relative flex gap-5 justify-between pt-4 w-full mx-auto">
-      <NuxtImg
+      <NuxtPicture
         v-for="(item, index) in images"
         :key="index"
         :class="{ 'opacity-100': activeIndex === index }"
-        class="w-[20%] object-cover"
+        class="w-[20%] cursor-pointer"
+        :img-attrs="{ class: 'w-full object-cover aspect-square' }"
         loading="lazy"
         :src="item"
         @click="select(index)"
@@ -42,10 +47,11 @@
     >
       <template #content="{ close }">
         <div class="relative flex h-full w-full items-center justify-center p-4">
-          <NuxtImg
+          <NuxtPicture
             v-if="images[activeIndex]"
             :src="images[activeIndex]"
-            class="max-h-full max-w-full object-contain"
+            class="contents"
+            :img-attrs="{ class: 'max-h-full max-w-full object-contain' }"
           />
 
           <button
