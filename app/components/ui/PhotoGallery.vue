@@ -3,7 +3,7 @@
     <div class="relative w-full">
       <UCarousel
         ref="carousel"
-        v-slot="{ item }"
+        v-slot="{ item, index }"
         :items="images"
         class="relative w-full"
         @select="onSelect"
@@ -13,6 +13,8 @@
             :src="item"
             class="contents"
             :img-attrs="{ class: 'w-full h-full object-cover' }"
+            sizes="sm:720px md:976px lg:1216px"
+            :preload="index === 0"
           />
         </div>
       </UCarousel>
@@ -26,15 +28,17 @@
         @keydown.space.prevent="isFullscreen = true"
       />
     </div>
-    <div class="relative flex gap-5 justify-between pt-4 w-full mx-auto">
+    <div class="relative grid grid-cols-5 gap-5 pt-4 w-full">
       <NuxtPicture
         v-for="(item, index) in images"
         :key="index"
-        :class="{ 'opacity-100': activeIndex === index }"
-        class="w-[20%] cursor-pointer"
-        :img-attrs="{ class: 'w-full object-cover aspect-square' }"
-        loading="lazy"
         :src="item"
+        :class="{ 'opacity-100': activeIndex === index }"
+        class="w-full cursor-pointer"
+        :img-attrs="{ class: 'w-full object-cover aspect-square' }"
+        sizes="sm:128px md:179px lg:228px"
+        loading="lazy"
+        placeholder
         @click="select(index)"
       />
     </div>
