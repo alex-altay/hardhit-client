@@ -18,7 +18,7 @@
           />
         </div>
       </UCarousel>
-      <ExpandIcon
+      <UiExpandIcon
         class="absolute bottom-2 right-2 z-10 w-5 h-5 cursor-pointer"
         role="button"
         tabindex="0"
@@ -132,8 +132,6 @@
 </template>
 
 <script setup lang="ts">
-import ExpandIcon from '@/components/ui/ExpandIcon.vue'
-
 const props = defineProps<{ images: string[] }>()
 
 const carousel = useTemplateRef('carousel')
