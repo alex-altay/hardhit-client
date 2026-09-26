@@ -15,9 +15,11 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@comark/nuxt": "^0.7.0",
     "@nuxt/eslint": "^1.17.0",
     "@nuxt/image": "^2.1.0",
     "@nuxt/ui": "^4.11.1",
+    "@nuxtjs/strapi": "^2.2.0",
     "@tiptap/core": "^3.31.3",
     "@tiptap/extension-bubble-menu": "^3.31.3",
     "@tiptap/extension-code": "^3.31.3",

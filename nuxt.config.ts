@@ -2,11 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxt/image'],
+  modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxt/image', '@nuxtjs/strapi', '@comark/nuxt'],
   runtimeConfig: {
     apiSecret: '',
     public: {
-      strapiUrl: '',
+      strapiOrigin: '',
     },
   },
   app: {
@@ -20,10 +20,15 @@ export default defineNuxtConfig({
   },
   image: {
     format: ['webp'],
-    domains: [process.env.NUXT_PUBLIC_STRAPI_URL] as string[],
+    domains: [process.env.NUXT_PUBLIC_STRAPI_ORIGIN] as string[],
   },
   colorMode: {
     preference: 'dark',
     fallback: 'dark',
+  },
+  strapi: {
+    url: '/api/strapi',
+    prefix: '',
+    version: 'v5',
   },
 })

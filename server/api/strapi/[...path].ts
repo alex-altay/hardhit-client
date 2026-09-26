@@ -9,7 +9,7 @@ export default defineEventHandler((event) => {
 
   const { search } = getRequestURL(event)
 
-  return proxyRequest(event, `${config.public.strapiUrl}/api/${path}${search}`, {
+  return proxyRequest(event, `${config.public.strapiOrigin}/api/${path}${search}`, {
     headers: { Authorization: `Bearer ${config.apiSecret}` },
   })
 })
