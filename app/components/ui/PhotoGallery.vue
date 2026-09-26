@@ -29,6 +29,7 @@
       />
     </div>
     <div
+      v-if="images.length > 1"
       ref="previewStrip"
       class="relative flex gap-5 pt-4 w-full overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden"
     >
