@@ -16,7 +16,7 @@ type Story = {
   title: string
   cover: StrapiMedia
   text?: string
-  issue: Pick<Issue, 'id' | 'title' | 'volume' | 'date' | 'cover' | 'pdf' | 'description'>
+  issue: IssueRef
   bands: Pick<Band, 'id' | 'name' | 'slug'>[]
 }
 
@@ -29,6 +29,7 @@ type Issue = {
   volume: number
   stories: Pick<Story, 'title' | 'cover' | 'text'>[]
 }
+type IssueRef = Pick<Issue, 'title' | 'volume' | 'date' | 'cover' | 'pdf' | 'description'>
 
 type Band = {
   id: number

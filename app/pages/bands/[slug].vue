@@ -7,10 +7,9 @@
     </section>
     <section v-for="story in band?.stories" :key="story.title">
       <h3>{{ story.title }}</h3>
-      <NuxtImg :src="`${strapiOrigin}${story.cover.url}`" />
+      <NuxtImg format="webp" class="w-full" :src="`${strapiOrigin}${story.cover.url}`" />
       <RichMarkdown v-if="story.text" :value="story.text" />
-      {{ story.issue }}
-      <RichMarkdown v-if="story.issue.description" :value="story.issue.description" />
+      <FeaturedIn v-if="story.issue" :issue="story.issue" />
     </section>
   </div>
 </template>
@@ -28,7 +27,12 @@ const { data: band } = await useAsyncData(
       populate: {
         photos_collections: { populate: 'photos' },
         live_videos: { populate: 'video' },
-        stories: { populate: ['cover', 'issue'] },
+        stories: {
+          populate: {
+            cover: { fields: ['url', 'name'] },
+            issue: { populate: ['cover', 'pdf'] },
+          },
+        },
       },
     })
     return data[0] ?? null
