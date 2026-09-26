@@ -14,13 +14,13 @@ type About = {
 }
 
 const {
-  public: { strapiUrl },
+  public: { strapiOrigin },
 } = useRuntimeConfig()
 const { data: about } = await useFetch<StrapiResponse<About>>('/api/strapi/about', {
   query: { populate: '*' },
 })
 
 const images = about?.value?.data?.fotos
-  ? about?.value.data.fotos.sort((a, b) => a.id - b.id).map((el) => `${strapiUrl}${el.url}`)
+  ? about?.value.data.fotos.sort((a, b) => a.id - b.id).map((el) => `${strapiOrigin}${el.url}`)
   : []
 </script>
