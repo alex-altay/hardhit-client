@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 class="uppercase text-[4rem] font-black text-center">Magazine Issues</h1>
+    <h1>Magazine Issues</h1>
     <p class="pb-8 text-center text-[15px]">
       Click on any magazine to download it. They are all FREE
     </p>
@@ -14,7 +14,12 @@
         <div>
           <h3 class="uppercase">volume {{ issue.volume }}</h3>
           <RichMarkdown v-if="issue.description" :value="issue.description" />
-          <UButton :href="`${strapiOrigin}${issue.pdf.url}`" target="_blank">Download</UButton>
+          <UButton
+            class="w-74 h-9 uppercase"
+            :href="`${strapiOrigin}${issue.pdf.url}`"
+            target="_blank"
+            >Download</UButton
+          >
         </div>
       </div>
     </div>

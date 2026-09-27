@@ -3,5 +3,23 @@
 
 :root {
   --ui-header-height: 4rem;
-  --ui-bg: #1e1e1e;
+  --ui-radius: 0rem;
+  --ui-primary: var(--color-white);
+  --ui-error: var(--ui-color-error-800);
+
+  @variant light {
+    --ui-bg: var(--color-white);
+  }
+
+  @variant dark {
+    --ui-bg: #1e1e1e;
+  }
+}
+
+h1 {
+  @apply mb-12 text-7xl text-center font-black uppercase;
+}
+
+h2 {
+  @apply mb-2 text-4xl font-black uppercase;
 }

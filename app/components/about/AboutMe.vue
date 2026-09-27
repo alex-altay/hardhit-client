@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="uppercase text-[4rem] font-black text-center">{{ about?.data.title }}</h1>
+    <h1>{{ about?.data.title }}</h1>
     <p class="pb-8 text-center text-[15px]">{{ about?.data.description }}</p>
     <UiPhotoGallery :images="images" />
   </div>

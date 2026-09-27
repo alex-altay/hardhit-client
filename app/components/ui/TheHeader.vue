@@ -39,7 +39,7 @@ import type { NavigationMenuItem } from '@nuxt/ui'
 const linkClass = [
   'h-24 px-6 font-bold before:hidden',
   'w-28 justify-center',
-  'after:absolute after:inset-0 after:z-[-1] after:bg-[#a52a22]',
+  'after:absolute after:inset-0 after:z-[-1] after:bg-red-800',
   'after:[clip-path:polygon(0_0,100%_0,100%_100%,0_90%)]',
   'after:origin-top after:scale-y-0 after:transition-transform after:duration-300 after:ease-out',
   'motion-reduce:after:transition-none',

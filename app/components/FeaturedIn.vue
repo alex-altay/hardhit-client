@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Featured In</h3>
+    <p class="mb-2 font-black">Featured In</p>
     <div class="h-72 flex flex-row gap-6">
       <NuxtImg
         class="h-full w-auto"
@@ -9,9 +9,14 @@
         sizes="sm:128px md:179px lg:228px"
       />
       <div class="w-70 flex flex-col justify-center">
-        <h3 class="uppercase">volume {{ issue.volume }}</h3>
+        <h3 class="text-error font-black uppercase">volume {{ issue.volume }}</h3>
         <RichMarkdown v-if="issue.description" :value="issue.description" />
-        <UButton :href="`${strapiOrigin}${issue.pdf.url}`" target="_blank">Download</UButton>
+        <UButton
+          class="w-74 h-9 uppercase"
+          :href="`${strapiOrigin}${issue.pdf.url}`"
+          target="_blank"
+          >Download</UButton
+        >
       </div>
     </div>
   </div>
