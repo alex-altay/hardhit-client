@@ -50,7 +50,7 @@ const route = useRoute()
 
 const items = computed<NavigationMenuItem[]>(() =>
   [
-    { label: 'Photos', to: '/photos' },
+    { label: 'Photos', to: '/bands' },
     { label: 'About', to: '/about' },
   ].map((item) => ({ ...item, active: route.path.startsWith(item.to) })),
 )
