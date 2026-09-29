@@ -8,16 +8,7 @@
         :src="`${strapiOrigin}${issue.cover?.url}`"
         sizes="sm:128px md:179px lg:228px"
       />
-      <div class="w-70 flex flex-col justify-center">
-        <h3 class="text-error font-black uppercase">volume {{ issue.volume }}</h3>
-        <RichMarkdown v-if="issue.description" :value="issue.description" />
-        <UButton
-          class="w-74 h-9 uppercase"
-          :href="`${strapiOrigin}${issue.pdf.url}`"
-          target="_blank"
-          >Download</UButton
-        >
-      </div>
+      <IssueInfo :issue class="w-70" />
     </div>
   </div>
 </template>

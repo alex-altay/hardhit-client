@@ -1,5 +1,5 @@
 <template>
   <div>
-    <MagazineIssues />
+    <MainMagazineIssues />
   </div>
 </template>

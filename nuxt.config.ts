@@ -18,6 +18,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  imports: {
+    dirs: ['data'],
+  },
   image: {
     format: ['webp'],
     domains: [process.env.NUXT_PUBLIC_STRAPI_ORIGIN] as string[],

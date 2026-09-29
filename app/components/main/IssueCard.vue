@@ -1,0 +1,33 @@
+<template>
+  <div class="h-full flex flex-row shrink-0">
+    <NuxtPicture
+      :src="`${strapiOrigin}${issue.cover.url}`"
+      class="block h-full shrink-0 cursor-pointer"
+      sizes="sm:128px md:180px lg:228px"
+      @click="$emit('toggle')"
+    />
+    <div
+      :class="isOpen ? 'grid-cols-[1fr]' : 'grid-cols-[0fr]'"
+      class="grid transition-[grid-template-columns] ease-out motion-reduce:transition-none"
+      :style="transitionStyle"
+      :inert="!isOpen"
+    >
+      <div class="flex min-w-0 overflow-hidden">
+        <IssueInfo
+          :issue
+          :class="isOpen ? 'opacity-100' : 'opacity-0'"
+          class="shrink-0 w-max max-w-105 pl-5 transition-opacity motion-reduce:transition-none"
+          :style="transitionStyle"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+defineProps<{ issue: Issue; isOpen: boolean }>()
+defineEmits<{ toggle: [] }>()
+
+const { strapiOrigin } = useRuntimeConfig().public
+const transitionStyle = { transitionDuration: `${PANEL_TRANSITION_MS}ms` }
+</script>
