@@ -1,6 +1,10 @@
 @import 'tailwindcss';
 @import '@nuxt/ui';
 
+@theme {
+  --font-sans: 'Glacial Indifference', sans-serif;
+}
+
 :root {
   --ui-header-height: 4rem;
   --ui-radius: 0rem;
@@ -17,13 +21,17 @@
 }
 
 h1 {
-  @apply mb-12 text-7xl text-center font-black uppercase;
+  @apply mb-12 text-6xl tracking-[3%] text-center font-bold uppercase;
 }
 
 h2 {
-  @apply mb-2 text-4xl font-black uppercase;
+  @apply mb-2 text-8xl font-bold uppercase;
+}
+
+h3 {
+  @apply text-[40px] font-bold uppercase;
 }
 
 p {
-  @apply my-0;
+  @apply my-0 text-xl;
 }
