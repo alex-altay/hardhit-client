@@ -1,9 +1,10 @@
 <template>
   <div class="h-full flex flex-row shrink-0">
-    <NuxtPicture
+    <NuxtImg
       :src="`${strapiOrigin}${issue.cover.url}`"
-      class="block h-full shrink-0 cursor-pointer"
-      sizes="sm:128px md:180px lg:228px"
+      class="block h-80 w-auto shrink-0 cursor-pointer aspect-[1/1.414] object-cover"
+      sizes="320px"
+      format="webp"
       @click="$emit('toggle')"
     />
     <div
@@ -16,7 +17,7 @@
         <IssueInfo
           :issue
           :class="isOpen ? 'opacity-100' : 'opacity-0'"
-          class="shrink-0 w-max max-w-105 pl-5 transition-opacity motion-reduce:transition-none"
+          class="shrink-0 w-max max-w-[min(80vw,400px)] pl-5 transition-opacity motion-reduce:transition-none"
           :style="transitionStyle"
         />
       </div>
