@@ -4,7 +4,7 @@
     <p class="pb-8 text-center text-[15px]">
       Click on any magazine to download it. They are all FREE
     </p>
-    <MainIssuesSlider v-if="issues" :issues />
+    <MainIssueSlider v-if="issues" :issues />
   </section>
 </template>
 
