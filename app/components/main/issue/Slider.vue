@@ -2,12 +2,12 @@
   <div
     class="relative max-w-screen h-full overflow-hidden scrollbar-none [&::-webkit-scrollbar]:hidden"
   >
-    <UiBackIcon
+    <UiIconBack
       :class="{ hidden: !canScrollLeft }"
       class="absolute left-0 top-[calc(50%-0.25rem)] w-8 h-8 cursor-pointer z-10"
       @click.stop="selectPrevious"
     />
-    <UiBackIcon
+    <UiIconBack
       :class="{ hidden: !canScrollRight }"
       class="absolute right-0 top-[calc(50%-0.25rem)] w-8 h-8 rotate-180 cursor-pointer z-10"
       @click.stop="selectNext"

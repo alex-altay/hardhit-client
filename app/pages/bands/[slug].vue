@@ -1,7 +1,7 @@
 <template>
   <div>
     <NuxtLink to="/bands" class="mb-8 flex flex-row items-center">
-      <UiBackIcon class="inline mr-1.5 w-3.5 h-3.5" />
+      <UiIconBack class="inline mr-1.5 w-3.5 h-3.5" />
       <span class="font-bold">Back</span>
     </NuxtLink>
     <h1>{{ band?.name }}</h1>

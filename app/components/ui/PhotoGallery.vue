@@ -18,7 +18,7 @@
           />
         </div>
       </UCarousel>
-      <UiExpandIcon
+      <UiIconExpand
         class="absolute bottom-2 right-2 z-10 w-5 h-5 cursor-pointer"
         role="button"
         tabindex="0"
