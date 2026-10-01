@@ -1,0 +1,18 @@
+<template>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <rect height="6" rx="1" ry="1" width="4.667" x="3" y="1" />
+    <rect height="6" rx="1" ry="1" width="4.667" x="16.333" y="1" />
+    <rect height="6" rx="1" ry="1" width="4.667" x="9.667" y="1" />
+    <rect height="6" rx="1" ry="1" width="4.667" x="3" y="9" />
+    <rect height="6" rx="1" ry="1" width="4.667" x="16.333" y="9" />
+    <rect height="6" rx="1" ry="1" width="4.667" x="9.667" y="9" />
+    <rect height="6" rx="1" ry="1" width="4.667" x="3" y="17" />
+    <rect height="6" rx="1" ry="1" width="4.667" x="16.333" y="17" />
+    <rect height="6" rx="1" ry="1" width="4.667" x="9.667" y="17" />
+  </svg>
+</template>

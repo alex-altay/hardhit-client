@@ -6,3 +6,13 @@ type Youtube = {
   banner: StrapiMedia
   logo: StrapiMedia
 }
+
+type Instagram = {
+  logo: StrapiMedia
+  description: string
+  link: string
+  followersCount: number
+  followingCount: number
+  photosCount: number
+  photos: StrapiMedia[]
+}
