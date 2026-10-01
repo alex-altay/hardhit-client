@@ -7,10 +7,10 @@ export default defineAppConfig({
       info: 'blue',
       warning: 'yellow',
       error: 'red',
-      neutral: 'slate',
+      neutral: 'neutral',
     },
     button: {
-      slots: { base: 'justify-center' },
+      slots: { base: 'justify-center rounded-none' },
       compoundVariants: [
         { color: 'error', variant: 'solid', class: 'dark:text-white light:text-black' },
       ],
