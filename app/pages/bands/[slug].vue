@@ -6,15 +6,15 @@
     </NuxtLink>
     <h1>{{ band?.name }}</h1>
     <section v-for="collection in band?.photos_collections" :key="collection.id" class="mb-48">
-      <h2>
+      <h3>
         {{ collection.title }}
         <span v-if="collection.date">{{ transformDateString(collection.date) }}</span>
-      </h2>
+      </h3>
       <UiPhotoGallery :images="collection.photos.map((photo) => `${strapiOrigin}${photo.url}`)" />
     </section>
     <section v-for="story in band?.stories" :key="story.title">
       <div class="mb-8">
-        <h2>{{ story.title }}</h2>
+        <h3>{{ story.title }}</h3>
         <NuxtImg format="webp" class="w-full" :src="`${strapiOrigin}${story.cover.url}`" />
         <RichMarkdown v-if="story.text" :value="story.text" />
       </div>
