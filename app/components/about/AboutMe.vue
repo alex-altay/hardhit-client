@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{ about.title }}</h1>
-    <p class="pb-8 text-center text-[15px]">{{ about.description }}</p>
+    <p class="pb-8 text-center">{{ about.description }}</p>
     <UiPhotoGallery :images="about.fotos.map((photo) => `${strapiOrigin}${photo.url}`)" />
   </div>
 </template>
