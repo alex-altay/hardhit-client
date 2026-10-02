@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="mb-2 font-black">Featured In</p>
+    <p class="mb-2 font-bold">Featured In</p>
     <div class="h-72 flex flex-row gap-6">
       <NuxtImg
         class="h-full w-auto"

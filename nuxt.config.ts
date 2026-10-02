@@ -21,6 +21,11 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['data'],
   },
+  ui: {
+    theme: {
+      colors: ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'neutral', 'brand'],
+    },
+  },
   image: {
     format: ['webp'],
     domains: [process.env.NUXT_PUBLIC_STRAPI_ORIGIN] as string[],

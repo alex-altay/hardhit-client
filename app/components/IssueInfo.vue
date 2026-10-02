@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center">
-    <h3 class="mb-2 uppercase text-error font-black">volume {{ issue.volume }}</h3>
+    <h3 class="mb-2 uppercase text-brand-strong font-bold">volume {{ issue.volume }}</h3>
     <RichMarkdown :value="issue.description" class="mb-2" />
     <UButton class="w-74 h-9 uppercase" :href="`${strapiOrigin}${issue.pdf.url}`" target="_blank">
       Download

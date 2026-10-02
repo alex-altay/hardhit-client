@@ -8,13 +8,14 @@ export default defineAppConfig({
       warning: 'yellow',
       error: 'red',
       neutral: 'neutral',
+      brand: 'brand',
     },
     button: {
       slots: { base: 'justify-center rounded-none' },
       compoundVariants: [
-        { color: 'error', variant: 'solid', class: 'dark:text-white light:text-black' },
+        { color: 'brand', variant: 'solid', class: 'text-white hover:bg-brand-strong' },
       ],
-      defaultVariants: { color: 'error' },
+      defaultVariants: { color: 'brand' },
     },
   },
 })

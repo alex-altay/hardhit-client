@@ -3,20 +3,42 @@
 
 @theme {
   --font-sans: 'Glacial Indifference', sans-serif;
+  --color-brand-primary: var(--color-brand-600);
+  --color-brand-strong: var(--color-brand-700);
+}
+
+@theme static {
+  --color-brand-50: oklch(97.1% 0.012 27.9);
+  --color-brand-100: oklch(93.6% 0.029 27.9);
+  --color-brand-200: oklch(88.5% 0.056 27.9);
+  --color-brand-300: oklch(80.8% 0.103 27.9);
+  --color-brand-400: oklch(70.4% 0.173 27.9);
+  --color-brand-500: oklch(63.7% 0.214 27.9);
+  --color-brand-600: #dd1d1d;
+  --color-brand-700: #b21717;
+  --color-brand-800: oklch(44.4% 0.156 27.9);
+  --color-brand-900: oklch(39.6% 0.124 27.9);
+  --color-brand-950: oklch(25.8% 0.081 27.9);
 }
 
 :root {
   --ui-header-height: 4rem;
   --ui-radius: 0.25rem;
   --ui-primary: var(--color-white);
-  --ui-error: var(--ui-color-error-800);
+  --ui-brand: var(--ui-color-brand-600);
 
   @variant light {
     --ui-bg: var(--color-white);
   }
 
   @variant dark {
-    --ui-bg: #1e1e1e;
+    --ui-bg: #0a0a0a;
+    --ui-bg-elevated: #2a2a2a;
+    --ui-bg-muted: rgb(255 255 255 / 0.05);
+    --ui-text: var(--color-white);
+    --ui-text-highlighted: var(--color-white);
+    --ui-text-muted: #747474;
+    --ui-text-inverted: #0a0a0a;
   }
 }
 
