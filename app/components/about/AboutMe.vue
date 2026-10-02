@@ -1,26 +1,19 @@
 <template>
-  <div>
-    <h1>{{ about?.data.title }}</h1>
-    <p class="pb-8 text-center text-[15px]">{{ about?.data.description }}</p>
-    <UiPhotoGallery :images="images" />
+  <div v-if="about">
+    <h1>{{ about.title }}</h1>
+    <p class="pb-8 text-center text-[15px]">{{ about.description }}</p>
+    <UiPhotoGallery :images="about.fotos.map((photo) => `${strapiOrigin}${photo.url}`)" />
   </div>
 </template>
 
 <script setup lang="ts">
-type About = {
-  title: string
-  description: string
-  fotos: StrapiMedia[]
-}
+const { strapiOrigin } = useRuntimeConfig().public
+const { findOne } = useStrapi()
 
-const {
-  public: { strapiOrigin },
-} = useRuntimeConfig()
-const { data: about } = await useFetch<StrapiResponse<About>>('/api/strapi/about', {
-  query: { populate: '*' },
+const { data: about } = await useAsyncData('about', async () => {
+  const { data } = await findOne<About>('about', '', {
+    populate: { fotos: { sort: 'id:asc' } },
+  })
+  return data
 })
-
-const images = about?.value?.data?.fotos
-  ? about?.value.data.fotos.sort((a, b) => a.id - b.id).map((el) => `${strapiOrigin}${el.url}`)
-  : []
 </script>
