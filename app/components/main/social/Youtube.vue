@@ -1,5 +1,5 @@
 <template>
-  <div v-if="youtube">
+  <div>
     <NuxtLink :to="youtube.link" target="_blank">
       <div class="mb-8 flex flex-row items-center justify-center">
         <UiIconYoutube class="mr-2 w-8 h-auto dark:invert" aria-hidden="true" />
@@ -41,10 +41,7 @@
 const { strapiOrigin } = useRuntimeConfig().public
 const { findOne } = useStrapi()
 
-const { data: youtube } = await useAsyncData('youtube', async () => {
-  const { data } = await findOne<Youtube>('youtube', '', {
-    populate: '*',
-  })
-  return data
-})
+const youtube = await useStrapiData('youtube', () =>
+  findOne<Youtube>('youtube', '', { populate: '*' }),
+)
 </script>

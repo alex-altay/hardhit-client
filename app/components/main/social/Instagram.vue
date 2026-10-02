@@ -1,5 +1,5 @@
 <template>
-  <div v-if="instagram">
+  <div>
     <NuxtLink :to="instagram.link" target="_blank">
       <div class="mb-8 flex flex-row items-center justify-center">
         <UiIconInstagram class="mr-2 w-8 h-auto dark:invert" aria-hidden="true" />
@@ -90,10 +90,7 @@
 const { strapiOrigin } = useRuntimeConfig().public
 const { findOne } = useStrapi()
 
-const { data: instagram } = await useAsyncData('instagram', async () => {
-  const { data } = await findOne<Instagram>('instagram', '', {
-    populate: '*',
-  })
-  return data
-})
+const instagram = await useStrapiData('instagram', () =>
+  findOne<Instagram>('instagram', '', { populate: '*' }),
+)
 </script>

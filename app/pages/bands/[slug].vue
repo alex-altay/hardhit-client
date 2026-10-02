@@ -4,15 +4,15 @@
       <UiIconBack class="inline mr-1.5 w-3.5 h-3.5" />
       <span class="font-bold">Back</span>
     </NuxtLink>
-    <h1>{{ band?.name }}</h1>
-    <section v-for="collection in band?.photos_collections" :key="collection.id" class="mb-48">
+    <h1>{{ band.name }}</h1>
+    <section v-for="collection in band.photos_collections" :key="collection.id" class="mb-48">
       <h3>
         {{ collection.title }}
         <span v-if="collection.date">{{ transformDateString(collection.date) }}</span>
       </h3>
       <UiPhotoGallery :images="collection.photos.map((photo) => `${strapiOrigin}${photo.url}`)" />
     </section>
-    <section v-for="story in band?.stories" :key="story.title">
+    <section v-for="story in band.stories" :key="story.title">
       <div class="mb-8">
         <h3>{{ story.title }}</h3>
         <NuxtImg format="webp" class="w-full" :src="`${strapiOrigin}${story.cover.url}`" />
@@ -28,7 +28,7 @@ const route = useRoute()
 const { strapiOrigin } = useRuntimeConfig().public
 const { find } = useStrapi()
 
-const { data: band } = await useAsyncData(
+const band = await useStrapiData(
   `band-${route.params.slug}`,
   async () => {
     const { data } = await find<Band>('bands', {
@@ -44,12 +44,12 @@ const { data: band } = await useAsyncData(
         },
       },
     })
-    return data[0] ?? null
+    const band = data[0]
+    if (!band) {
+      throw createError({ status: 404, statusText: 'Band not found' })
+    }
+    return { data: band }
   },
   { watch: [() => route.params.slug] },
 )
-
-if (!band.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Band not found' })
-}
 </script>
