@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex-1 w-full">
+  <div v-if="images.length" class="relative flex-1 w-full">
     <div class="relative w-full">
       <UCarousel
         ref="carousel"

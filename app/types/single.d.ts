@@ -21,5 +21,5 @@ type About = {
   id: string
   title: string
   description: string
-  fotos: StrapiMedia[]
+  photos: StrapiMedia[]
 }
