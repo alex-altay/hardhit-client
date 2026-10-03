@@ -17,7 +17,7 @@ export function toAppError(err: unknown): NuxtError {
   const strapiError = (err as StrapiErrorBody | undefined)?.error
   if (strapiError?.status === NOT_FOUND_STATUS) {
     return createError({
-      status: 404,
+      status: NOT_FOUND_STATUS,
       statusText: 'Page not found',
       fatal: true,
     })
