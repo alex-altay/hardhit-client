@@ -18,9 +18,6 @@ export default defineNuxtConfig({
       },
     },
   },
-  imports: {
-    dirs: ['data'],
-  },
   ui: {
     theme: {
       colors: ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'neutral', 'brand'],

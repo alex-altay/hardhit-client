@@ -1,6 +1,11 @@
 import type { AsyncDataOptions } from '#app'
 import type { ComputedRef } from 'vue'
 
+/**
+ * Timeout for requests to strapi, without it requests can hang on for minutes
+ */
+const STRAPI_TIMEOUT_MS = 10_000
+
 export async function useStrapiData<T>(
   key: string,
   request: () => Promise<{ data: T }>,
@@ -41,7 +46,8 @@ function withTimeout<R>(promise: Promise<R>): Promise<R> {
   let timer: ReturnType<typeof setTimeout> | undefined
   const timeout = new Promise<never>((_, reject) => {
     timer = setTimeout(
-      () => reject(createError({ status: NETWORK_ERROR_STATUS, statusText: 'Connection problem' })),
+      () =>
+        reject(createError({ status: HttpStatus.NetworkError, statusText: 'Connection problem' })),
       STRAPI_TIMEOUT_MS,
     )
   })

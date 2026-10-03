@@ -15,9 +15,9 @@ const { error } = defineProps<{ error: NuxtError }>()
 
 const view = computed(() => {
   switch (error.status) {
-    case NOT_FOUND_STATUS:
+    case HttpStatus.NotFound:
       return { title: '404', text: 'Page not found' }
-    case NETWORK_ERROR_STATUS:
+    case HttpStatus.NetworkError:
       return { title: 'No connection', text: 'Check your internet connection and try again' }
     default:
       return { title: 'Oops', text: 'Something terrible has just happened, try again later' }
