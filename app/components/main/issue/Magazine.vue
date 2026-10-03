@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-const { find } = useStrapi<Issue>()
+const { find } = useStrapi()
 
 const issues = await useStrapiData('magazine-issues', () =>
   find<Issue>('issues', { populate: '*', sort: 'volume:asc' }),
