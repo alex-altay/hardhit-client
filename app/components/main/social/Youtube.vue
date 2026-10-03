@@ -7,7 +7,7 @@
       </div>
       <div class="w-full p-5 bg-elevated">
         <NuxtImg
-          :src="`${strapiOrigin}${youtube.banner.url}`"
+          :src="getMediaLink(youtube.banner)"
           class="mb-8 w-full rounded-2xl aspect-6/1 object-cover object-left"
           format="webp"
           sizes="1180px"
@@ -15,7 +15,7 @@
         <div class="flex flex-row gap-6">
           <UAvatar
             class="h-20 w-20 sm:h-40 sm:w-40"
-            :src="`${strapiOrigin}${youtube.logo.url}`"
+            :src="getMediaLink(youtube.logo)"
             sizes="160px"
           />
           <div class="flex flex-col justify-between">
@@ -38,7 +38,6 @@
 </template>
 
 <script setup lang="ts">
-const { strapiOrigin } = useRuntimeConfig().public
 const { findOne } = useStrapi()
 
 const youtube = await useStrapiData('youtube', () =>

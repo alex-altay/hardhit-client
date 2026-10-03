@@ -5,7 +5,7 @@
       <NuxtImg
         class="h-full w-auto"
         format="webp"
-        :src="`${strapiOrigin}${issue.cover?.url}`"
+        :src="getMediaLink(issue.cover)"
         sizes="sm:128px md:179px lg:228px"
       />
       <IssueInfo :issue class="w-70" />
@@ -15,5 +15,4 @@
 
 <script setup lang="ts">
 defineProps<{ issue: IssueRef }>()
-const { strapiOrigin } = useRuntimeConfig().public
 </script>

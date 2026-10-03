@@ -9,7 +9,7 @@
         <div class="flex flex-row gap-6">
           <UAvatar
             class="h-20 w-20 sm:h-40 sm:w-40"
-            :src="`${strapiOrigin}${instagram.logo.url}`"
+            :src="getMediaLink(instagram.logo)"
             alt="Hard Hit Magazine"
             sizes="160px"
           />
@@ -44,9 +44,9 @@
           </div>
         </div>
         <div class="mb-8 flex flex-row justify-start gap-5">
-          <div class="flex flex-col items-center">
+          <div v-if="instagram.photos[0]" class="flex flex-col items-center">
             <NuxtImg
-              :src="`${strapiOrigin}${instagram.photos[0]?.url}`"
+              :src="getMediaLink(instagram.photos[0])"
               alt=""
               format="webp"
               sizes="100px"
@@ -73,7 +73,7 @@
           <NuxtImg
             v-for="photo in instagram.photos"
             :key="photo.id"
-            :src="`${strapiOrigin}${photo.url}`"
+            :src="getMediaLink(photo)"
             :alt="photo.alternativeText ?? ''"
             format="webp"
             sizes="33vw lg:400px"
@@ -87,7 +87,6 @@
 </template>
 
 <script setup lang="ts">
-const { strapiOrigin } = useRuntimeConfig().public
 const { findOne } = useStrapi()
 
 const instagram = await useStrapiData('instagram', () =>

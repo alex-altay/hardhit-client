@@ -10,12 +10,12 @@
         {{ collection.title }}
         <span v-if="collection.date">{{ transformDateString(collection.date) }}</span>
       </h3>
-      <UiPhotoGallery :images="collection.photos.map((photo) => `${strapiOrigin}${photo.url}`)" />
+      <UiPhotoGallery :images="collection.photos.map(getMediaLink)" />
     </section>
     <section v-for="story in band.stories" :key="story.title">
       <div class="mb-8">
         <h3>{{ story.title }}</h3>
-        <NuxtImg format="webp" class="w-full" :src="`${strapiOrigin}${story.cover.url}`" />
+        <NuxtImg format="webp" class="w-full" :src="getMediaLink(story.cover)" />
         <RichMarkdown v-if="story.text" :value="story.text" />
       </div>
       <FeaturedIn v-if="story.issue" :issue="story.issue" />
@@ -25,7 +25,6 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const { strapiOrigin } = useRuntimeConfig().public
 const { find } = useStrapi()
 
 const band = await useStrapiData(

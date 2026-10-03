@@ -2,12 +2,11 @@
   <div>
     <h1>{{ about.title }}</h1>
     <p class="pb-8 text-center">{{ about.description }}</p>
-    <UiPhotoGallery :images="about.fotos.map((photo) => `${strapiOrigin}${photo.url}`)" />
+    <UiPhotoGallery :images="about.fotos.map(getMediaLink)" />
   </div>
 </template>
 
 <script setup lang="ts">
-const { strapiOrigin } = useRuntimeConfig().public
 const { findOne } = useStrapi()
 
 const about = await useStrapiData('about', () =>

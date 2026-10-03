@@ -9,3 +9,13 @@ const compactNumber = new Intl.NumberFormat('en', { notation: 'compact', maximum
 export function formatCount(count: number, singular: string, plural = `${singular}s`): string {
   return `${compactNumber.format(count)}\u00A0${count === 1 ? singular : plural}`
 }
+
+/**
+ * Adds actual strapi admin prefix
+ * @param media Strapi Media, object with url field (string)
+ * @returns string
+ */
+export function getMediaLink(media: StrapiMedia): string {
+  const { strapiOrigin } = useRuntimeConfig().public
+  return `${strapiOrigin}${media.url}`
+}

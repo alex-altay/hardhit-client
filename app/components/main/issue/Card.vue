@@ -1,7 +1,7 @@
 <template>
   <div class="h-full flex flex-row shrink-0">
     <NuxtImg
-      :src="`${strapiOrigin}${issue.cover.url}`"
+      :src="getMediaLink(issue.cover)"
       class="block h-80 w-auto shrink-0 cursor-pointer aspect-[1/1.414] object-cover"
       sizes="320px"
       format="webp"
@@ -29,6 +29,5 @@
 defineProps<{ issue: Issue; isOpen: boolean }>()
 defineEmits<{ toggle: [] }>()
 
-const { strapiOrigin } = useRuntimeConfig().public
 const transitionStyle = { transitionDuration: `${PANEL_TRANSITION_MS}ms` }
 </script>
