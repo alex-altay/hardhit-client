@@ -20,10 +20,12 @@
           />
           <div class="flex flex-col justify-between">
             <div class="text-2xl font-bold">Hard Hit Magazine</div>
-            <div>
-              <span class="font-bold text-wrap">@HardHitMag</span> •&nbsp;
-              <span>{{ youtube.subscribersCount }}&nbsp;subscribers</span> •&nbsp;
-              <span>{{ youtube.videosCount }}&nbsp;videos</span>
+            <div class="flex flex-row flex-wrap">
+              <span class="mr-1 font-bold">@HardHitMag</span>
+              <span class="mr-1"
+                >•&nbsp;{{ formatCount(youtube.subscribersCount, 'subscriber') }}</span
+              >
+              <span>•&nbsp;{{ formatCount(youtube.videosCount, 'video') }}</span>
             </div>
             <div>{{ youtube.description }}</div>
             <div class="mb-2 text-blue-500">hardhit.de</div>
