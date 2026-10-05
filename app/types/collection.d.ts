@@ -5,13 +5,6 @@ type PhotosCollection = {
   photos: StrapiMedia[]
 }
 
-type LiveVideo = {
-  id: number
-  title: string
-  date?: string
-  video: StrapiMedia
-}
-
 type Story = {
   title: string
   cover: StrapiMedia
@@ -31,11 +24,17 @@ type Issue = {
 }
 type IssueRef = Pick<Issue, 'title' | 'volume' | 'date' | 'cover' | 'pdf' | 'description'>
 
+type VideoLink = {
+  id: string
+  url: string
+  title?: string
+}
+
 type Band = {
   id: number
   name: string
   slug: string
   stories: Story[]
   photos_collections: PhotosCollection[]
-  live_videos: LiveVideo[]
+  video_links: VideoLink[]
 }

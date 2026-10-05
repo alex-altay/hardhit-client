@@ -5,15 +5,27 @@
       <span class="font-bold">Back</span>
     </NuxtLink>
     <h1>{{ band.name }}</h1>
-    <section v-for="collection in band.photos_collections" :key="collection.id" class="mb-48">
+    <section v-for="collection in band.photos_collections" :key="collection.id" class="mb-24">
       <h3>
         {{ collection.title }}
         <span v-if="collection.date">{{ transformDateString(collection.date) }}</span>
       </h3>
       <UiPhotoGallery :images="collection.photos.map(getMediaLink)" />
     </section>
-    <section v-for="story in band.stories" :key="story.title">
-      <div class="mb-8">
+
+    <section v-if="band.video_links && band.video_links.length" class="mb-12 sm:mb-24">
+      <div v-for="video in band.video_links" :key="video.id" class="mb-12">
+        <h3 v-if="video.title" class="mb-3">{{ video.title }}</h3>
+        <UiYoutubeEmbed
+          v-if="getYoutubeId(video.url)"
+          :video-id="getYoutubeId(video.url)!"
+          :title="video.title ?? band.name"
+        />
+      </div>
+    </section>
+
+    <section v-for="story in band.stories" :key="story.title" class="mb-12 sm:mb-24">
+      <div class="mb-8 pb-8">
         <h3>{{ story.title }}</h3>
         <NuxtImg format="webp" class="w-full" :src="getMediaLink(story.cover)" />
         <RichMarkdown v-if="story.text" :value="story.text" />
@@ -34,7 +46,7 @@ const band = await useStrapiData(
       filters: { slug: { $eq: route.params.slug as string } },
       populate: {
         photos_collections: { populate: 'photos' },
-        live_videos: { populate: 'video' },
+        video_links: { fields: ['url', 'title'] },
         stories: {
           populate: {
             cover: { fields: ['url', 'name'] },

@@ -1,14 +1,14 @@
 <template>
   <div>
     <p class="mb-2 font-bold">Featured In</p>
-    <div class="h-72 flex flex-row gap-6">
+    <div class="flex flex-row flex-wrap gap-6">
       <NuxtImg
-        class="h-full w-auto"
+        class="h-72 w-auto"
         format="webp"
         :src="getMediaLink(issue.cover)"
         sizes="sm:128px md:179px lg:228px"
       />
-      <IssueInfo :issue class="w-70" />
+      <IssueInfo :issue class="w-74" />
     </div>
   </div>
 </template>

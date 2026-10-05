@@ -19,3 +19,31 @@ export function getMediaLink(media: StrapiMedia): string {
   const { strapiOrigin } = useRuntimeConfig().public
   return `${strapiOrigin}${media.url}`
 }
+
+/**
+ * Extracts video id from youtube link, returns undefined for non-youtube links
+ */
+export function getYoutubeId(link: string): string | undefined {
+  let url: URL
+  try {
+    url = new URL(link)
+  } catch {
+    return undefined
+  }
+
+  const host = url.hostname.replace(/^(www|m)\./, '')
+  if (host === 'youtu.be') {
+    return url.pathname.slice(1) || undefined
+  }
+  if (host === 'youtube.com' || host === 'youtube-nocookie.com') {
+    const fromQuery = url.searchParams.get('v')
+    if (fromQuery) {
+      return fromQuery
+    }
+    const [, kind, id] = url.pathname.split('/')
+    if (kind && ['embed', 'shorts', 'live'].includes(kind)) {
+      return id || undefined
+    }
+  }
+  return undefined
+}
