@@ -8,7 +8,7 @@
         v-model:with-interview="withInterview"
         v-model:with-live="withLive"
       />
-      <BandsListSlideshowAll class="w-full sm:w-64 justify-center" />
+      <BandsListSlideshowAll :bands class="w-full sm:w-64 justify-center" />
     </div>
 
     <nav

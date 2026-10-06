@@ -6,7 +6,7 @@
         v-slot="{ item, index }"
         :items="images"
         class="relative w-full"
-        @select="onSelect"
+        @select="select"
       >
         <div class="w-full aspect-3/2 overflow-hidden">
           <NuxtPicture
@@ -47,93 +47,24 @@
       />
     </div>
 
-    <UModal
+    <UiPhotoLightbox
       v-model:open="isFullscreen"
-      fullscreen
-      title="Photo"
-      :ui="{ content: 'bg-black/95 ring-0 divide-y-0' }"
-    >
-      <template #content="{ close }">
-        <div class="relative flex h-full w-full items-center justify-center p-4">
-          <NuxtPicture
-            v-if="images[activeIndex]"
-            :src="images[activeIndex]"
-            class="contents"
-            :img-attrs="{ class: 'max-h-full max-w-full object-contain' }"
-          />
-
-          <button
-            type="button"
-            aria-label="Previous photo"
-            :disabled="activeIndex === 0"
-            class="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer p-2 text-white/70 hover:text-white disabled:cursor-default disabled:opacity-25"
-            @click="prevPhoto"
-          >
-            <UiIconChevronLeft />
-          </button>
-
-          <button
-            type="button"
-            aria-label="Next photo"
-            :disabled="activeIndex === images.length - 1"
-            class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer p-2 text-white/70 hover:text-white disabled:cursor-default disabled:opacity-25"
-            @click="nextPhoto"
-          >
-            <UiIconChevronRight />
-          </button>
-
-          <button
-            type="button"
-            aria-label="Close"
-            class="absolute top-4 right-4 cursor-pointer p-2 text-white/70 hover:text-white"
-            @click="close"
-          >
-            <UiIconClose />
-          </button>
-
-          <span class="absolute bottom-4 left-1/2 -translate-x-1/2 text-sm text-white/60">
-            {{ activeIndex + 1 }} / {{ images.length }}
-          </span>
-        </div>
-      </template>
-    </UModal>
+      v-model:index="activeIndex"
+      :photos="images.map((src) => ({ src }))"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ images: string[] }>()
+defineProps<{ images: string[] }>()
 
 const carousel = useTemplateRef('carousel')
 const previewStrip = useTemplateRef('previewStrip')
 const activeIndex = ref(0)
 const isFullscreen = ref(false)
 
-function onSelect(index: number) {
-  activeIndex.value = index
-}
-
 function select(index: number) {
   activeIndex.value = index
-  carousel.value?.emblaApi?.scrollTo(index)
-}
-
-function prevPhoto() {
-  if (activeIndex.value > 0) select(activeIndex.value - 1)
-}
-function nextPhoto() {
-  if (activeIndex.value < props.images.length - 1) select(activeIndex.value + 1)
-}
-
-function onFullscreenKeydown(event: KeyboardEvent) {
-  if (!isFullscreen.value) return
-
-  if (event.key === 'ArrowLeft') {
-    event.preventDefault()
-    prevPhoto()
-  } else if (event.key === 'ArrowRight') {
-    event.preventDefault()
-    nextPhoto()
-  }
 }
 
 function revealThumb(index: number) {
@@ -148,7 +79,8 @@ function revealThumb(index: number) {
   strip.scrollTo({ left: Math.min(Math.max(centered, 0), max), behavior: 'smooth' })
 }
 
-watch(activeIndex, revealThumb)
-onMounted(() => window.addEventListener('keydown', onFullscreenKeydown))
-onBeforeUnmount(() => window.removeEventListener('keydown', onFullscreenKeydown))
+watch(activeIndex, (index) => {
+  carousel.value?.emblaApi?.scrollTo(index)
+  revealThumb(index)
+})
 </script>
