@@ -13,8 +13,8 @@
       <UiPhotoGallery :images="collection.photos.map(getMediaLink)" />
     </section>
 
-    <section v-if="band.video_links && band.video_links.length" class="mb-12 sm:mb-24">
-      <div v-for="video in band.video_links" :key="video.id" class="mb-12">
+    <section v-if="videos.length" class="mb-12 sm:mb-24">
+      <div v-for="video in videos" :key="video.id" class="mb-12">
         <h3 v-if="video.title" class="mb-3">{{ video.title }}</h3>
         <UiYoutubeEmbed
           v-if="getYoutubeId(video.url)"
@@ -46,7 +46,8 @@ const band = await useStrapiData(
       filters: { slug: { $eq: route.params.slug as string } },
       populate: {
         photos_collections: { populate: 'photos' },
-        video_links: { fields: ['url', 'title'] },
+        live_links: { fields: ['url', 'title'] },
+        interview_links: { fields: ['url', 'title'] },
         stories: {
           populate: {
             cover: { fields: ['url', 'name'] },
@@ -63,4 +64,6 @@ const band = await useStrapiData(
   },
   { watch: [() => route.params.slug] },
 )
+
+const videos = [...band.value.live_links, ...band.value.interview_links]
 </script>

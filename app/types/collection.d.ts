@@ -36,5 +36,6 @@ type Band = {
   slug: string
   stories: Story[]
   photos_collections: PhotosCollection[]
-  video_links: VideoLink[]
+  live_links: VideoLink[]
+  interview_links: VideoLink[]
 }

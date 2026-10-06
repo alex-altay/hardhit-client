@@ -18,6 +18,11 @@ export default defineNuxtConfig({
       },
     },
   },
+  router: {
+    options: {
+      scrollBehaviorType: 'smooth',
+    },
+  },
   ui: {
     theme: {
       colors: ['primary', 'secondary', 'success', 'info', 'warning', 'error', 'neutral', 'brand'],
