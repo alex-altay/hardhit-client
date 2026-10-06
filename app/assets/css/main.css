@@ -5,6 +5,17 @@
   --font-sans: 'Glacial Indifference', sans-serif;
   --color-brand-primary: var(--color-brand-600);
   --color-brand-strong: var(--color-brand-700);
+  --animate-icon-hop: icon-hop 400ms ease-out;
+
+  @keyframes icon-hop {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    40% {
+      translate: 0 -4px;
+    }
+  }
 }
 
 @theme static {
