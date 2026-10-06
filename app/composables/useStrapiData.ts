@@ -1,4 +1,4 @@
-import type { AsyncDataOptions } from '#app'
+import type { AsyncDataOptions, NuxtApp } from '#app'
 import type { ComputedRef } from 'vue'
 
 /**
@@ -21,7 +21,10 @@ export async function useStrapiData<T>(
         throw toAppError(err)
       }
     },
-    options,
+    {
+      ...options,
+      getCachedData: getSessionCachedData,
+    },
   )
 
   if (error.value) {
@@ -40,6 +43,20 @@ export async function useStrapiData<T>(
     }
     return data.value as T
   })
+}
+
+/**
+ * Keeps strapi data: by default nuxt reuses payload only during hydration
+ * and deletes it when the page unmounts
+ */
+function getSessionCachedData<T>(
+  key: string,
+  nuxtApp: NuxtApp,
+  ctx: { cause: string },
+): T | undefined {
+  return ctx.cause === 'initial'
+    ? (nuxtApp.payload.data[key] ?? nuxtApp.static.data[key])
+    : undefined
 }
 
 function withTimeout<R>(promise: Promise<R>): Promise<R> {
