@@ -23,3 +23,8 @@ type About = {
   description: string
   photos: StrapiMedia[]
 }
+
+type PhotosHero = {
+  backgroundPhoto: StrapiMedia
+  bands: PhotoWithDescription[]
+}

@@ -9,3 +9,8 @@ type StrapiErrorBody = {
     }
   }
 }
+
+type PhotoWithDescription = {
+  description: string
+  photo: StrapiMedia
+}
