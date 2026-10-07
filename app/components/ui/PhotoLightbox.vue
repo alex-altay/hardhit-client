@@ -8,15 +8,14 @@
     <slot />
     <template #content="{ close }">
       <div class="relative flex h-full w-full items-center justify-center p-4">
-        <NuxtPicture
+        <NuxtImg
           v-if="photo"
-          :key="photo.src"
           :src="photo.src"
           :alt="photo.alt ?? ''"
-          class="contents"
-          :img-attrs="{ class: 'max-h-full max-w-full object-contain' }"
+          preset="fullscreen"
+          class="max-h-full max-w-full object-contain"
         />
-        <NuxtPicture v-if="nextPhoto" :src="nextPhoto.src" class="hidden" aria-hidden="true" />
+        <NuxtImg v-if="nextPhoto" :src="nextPhoto.src" preset="fullscreen" alt="" class="hidden" />
 
         <button
           type="button"
