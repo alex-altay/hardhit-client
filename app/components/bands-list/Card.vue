@@ -1,13 +1,13 @@
 <template>
   <NuxtLink :to="`/bands/${band.slug}`" class="group block w-fit outline-none">
     <div
-      class="flex flex-col w-[min(90vw,400px)] p-[min(3vw,15px)] pb-0 overflow-hidden dark:bg-white light:bg-elevated aspect-6/7 group-focus-visible:outline-2 group-focus-visible:outline-offset-4 group-focus-visible:outline-brand-primary"
+      class="flex flex-col w-[min(90vw,390px)] p-[min(3vw,15px)] pb-0 overflow-hidden dark:bg-white light:bg-elevated aspect-6/7 group-focus-visible:outline-2 group-focus-visible:outline-offset-4 group-focus-visible:outline-brand-primary"
     >
       <div class="shrink-0 w-full aspect-square overflow-hidden">
         <NuxtImg
           :src="getPreviewUrl(band)"
           class="h-full w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-103 motion-safe:group-focus-visible:scale-103"
-          sizes="370px"
+          sizes="360px"
           format="webp"
         />
       </div>

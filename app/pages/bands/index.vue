@@ -32,7 +32,7 @@
       v-for="[letter, group] in bandsByLetter"
       :id="getLetterId(letter)"
       :key="letter"
-      class="mb-8 scroll-mt-[calc(var(--ui-header-height)+16px)] grid grid-cols-[repeat(auto-fill,min(90vw,400px))] gap-4"
+      class="mb-8 scroll-mt-[calc(var(--ui-header-height)+16px)] grid grid-cols-[repeat(auto-fill,min(90vw,390px))] gap-4"
     >
       <div class="mb-1 col-span-full text-5xl font-bold">{{ letter }}</div>
       <BandsListCard v-for="band in group" :key="band.id" :band />
