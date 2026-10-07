@@ -1,8 +1,10 @@
 <template>
   <div>
-    <BandsListHero />
+    <BandsListHero scroll-target-id="captured-live" />
     <UContainer class="py-12">
-      <h1 class="mb-8">Captured Live</h1>
+      <h1 id="captured-live" class="mb-8 scroll-mt-[calc(var(--ui-header-height)+16px)]">
+        Captured Live
+      </h1>
 
       <div class="mb-8 flex flex-row flex-wrap justify-between items-center gap-4">
         <BandsListFilters

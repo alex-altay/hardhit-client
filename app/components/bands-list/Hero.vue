@@ -16,10 +16,16 @@
       class="absolute w-1/4"
       :style="getCardStyle(CARD_LAYOUT[index]!)"
     />
+    <UiScrollDownButton
+      :scroll-target-id="scrollTargetId"
+      screen-reader-label="Scroll to the bands"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+defineProps<{ scrollTargetId: string }>()
+
 const { findOne } = useStrapi()
 
 const hero = await useStrapiData('photos-hero', () =>
