@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <div class="flex flex-col p-[5%] pb-0 aspect-6/7 bg-white shadow-2xl">
+  <div
+    :style="swayAngle ? { transform: `perspective(1200px) rotateY(${swayAngle}deg)` } : undefined"
+    class="shadow-2xl"
+    @pointermove="onPointerMove"
+  >
+    <div class="flex flex-col p-[5%] pb-0 aspect-6/7 bg-white">
       <NuxtImg
         :src="getMediaLink(band.photo)"
         :alt="band.description"
@@ -17,4 +21,46 @@
 
 <script setup lang="ts">
 defineProps<{ band: PhotoWithDescription }>()
+
+const MAX_SWAY_DEGREE = 5
+const SWAY_SENSITIVITY = 0.02 // нow strong the card reacts to the mouse
+const SWAY_SPEED = 0.08
+const SWAY_CALMING = 0.15
+
+const swayAngle = ref(0)
+let swayVelocity = 0
+let swayFrame = 0
+
+function onPointerMove(event: PointerEvent) {
+  if (event.pointerType !== 'mouse' || reducedMotion()) {
+    return
+  }
+  swayVelocity += event.movementX * SWAY_SENSITIVITY
+  if (!swayFrame) {
+    swayFrame = requestAnimationFrame(swayStep)
+  }
+}
+
+function swayStep() {
+  swayVelocity = (swayVelocity - SWAY_SPEED * swayAngle.value) * (1 - SWAY_CALMING)
+  const angle = Math.min(
+    Math.max(swayAngle.value + swayVelocity, -MAX_SWAY_DEGREE),
+    MAX_SWAY_DEGREE,
+  )
+
+  if (Math.abs(angle) < 0.01 && Math.abs(swayVelocity) < 0.01) {
+    swayAngle.value = 0
+    swayVelocity = 0
+    swayFrame = 0
+    return
+  }
+  swayAngle.value = angle
+  swayFrame = requestAnimationFrame(swayStep)
+}
+
+function reducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
+onBeforeUnmount(() => cancelAnimationFrame(swayFrame))
 </script>
