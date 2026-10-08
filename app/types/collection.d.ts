@@ -34,6 +34,7 @@ type Band = {
   id: number
   name: string
   slug: string
+  description: string
   stories: Story[]
   photos_collections: PhotosCollection[]
   live_links: VideoLink[]

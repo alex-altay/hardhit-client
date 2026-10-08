@@ -1,19 +1,24 @@
 <template>
-  <div>
-    <NuxtLink to="/bands" class="mb-8 flex flex-row items-center">
-      <UiIconBack class="inline mr-1.5 w-3.5 h-3.5" />
-      <span class="font-bold">Back</span>
-    </NuxtLink>
+  <div class="flex flex-col items-center">
+    <div class="w-full flex flex-row justify-start">
+      <NuxtLink to="/bands" class="mb-8 flex flex-row items-center">
+        <UiIconBack class="inline mr-1.5 w-3.5 h-3.5" />
+        <span class="font-bold">Back</span>
+      </NuxtLink>
+    </div>
     <h1>{{ band.name }}</h1>
+    <div v-if="band.description" class="-mt-8 mb-12 max-w-150 text-xl text-center">
+      {{ band.description }}
+    </div>
     <section v-for="collection in band.photos_collections" :key="collection.id" class="mb-24">
-      <h3>
+      <h3 class="mb-3 text-center sm:text-left">
         {{ collection.title }}
         <span v-if="collection.date">{{ transformDateString(collection.date) }}</span>
       </h3>
       <UiPhotoGallery :images="collection.photos.map(getMediaLink)" />
     </section>
 
-    <section v-if="videos.length" class="mb-12 sm:mb-24">
+    <section v-if="videos.length" class="mb-12 sm:mb-24 w-full">
       <div v-for="video in videos" :key="video.id" class="mb-12">
         <h3 v-if="video.title" class="mb-3">{{ video.title }}</h3>
         <UiYoutubeEmbed
@@ -24,9 +29,9 @@
       </div>
     </section>
 
-    <section v-for="story in band.stories" :key="story.title" class="mb-12 sm:mb-24">
-      <div class="mb-8 pb-8">
-        <h3>{{ story.title }}</h3>
+    <section v-for="story in band.stories" :key="story.title" class="mb-12 sm:mb-24 w-full">
+      <div class="mb-3 sm:mb-6 sm:pb-6">
+        <h3 class="mb-3">{{ story.title }}</h3>
         <NuxtImg format="webp" class="w-full" :src="getMediaLink(story.cover)" />
         <RichMarkdown v-if="story.text" :value="story.text" />
       </div>
