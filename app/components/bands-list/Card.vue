@@ -23,11 +23,11 @@
             {{ band.name }}
           </div>
           <UiIconMicrophone
-            v-if="band.interview_links.length"
+            v-if="media.hasInterview"
             class="h-4 w-auto text-brand motion-safe:group-hover:animate-icon-hop"
           />
           <UiIconLive
-            v-if="band.live_links.length"
+            v-if="media.hasVideo"
             class="h-4 w-auto text-brand motion-safe:group-hover:animate-icon-hop motion-safe:group-hover:[animation-delay:80ms]"
           />
         </div>
@@ -37,7 +37,8 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ band: Band }>()
+const props = defineProps<{ band: Band }>()
+const media = computed(() => getBandMedia(props.band))
 
 function getPreviewUrl(band: Band) {
   const firstMedia = band!.photos_collections[0]?.photos[0]

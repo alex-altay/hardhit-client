@@ -40,3 +40,15 @@ type Band = {
   live_links: VideoLink[]
   interview_links: VideoLink[]
 }
+
+type BandMedia = {
+  hasPhotos: boolean
+  hasInterview: boolean
+  hasVideo: boolean
+}
+
+type BandIndexEntry = {
+  name: string
+  slug: string
+  media: BandMedia
+}

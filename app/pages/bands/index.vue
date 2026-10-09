@@ -76,19 +76,10 @@ const filteredBands = computed(() => {
   return bands.value.filter(
     (band) =>
       (!query || toSearchable(band.name).includes(query)) &&
-      (!withInterview.value || band.interview_links.length > 0) &&
-      (!withLive.value || band.live_links.length > 0),
+      (!withInterview.value || getBandMedia(band).hasInterview) &&
+      (!withLive.value || getBandMedia(band).hasVideo),
   )
 })
 
-const bandsByLetter = computed(() => {
-  const groups = new Map<string, Band[]>()
-  for (const letter of INDEX_LETTERS) {
-    const group = filteredBands.value.filter((band) => getIndexLetter(band.name) === letter)
-    if (group.length) {
-      groups.set(letter, group)
-    }
-  }
-  return groups
-})
+const bandsByLetter = computed(() => groupBandsByLetter(filteredBands.value))
 </script>
