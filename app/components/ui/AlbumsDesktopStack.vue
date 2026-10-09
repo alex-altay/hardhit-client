@@ -26,6 +26,7 @@
             class="absolute inset-0 size-full object-cover backface-hidden"
             sizes="xs:40vw sm:40vw md:40vw lg:480px"
             format="webp"
+            loading="lazy"
           />
           <UiAlbumBackSide :album class="absolute inset-0 backface-hidden rotate-y-180" />
         </span>

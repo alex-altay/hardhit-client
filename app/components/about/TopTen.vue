@@ -3,7 +3,8 @@
     <UContainer class="py-12">
       <h1>{{ topTen.header }}</h1>
       <p class="text-center">{{ topTen.description }}</p>
-      <UiAlbumsStack :albums="topTen.albums" class="my-25" />
+      <UiAlbumsMobileStack :albums="topTen.albums" class="sm:hidden my-12" />
+      <UiAlbumsDesktopStack :albums="topTen.albums" class="hidden sm:flex my-25" />
     </UContainer>
   </section>
 </template>
