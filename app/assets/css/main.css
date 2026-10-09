@@ -5,6 +5,8 @@
   --font-sans: 'Glacial Indifference', sans-serif;
   --color-brand-primary: var(--color-brand-600);
   --color-brand-strong: var(--color-brand-700);
+  /* Something picked up above the page, denser than shadow-2xl: shadow-lifted */
+  --shadow-lifted: 0 12px 30px rgb(0 0 0 / 0.35);
   --animate-icon-hop: icon-hop 400ms ease-out;
 
   @keyframes icon-hop {

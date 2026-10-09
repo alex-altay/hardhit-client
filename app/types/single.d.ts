@@ -28,3 +28,17 @@ type PhotosHero = {
   backgroundPhoto: StrapiMedia
   bands: PhotoWithDescription[]
 }
+
+type TopAlbum = {
+  position: number
+  band: string
+  album: string
+  description: string
+  cover: StrapiMedia
+}
+
+type TopTen = {
+  header: string
+  description: string
+  albums: TopAlbum[]
+}

@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <section class="mb-12">
     <h1>{{ about.title }}</h1>
     <p class="pb-8 text-center">{{ about.description }}</p>
     <UiPhotoGallery :images="about.photos.map(getMediaLink)" />
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
