@@ -6,7 +6,7 @@
       content: menuContentClass,
       overlay: 'lg:block xl:hidden',
       header: 'lg:px-8 border-b border-default',
-      body: 'overflow-x-hidden',
+      body: 'flex-1 flex flex-col overflow-x-hidden',
     }"
   >
     <template #title>
@@ -42,6 +42,10 @@
           {{ item.label }}
         </NuxtLink>
       </nav>
+
+      <div class="mt-auto flex justify-center pt-8">
+        <UColorModeSwitch />
+      </div>
     </template>
   </UHeader>
 </template>
