@@ -1,10 +1,12 @@
 <template>
   <UHeader
+    :menu="menu"
     :ui="{
       toggle: 'lg:inline-flex xl:hidden',
-      content: 'lg:flex xl:hidden',
+      content: menuContentClass,
       overlay: 'lg:block xl:hidden',
       header: 'lg:px-8 border-b border-default',
+      body: 'overflow-x-hidden',
     }"
   >
     <template #title>
@@ -30,11 +32,12 @@
     <template #body>
       <nav class="flex flex-col items-end gap-2">
         <NuxtLink
-          v-for="item in mobileItems"
+          v-for="(item, index) in mobileItems"
           :key="item.label"
           :to="item.to"
-          class="relative w-[min(250px,50%)] isolate pl-10 pr-4 pt-4 pb-12 text-end text-xl font-bold uppercase tracking-wide"
+          class="relative w-[min(250px,50%)] isolate pl-10 pr-4 pt-4 pb-12 text-end text-xl font-bold uppercase tracking-wide animate-[enter-from-right_400ms_var(--ease-out)_both]"
           :class="item.active && mobileActiveClass"
+          :style="{ animationDelay: `${index * 60}ms` }"
         >
           {{ item.label }}
         </NuxtLink>
@@ -59,6 +62,17 @@ const mobileActiveClass = [
   'text-white mb-4',
   'after:absolute after:inset-0 after:-z-1 after:bg-brand-strong',
   'after:[clip-path:polygon(0_0,100%_0,100%_100%,0_75%)]',
+].join(' ')
+
+const menu = {
+  transition: true,
+  content: { onOpenAutoFocus: (event: Event) => event.preventDefault() },
+}
+
+const menuContentClass = [
+  'lg:flex xl:hidden',
+  'data-[state=open]:animate-[fade-in_200ms_var(--ease-out)]',
+  'data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]',
 ].join(' ')
 
 const route = useRoute()
