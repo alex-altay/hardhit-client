@@ -2,7 +2,7 @@
   <div>
     <NuxtLink :to="instagram.link" target="_blank">
       <div class="mb-8 flex flex-row items-center justify-center">
-        <UiIconInstagram class="mr-2 w-8 h-auto dark:invert" aria-hidden="true" />
+        <UiIconInstagram class="mr-2 w-8 h-auto" aria-hidden="true" />
         <p class="font-bold">Instagram</p>
       </div>
       <div class="w-full p-5 bg-elevated">

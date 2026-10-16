@@ -1,5 +1,8 @@
 <template>
-  <NuxtLink :to="`/bands/${band.slug}`" class="group block w-fit outline-none">
+  <NuxtLink
+    :to="`/bands/${band.slug}`"
+    class="group block w-fit [overflow-anchor:none] outline-none"
+  >
     <div
       class="flex flex-col w-[min(90vw,390px)] p-[min(3vw,15px)] pb-0 overflow-hidden dark:bg-white light:bg-elevated aspect-6/7 group-focus-visible:outline-2 group-focus-visible:outline-offset-4 group-focus-visible:outline-brand-primary"
     >
@@ -13,22 +16,11 @@
       </div>
       <div class="flex-1 h-full flex flex-col justify-center text-black">
         <div class="flex flex-row items-center gap-2">
-          <div
-            :class="[
-              'relative after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:bg-brand-primary',
-              'after:origin-left after:scale-x-0 after:transition-transform after:duration-300 after:ease-out',
-              'group-hover:after:scale-x-100 group-focus-visible:after:scale-x-100',
-            ]"
-          >
-            {{ band.name }}
-          </div>
-          <UiIconMicrophone
-            v-if="media.hasInterview"
-            class="h-4 w-auto text-brand motion-safe:group-hover:animate-icon-hop"
-          />
+          <div class="hover-underline">{{ band.name }}</div>
+          <UiIconMicrophone v-if="media.hasInterview" class="h-4 w-auto text-brand hover-hop" />
           <UiIconLive
             v-if="media.hasVideo"
-            class="h-4 w-auto text-brand motion-safe:group-hover:animate-icon-hop motion-safe:group-hover:[animation-delay:80ms]"
+            class="h-4 w-auto text-brand hover-hop [--hop-delay:80ms]"
           />
         </div>
       </div>

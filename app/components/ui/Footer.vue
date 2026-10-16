@@ -23,7 +23,7 @@
             aria-label="Instagram"
             class="text-muted hover:text-default transition-colors opacity-80"
           >
-            <UiIconInstagram class="size-6 fill-current" aria-hidden="true" />
+            <UiIconInstagram class="size-6" aria-hidden="true" />
           </a>
           <a
             href="https://www.youtube.com/@HardHitMag"
@@ -31,7 +31,7 @@
             aria-label="YouTube"
             class="text-muted hover:text-default transition-colors opacity-80"
           >
-            <UiIconYoutubeOutline class="h-5 w-auto fill-current" aria-hidden="true" />
+            <UiIconYoutubeOutline class="h-5 w-auto" aria-hidden="true" />
           </a>
         </div>
       </div>

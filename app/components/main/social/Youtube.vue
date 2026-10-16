@@ -1,17 +1,22 @@
 <template>
   <div>
-    <NuxtLink :to="youtube.link" target="_blank">
+    <NuxtLink :to="youtube.link" target="_blank" class="group block [overflow-anchor:none]">
       <div class="mb-8 flex flex-row items-center justify-center">
-        <UiIconYoutube class="mr-2 w-8 h-auto dark:invert" aria-hidden="true" />
+        <UiIconYoutube
+          class="mr-2 w-8 h-auto transition-colors group-hover:text-brand-primary group-focus-visible:text-brand-primary hover-hop"
+          aria-hidden="true"
+        />
         <p class="font-bold">Youtube</p>
       </div>
       <div class="w-full p-5 bg-elevated">
-        <NuxtImg
-          :src="getMediaLink(youtube.banner)"
-          class="mb-8 w-full rounded-2xl aspect-6/1 object-cover object-left"
-          format="webp"
-          sizes="1180px"
-        />
+        <div class="mb-8 rounded-2xl overflow-hidden isolate">
+          <NuxtImg
+            :src="getMediaLink(youtube.banner)"
+            class="block w-full aspect-6/1 object-cover object-left hover-zoom"
+            format="webp"
+            sizes="1180px"
+          />
+        </div>
         <div class="flex flex-row gap-6">
           <UAvatar
             class="h-20 w-20 sm:h-40 sm:w-40"
@@ -29,7 +34,9 @@
             </div>
             <div>{{ youtube.description }}</div>
             <div class="mb-2 text-blue-500">hardhit.de</div>
-            <div class="h-10 w-30 flex items-center justify-center bg-white rounded-3xl text-black">
+            <div
+              class="h-10 w-30 flex items-center justify-center bg-white rounded-3xl text-black transition-colors group-hover:bg-brand-primary group-hover:text-white group-focus-visible:bg-brand-primary group-focus-visible:text-white hover-hop"
+            >
               Subscribe
             </div>
           </div>

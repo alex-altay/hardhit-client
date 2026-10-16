@@ -128,3 +128,39 @@ p {
     }
   }
 }
+
+@utility hover-underline {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: calc(var(--spacing) * -0.5);
+    height: calc(var(--spacing) * 0.5);
+    background: var(--color-brand-primary);
+    transform-origin: left;
+    scale: 0 1;
+    transition: scale 300ms var(--ease-out);
+  }
+
+  @media (hover: hover) {
+    &:hover::after,
+    :where(.group):hover &::after {
+      scale: 1;
+    }
+  }
+
+  :where(.group):focus-visible &::after {
+    scale: 1;
+  }
+}
+
+@utility hover-hop {
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    &:hover,
+    :where(.group):hover & {
+      animation: var(--animate-icon-hop) var(--hop-delay, 0ms);
+    }
+  }
+}
