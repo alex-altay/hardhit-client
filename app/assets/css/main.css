@@ -111,3 +111,20 @@ p {
     }
   }
 }
+
+@utility hover-zoom {
+  @media (prefers-reduced-motion: no-preference) {
+    transition: scale 500ms var(--ease-out);
+
+    @media (hover: hover) {
+      &:hover,
+      :where(.group):hover & {
+        scale: 1.03;
+      }
+    }
+
+    :where(.group):focus-visible & {
+      scale: 1.03;
+    }
+  }
+}

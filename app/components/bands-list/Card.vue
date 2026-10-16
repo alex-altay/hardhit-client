@@ -6,7 +6,7 @@
       <div class="shrink-0 w-full aspect-square overflow-hidden">
         <NuxtImg
           :src="getPreviewUrl(band)"
-          class="h-full w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-103 motion-safe:group-focus-visible:scale-103"
+          class="h-full w-full object-cover hover-zoom"
           sizes="360px"
           format="webp"
         />

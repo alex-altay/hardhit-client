@@ -1,7 +1,7 @@
 <template>
   <div class="h-full flex flex-row shrink-0">
     <div
-      class="h-80 shrink-0 cursor-pointer aspect-[1/1.414] hover-light-streak"
+      class="h-80 shrink-0 cursor-pointer aspect-[1/1.414] hover-light-streak hover-zoom"
       @click="$emit('toggle')"
     >
       <NuxtImg
