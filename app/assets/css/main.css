@@ -87,3 +87,27 @@ p {
     transition-delay: 125ms;
   }
 }
+
+@utility hover-light-streak {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 50%;
+    pointer-events: none;
+    background: linear-gradient(to right, transparent, rgb(255 255 255 / 0.4), transparent);
+    transform: skewX(-12deg);
+    translate: -100%;
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    &:hover::after {
+      translate: 250%;
+      transition: translate 700ms var(--ease-out);
+    }
+  }
+}

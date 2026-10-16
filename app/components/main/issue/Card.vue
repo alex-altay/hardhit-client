@@ -1,12 +1,16 @@
 <template>
   <div class="h-full flex flex-row shrink-0">
-    <NuxtImg
-      :src="getMediaLink(issue.cover)"
-      class="block h-80 w-auto shrink-0 cursor-pointer aspect-[1/1.414] object-cover"
-      sizes="320px"
-      format="webp"
+    <div
+      class="h-80 shrink-0 cursor-pointer aspect-[1/1.414] hover-light-streak"
       @click="$emit('toggle')"
-    />
+    >
+      <NuxtImg
+        :src="getMediaLink(issue.cover)"
+        class="block h-full w-full object-cover"
+        sizes="320px"
+        format="webp"
+      />
+    </div>
     <div
       :class="isOpen ? 'grid-cols-[1fr]' : 'grid-cols-[0fr]'"
       class="grid transition-[grid-template-columns] ease-out motion-reduce:transition-none"
