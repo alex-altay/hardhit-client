@@ -60,7 +60,7 @@ h1 {
 }
 
 h2 {
-  @apply mb-2 text-8xl font-bold uppercase;
+  @apply mb-2 text-3xl font-bold uppercase;
 }
 
 h3 {

@@ -17,7 +17,7 @@
 
       <nav class="flex flex-col gap-4 md:justify-self-center">
         <ULink :active="false" to="/privacy-policy">Privacy Policy</ULink>
-        <ULink :active="false" to="/terms-of-service">Terms of Service</ULink>
+        <ULink :active="false" to="/terms-of-use">Terms of Use</ULink>
       </nav>
 
       <div class="flex md:justify-end">
