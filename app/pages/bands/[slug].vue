@@ -6,7 +6,7 @@
         <span class="font-bold">Back</span>
       </NuxtLink>
     </div>
-    <h1>{{ band.name }}</h1>
+    <h1 v-animate>{{ band.name }}</h1>
     <div v-if="band.description" class="-mt-8 mb-12 max-w-150 text-xl text-center">
       {{ band.description }}
     </div>

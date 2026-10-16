@@ -5,7 +5,6 @@
   --font-sans: 'Glacial Indifference', sans-serif;
   --color-brand-primary: var(--color-brand-600);
   --color-brand-strong: var(--color-brand-700);
-  /* Something picked up above the page, denser than shadow-2xl: shadow-lifted */
   --shadow-lifted: 0 12px 30px rgb(0 0 0 / 0.35);
   --animate-icon-hop: icon-hop 400ms ease-out;
 
@@ -69,4 +68,22 @@ h3 {
 
 p {
   @apply my-0 text-xl;
+}
+
+/* v-animate directive, app/plugins/animate.ts */
+@media (prefers-reduced-motion: no-preference) {
+  [data-animate] {
+    transition:
+      transform 500ms ease-out,
+      opacity 500ms ease-out;
+
+    &:not([data-in-viewport]) {
+      transform: translateX(-35px);
+      opacity: 0;
+    }
+  }
+
+  [data-animate='delayed'] {
+    transition-delay: 125ms;
+  }
 }

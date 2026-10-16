@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>TERMS OF USE</h1>
+    <h1 v-animate>TERMS OF USE</h1>
 
     <p class="mb-8!">Last updated November 1, 2026</p>
 

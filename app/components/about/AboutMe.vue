@@ -1,6 +1,6 @@
 <template>
   <section class="mb-12">
-    <h1>{{ about.title }}</h1>
+    <h1 v-animate>{{ about.title }}</h1>
     <p class="pb-8 text-center">{{ about.description }}</p>
     <UiPhotoGallery :images="about.photos.map(getMediaLink)" />
   </section>

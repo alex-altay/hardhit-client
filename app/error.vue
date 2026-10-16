@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen w-screen flex flex-col justify-center items-center">
     <div class="max-w-100 flex flex-col items-center text-center">
-      <h1>{{ view.title }}</h1>
+      <h1 v-animate>{{ view.title }}</h1>
       <h3 class="mb-16">{{ view.text }}</h3>
       <a href="/" @click.prevent="clearError({ redirect: '/' })">Go back home</a>
     </div>

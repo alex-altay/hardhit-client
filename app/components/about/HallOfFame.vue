@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>HALL OF FAME</h1>
+    <h1 v-animate.delayed>HALL OF FAME</h1>
     <div class="mb-2 text-xl text-center">
       All the bands I've seen (so far): <span class="text-brand">{{ bands.length }}</span>
     </div>
