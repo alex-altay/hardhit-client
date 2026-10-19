@@ -1,6 +1,9 @@
 <template>
   <UHeader
     :menu="menu"
+    :inert="isHidden"
+    class="transition-transform duration-1000 ease-out motion-reduce:transition-none"
+    :class="isHidden && '-translate-y-full'"
     :ui="{
       toggle: 'lg:inline-flex xl:hidden',
       content: menuContentClass,
@@ -10,14 +13,7 @@
     }"
   >
     <template #title>
-      <NuxtImg
-        class="relative top-0.5 h-9 w-auto light:invert"
-        src="/images/logo.png"
-        format="webp"
-        width="115"
-        height="36"
-        alt=""
-      />
+      <UiLogo class="relative top-0.5 h-7 w-auto text-highlighted" />
     </template>
 
     <template #right>
@@ -80,6 +76,8 @@ const menuContentClass = [
 ].join(' ')
 
 const route = useRoute()
+const hasIntroFinished = useHasIntroFinished()
+const isHidden = computed(() => route.path === '/' && !hasIntroFinished.value)
 
 const items = computed<NavigationMenuItem[]>(() =>
   [
