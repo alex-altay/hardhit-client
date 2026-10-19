@@ -9,7 +9,7 @@
       v-show="isAtTop"
       type="button"
       :aria-label="screenReaderLabel"
-      class="hidden lg:block absolute top-[min(calc(100vh-var(--ui-header-height)-4rem),calc(100%-4rem))] left-1/2 z-10 -translate-x-1/2 cursor-pointer p-2 text-white drop-shadow-lg hover:text-brand-primary transition-colors"
+      class="hidden lg:block cursor-pointer p-2 text-highlighted drop-shadow-lg hover:text-brand-primary transition-colors"
       @click="scrollToTarget"
     >
       <UiIconScrollDown class="size-10 motion-safe:animate-bounce" />

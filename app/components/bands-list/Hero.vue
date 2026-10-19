@@ -17,6 +17,7 @@
       :style="getCardStyle(CARD_LAYOUT[index]!)"
     />
     <UiScrollDownButton
+      class="absolute top-[min(calc(100vh-var(--ui-header-height)-4rem),calc(100%-4rem))] left-1/2 z-10 -translate-x-1/2"
       :scroll-target-id="scrollTargetId"
       screen-reader-label="Scroll to the bands"
     />
