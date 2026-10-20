@@ -13,6 +13,7 @@
         <nav class="flex flex-col gap-4">
           <ULink :active="false" to="/">Main</ULink>
           <ULink :active="false" to="/bands">Photos</ULink>
+          <ULink :active="false" to="/design">Metal Design</ULink>
           <ULink :active="false" to="/about">About</ULink>
         </nav>
 

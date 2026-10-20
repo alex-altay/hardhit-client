@@ -79,19 +79,20 @@ const route = useRoute()
 const hasIntroFinished = useHasIntroFinished()
 const isHidden = computed(() => route.path === '/' && !hasIntroFinished.value)
 
-const items = computed<NavigationMenuItem[]>(() =>
-  [
-    { label: 'Photos', to: '/bands' },
-    { label: 'About', to: '/about' },
-  ].map((item) => ({ ...item, active: route.path.startsWith(item.to) })),
-)
-
 const mobileItems = computed<NavigationMenuItem[]>(() => [
   { label: 'Main', to: '/', active: route.path === '/' },
-  ...items.value,
+  ...[
+    { label: 'Photos', to: '/bands' },
+    { label: 'Metal Design', to: '/design', active: route.path.startsWith('/design') },
+    { label: 'About', to: '/about' },
+  ].map((item) => ({ ...item, active: route.path.startsWith(item.to) })),
 ])
 
 const desktopItems = computed<NavigationMenuItem[]>(() =>
-  items.value.map((item) => ({ ...item, class: item.active ? activeClass : '' })),
+  [
+    { label: 'Photos', to: '/bands' },
+    { label: 'Design', to: '/design' },
+    { label: 'About', to: '/about' },
+  ].map((item) => ({ ...item, class: route.path.startsWith(item.to) ? activeClass : '' })),
 )
 </script>
