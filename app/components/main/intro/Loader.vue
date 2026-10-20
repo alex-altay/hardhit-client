@@ -1,5 +1,5 @@
 <template>
-  <div class="loader absolute inset-0 grid place-items-center text-highlighted">
+  <div class="intro-loader absolute inset-0 grid place-items-center text-highlighted">
     <svg
       id="note"
       viewBox="0 0 32 32"
@@ -69,15 +69,15 @@
   </div>
 </template>
 
-<script setup lang="ts">
-// No scrolling while the loader is shown, the reserved scrollbar gutter keeps the page from shifting when it ends
-useHead({
-  htmlAttrs: { style: 'overflow: hidden; scrollbar-gutter: stable' },
-})
-</script>
+<style>
+html:has(.intro-loader) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+</style>
 
 <style scoped>
-.loader {
+.intro-loader {
   --icon-cycle-duration: 1.6s;
 }
 
