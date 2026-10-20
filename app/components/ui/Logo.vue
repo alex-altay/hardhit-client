@@ -1,29 +1,36 @@
 <template>
-  <svg viewBox="45 48 614 152" role="img" aria-label="Hard Hit Magazine">
+  <svg
+    viewBox="45 48 614 152"
+    role="img"
+    aria-label="Hard Hit Magazine"
+    :class="{ glitch: hasGlitch }"
+  >
     <defs>
       <template v-for="(letter, i) in title" :key="i">
         <clipPath v-for="(piece, k) in letter.pieces" :id="`${id}-cut-${i}-${k}`" :key="k">
           <polygon :points="piece.clip" />
         </clipPath>
       </template>
-      <g :id="`${id}-title`">
-        <template v-for="(letter, i) in title" :key="i">
-          <path
-            v-for="(piece, k) in letter.pieces"
-            :key="k"
-            :d="letter.d"
-            :clip-path="`url(#${id}-cut-${i}-${k})`"
-            :transform="`translate(${piece.x} ${piece.y})`"
-          />
-        </template>
-      </g>
     </defs>
-    <use
-      :href="`#${id}-title`"
-      class="fill-(--logo-shadow,var(--ui-text-inverted))"
-      transform="translate(-3 2.5)"
-    />
-    <use :href="`#${id}-title`" fill="currentColor" />
+    <g
+      v-for="layer in layers"
+      :key="layer.name"
+      :class="layer.class"
+      :fill="layer.fill"
+      :transform="layer.transform"
+    >
+      <template v-for="(letter, i) in title" :key="i">
+        <path
+          v-for="(piece, k) in letter.pieces"
+          :key="k"
+          class="piece"
+          :d="letter.d"
+          :clip-path="`url(#${id}-cut-${i}-${k})`"
+          :transform="`translate(${piece.x} ${piece.y})`"
+          :style="hasGlitch && glitchOffset(i, k)"
+        />
+      </template>
+    </g>
     <g fill="currentColor">
       <path v-for="(d, i) in subtitle" :key="i" :d />
     </g>
@@ -31,7 +38,30 @@
 </template>
 
 <script setup lang="ts">
+const { hasGlitch = false } = defineProps<{ hasGlitch?: boolean }>()
+
 const id = useId()
+
+const layers = computed(() => [
+  ...(hasGlitch
+    ? [
+        { name: 'red', class: 'rgb-layer rgb-red', fill: 'var(--color-brand-primary)' },
+        { name: 'cyan', class: 'rgb-layer rgb-cyan', fill: '#00e5ff' },
+      ]
+    : []),
+  {
+    name: 'shadow',
+    class: 'fill-(--logo-shadow,var(--ui-text-inverted))',
+    transform: 'translate(-3 2.5)',
+  },
+  { name: 'letters', fill: 'currentColor' },
+])
+
+function glitchOffset(letter: number, piece: number) {
+  const direction = (letter + piece) % 2 ? 1 : -1
+  return { '--glitch-x': `${direction * (3 + ((letter * 5 + piece * 3) % 5) * 1.5)}px` }
+}
+
 const title = [
   {
     // H
@@ -103,3 +133,70 @@ const subtitle = [
   'M631.5 174.5H645.13V179.19H636.68V183.51H644.78V188.22H636.68V193.31H645.13V198H631.5Z', // E
 ]
 </script>
+
+<style scoped>
+@media (prefers-reduced-motion: no-preference) {
+  .glitch .piece {
+    animation: glitch-burst 4s 0.6s step-end infinite;
+  }
+
+  .glitch .rgb-red {
+    animation: rgb-split 4s 0.6s step-end infinite;
+  }
+
+  .glitch .rgb-cyan {
+    --rgb-direction: -1;
+    animation: rgb-split 4s 0.6s step-end infinite;
+  }
+}
+
+.rgb-layer {
+  opacity: 0;
+}
+
+@keyframes glitch-burst {
+  0%,
+  8%,
+  100% {
+    translate: 0 0;
+  }
+  1% {
+    translate: var(--glitch-x) 0;
+  }
+  2.5% {
+    translate: calc(var(--glitch-x) * -0.5) 0;
+  }
+  4% {
+    translate: calc(var(--glitch-x) * 0.8) 0;
+  }
+  5.5% {
+    translate: 0 0;
+  }
+  6.5% {
+    translate: calc(var(--glitch-x) * -0.3) 0;
+  }
+}
+
+@keyframes rgb-split {
+  0%,
+  8%,
+  100% {
+    opacity: 0;
+    translate: 0 0;
+  }
+  1% {
+    opacity: 0.9;
+    translate: calc(var(--rgb-direction, 1) * 6px) 0;
+  }
+  2.5% {
+    translate: calc(var(--rgb-direction, 1) * -4px) 0;
+  }
+  4% {
+    translate: calc(var(--rgb-direction, 1) * 8px) 0;
+  }
+  6.5% {
+    opacity: 0.9;
+    translate: calc(var(--rgb-direction, 1) * 3px) 0;
+  }
+}
+</style>
