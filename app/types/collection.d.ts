@@ -52,3 +52,14 @@ type BandIndexEntry = {
   slug: string
   media: BandMedia
 }
+
+type DesignArticle = {
+  title: string
+  slug: string
+  summary: string
+  cover: StrapiMedia
+  issue?: IssueRef
+  text?: string
+  isVerticalFeatured?: boolean | null
+  isHorizontalFeatured?: boolean | null
+}
