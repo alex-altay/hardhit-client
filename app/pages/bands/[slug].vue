@@ -1,11 +1,6 @@
 <template>
   <div class="flex flex-col items-center">
-    <div class="w-full flex flex-row justify-start">
-      <NuxtLink to="/bands" class="mb-8 flex flex-row items-center">
-        <UiIconBack class="inline mr-1.5 w-3.5 h-3.5" />
-        <span class="font-bold">Back</span>
-      </NuxtLink>
-    </div>
+    <UiBackLink to="/bands" />
     <h1 v-animate>{{ band.name }}</h1>
     <div v-if="band.description" class="-mt-8 mb-12 max-w-150 text-xl text-center">
       {{ band.description }}
