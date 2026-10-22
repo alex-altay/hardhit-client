@@ -6,7 +6,7 @@
     leave-to-class="opacity-0"
   >
     <button
-      v-show="isAtTop"
+      v-show="isAlwaysVisible || isAtTop"
       type="button"
       :aria-label="screenReaderLabel"
       class="hidden lg:block cursor-pointer p-2 text-highlighted drop-shadow-lg hover:text-brand-primary transition-colors"
@@ -21,6 +21,7 @@
 const props = defineProps<{
   scrollTargetId: string
   screenReaderLabel: string
+  isAlwaysVisible?: boolean
 }>()
 
 const isAtTop = ref(true)
