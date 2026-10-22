@@ -1,8 +1,12 @@
 <template>
   <div>
-    <DesignArticlesHero :scroll-target-id="scrollTargetId" />
+    <DesignArticlesHero class="mb-12" :scroll-target-id="scrollTargetId" />
     <UContainer class="py-12">
-      <h1 id="design" v-animate.delayed class="mb-8 scroll-mt-[calc(var(--ui-header-height)+16px)]">
+      <h1
+        :id="scrollTargetId"
+        v-animate.delayed
+        class="mb-24! scroll-mt-[calc(var(--ui-header-height)+16px)]"
+      >
         Designed for Metal
       </h1>
       <div class="@container">

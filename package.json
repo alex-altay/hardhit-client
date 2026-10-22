@@ -38,6 +38,7 @@
     "@tiptap/suggestion": "^3.31.3",
     "@tiptap/vue-3": "^3.31.3",
     "eslint": "^10.10.0",
+    "gsap": "^3.13.0",
     "nuxt": "^4.5.2",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
