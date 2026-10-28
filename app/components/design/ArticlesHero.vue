@@ -1,5 +1,5 @@
 <template>
-  <section ref="section" class="relative h-[750svh]">
+  <section ref="section" class="relative h-[600svh]">
     <div
       class="sticky top-(--ui-header-height) h-[calc(100svh-var(--ui-header-height))] overflow-hidden @container-size"
     >
@@ -93,7 +93,7 @@
             <path d="M-38 0H-22M22 0H38M0 -38V-22M0 22V38" />
           </g>
 
-          <g class="stroke-white/80" stroke-width="4">
+          <g class="stroke-white/90" stroke-width="4">
             <path
               v-for="line in GRID_LINES"
               :key="line"
@@ -112,12 +112,6 @@
           />
         </svg>
       </div>
-
-      <!-- TODO REMOVE -->
-      <button class="absolute top-35 right-5 cursor-pointer" @click="animation.play()">Play</button>
-      <button class="absolute top-45 right-5 cursor-pointer" @click="animation.restart()">
-        Restart
-      </button>
 
       <div
         class="pointer-events-none absolute inset-0 bg-linear-to-l from-black/70 via-black/0 via-45% to-transparent"
@@ -153,6 +147,7 @@
 import gsap from 'gsap'
 import GSDevTools from 'gsap/GSDevTools' // TODO Remove
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import { CustomEase } from 'gsap/CustomEase'
 
 defineProps<{ scrollTargetId: string }>()
 
@@ -170,7 +165,7 @@ function showCaption(index: number) {
 
 const CAPTIONS = [
   { title: 'Rule of thirds', text: 'The microphone sits right where the lines cross' },
-  { title: 'Leading lines', text: 'The arm and the microphone both run back to his mouth' },
+  { title: 'Leading lines', text: 'The arm and the mic draw the path for your eye' },
   { title: 'Golden ratio', text: 'φ = 1.618. The spiral curls straight into the center of scream' },
 ]
 const FRAME = { width: 1618, height: 1000 }
@@ -226,19 +221,20 @@ const SPIRAL = [
   'A34 34 0 0 1 472 270',
 ].join(' ')
 const SPIRAL_EYE = { x: 452, y: 262 }
+const SPIRAL_EASE =
+  'M0,0 C0.042,0 0.137,0 0.35,0.39 C0.564,0.78 0.658,0.78 0.7,0.78 C0.811,0.78 0.889,1 1,1'
 
 onMounted(() => {
-  gsap.registerPlugin(GSDevTools, ScrollTrigger)
+  gsap.registerPlugin(GSDevTools, ScrollTrigger, CustomEase) // TODO Remove GSDevTools
 
   const ruleOfThirds = gsap
     .timeline()
-    .add('thirds')
     .to('.thirds-horizontal', { ...TO_DRAW, duration: 1, ease: 'power2.out' })
     .to('.thirds-vertical', { ...TO_DRAW, duration: 1, ease: 'power2.out' }, '-=0.3')
     .to(
       '.dots',
-      { opacity: 0.8, stagger: { from: 'center', amount: 0.1 }, ease: 'power2.out' },
-      '-=0.5',
+      { opacity: 0.9, stagger: { from: 'center', amount: 0.1 }, ease: 'power2.out' },
+      '-=0.9',
     )
     .to('.thirds', { opacity: 0.5, strokeWidth: 1 })
 
@@ -256,26 +252,31 @@ onMounted(() => {
   const goldenRatio = gsap
     .timeline()
     .to('.grid-line', { ...TO_DRAW, stagger: 0.15, ease: 'power1.inOut' })
-    .to('.spiral', { ...TO_DRAW, duration: 1.8, ease: 'sine.inOut' })
-    .to('.grid-line', { opacity: 0.3, strokeWidth: 1 }, '<')
+    .to(
+      '.spiral',
+      { ...TO_DRAW, duration: 1.8, ease: CustomEase.create('spiral', SPIRAL_EASE) },
+      '-=1',
+    )
     .to('.shade', { attr: { opacity: 0.65 }, duration: 1.8, ease: 'power1.inOut' }, '<')
-    .to('.spotlight', { attr: { r: 520 }, duration: 1.8, ease: 'power1.inOut' }, '<')
+    .to('.spotlight', { attr: { r: 320 }, duration: 1.8, ease: 'power1.inOut' }, '<')
+    .to('.grid-line', { opacity: 0.25, strokeWidth: 1, duration: 0.8, ease: 'none' })
 
   animation
-    .add(ruleOfThirds, 'ruleOfThirds')
-    .add(showCaption(1), 'leadingLines')
-    .add(leadingLines, 'leadingLines')
-    .add(showCaption(2), 'goldenRatio')
-    .add(goldenRatio, 'goldenRatio')
+    .add(ruleOfThirds)
+    .add(showCaption(1), '-=0.5')
+    .add(leadingLines, '<')
+    .add(showCaption(2), '-=0.5')
+    .add(goldenRatio)
 
   trigger = ScrollTrigger.create({
     trigger: section.value,
     start: 1,
-    end: 'bottom bottom+=600',
-    scrub: 1,
+    end: 'bottom bottom+=350',
+    scrub: 1.5,
     animation: animation,
   })
-  GSDevTools.create({ animation: animation }) // TODO Remove
+  // TODO Remove
+  GSDevTools.create({ animation: animation })
 })
 
 onBeforeUnmount(() => {
