@@ -1,132 +1,146 @@
 <template>
-  <section ref="section" class="relative h-[300svh] motion-reduce:h-auto">
+  <section ref="section" class="relative h-[750svh]">
     <div
       class="sticky top-(--ui-header-height) h-[calc(100svh-var(--ui-header-height))] overflow-hidden @container-size"
     >
-      <!-- A golden rectangle: everything inside is drawn in its own 1618 × 1000 coordinates -->
-      <div class="frame absolute">
-        <!-- Cropped so that the microphone crosses the thirds and the mouth is close to the eye of the spiral -->
+      <div class="golden-ratio-frame absolute">
         <NuxtImg
           src="/images/design-hero/baest.webp"
           alt="Example of photo to display design rules"
-          class="absolute top-[-30%] left-[-45.67%] h-auto w-[148.61%] max-w-none"
+          class="absolute size-full"
           format="webp"
           fetchpriority="high"
           preload
         />
 
         <svg
-          viewBox="0 0 1618 1000"
+          :viewBox="`0 0 ${FRAME.width} ${FRAME.height}`"
           class="absolute inset-0 size-full"
           fill="none"
           aria-hidden="true"
         >
           <defs>
-            <radialGradient :id="`${id}-hole`">
+            <radialGradient id="mouth-hole">
               <stop offset="0.5" stop-color="black" />
               <stop offset="1" stop-color="white" />
             </radialGradient>
-            <mask :id="`${id}-spotlight`">
-              <rect width="1618" height="1000" fill="white" />
+            <mask id="mouth-spotlight">
+              <rect :width="FRAME.width" :height="FRAME.height" fill="white" />
               <circle
                 class="spotlight"
                 :cx="SPIRAL_EYE.x"
                 :cy="SPIRAL_EYE.y"
                 r="1900"
-                :fill="`url(#${id}-hole)`"
+                fill="url('#mouth-hole')"
               />
             </mask>
           </defs>
 
-          <!-- Darkens everything around the eye of the spiral -->
           <rect
             class="shade"
-            width="1618"
-            height="1000"
+            :width="FRAME.width"
+            :height="FRAME.height"
             fill="black"
             opacity="0"
-            :mask="`url(#${id}-spotlight)`"
+            mask="url(#mouth-spotlight)"
           />
 
-          <g class="thirds" stroke="white" stroke-opacity="0.8" stroke-width="2">
-            <line class="draw" x1="539" y1="0" x2="539" y2="1000" pathLength="1" />
-            <line class="draw" x1="1079" y1="0" x2="1079" y2="1000" pathLength="1" />
-            <line class="draw" x1="0" y1="333" x2="1618" y2="333" pathLength="1" />
-            <line class="draw" x1="0" y1="667" x2="1618" y2="667" pathLength="1" />
-            <g class="thirds-dots" fill="white" stroke="none">
-              <circle
-                v-for="dot in THIRDS_DOTS"
-                :key="`${dot.x}-${dot.y}`"
-                :cx="dot.x"
-                :cy="dot.y"
-                r="7"
-              />
-            </g>
+          <g class="thirds stroke-brand" stroke-width="3">
+            <path
+              v-for="line in THIRDS_HORIZONTAL"
+              :key="line"
+              class="thirds-horizontal will-draw"
+              :d="line"
+              pathLength="1"
+            />
+            <path
+              v-for="line in THIRDS_VERTICAL"
+              :key="line"
+              class="thirds-vertical will-draw"
+              :d="line"
+              pathLength="1"
+            />
+            <circle
+              v-for="dot in THIRDS_DOTS"
+              :key="`${dot.x}-${dot.y}`"
+              class="dots stroke-none"
+              :class="dot.isMicrophone ? 'micro fill-white' : 'fill-brand'"
+              :cx="dot.x"
+              :cy="dot.y"
+              r="9"
+            />
           </g>
 
-          <g>
-            <g class="golden" stroke="white" stroke-opacity="0.6" stroke-width="2">
-              <path
-                v-for="line in GOLDEN_LINES"
-                :key="line"
-                class="draw"
-                :d="line"
-                pathLength="1"
-              />
-            </g>
-            <path
-              class="spiral draw"
-              :d="SPIRAL"
-              stroke="#d4af37"
-              stroke-width="5"
+          <g class="stroke-brand-primary" stroke-width="6" stroke-linecap="round">
+            <line
+              v-for="line in LEADING_LINES"
+              :key="`${line.from.x}-${line.from.y}`"
+              class="leading-line will-draw"
+              :x1="line.from.x"
+              :y1="line.from.y"
+              :x2="line.to.x"
+              :y2="line.to.y"
               pathLength="1"
             />
           </g>
 
-          <g class="leading stroke-brand-primary" stroke-width="4" stroke-linecap="round">
-            <path v-for="line in LEADING_LINES" :key="line" class="draw" :d="line" pathLength="1" />
+          <g
+            class="focal-point stroke-brand-primary"
+            stroke-width="5"
+            :transform="`translate(${FOCAL_POINT.x} ${FOCAL_POINT.y})`"
+          >
+            <circle r="38" />
+            <path d="M-38 0H-22M22 0H38M0 -38V-22M0 22V38" />
           </g>
 
-          <g class="focal stroke-brand-primary" stroke-width="3">
-            <g
-              v-for="point in FOCAL_POINTS"
-              :key="`${point.x}-${point.y}`"
-              class="focal-point"
-              :transform="`translate(${point.x} ${point.y})`"
-            >
-              <circle r="38" />
-              <path d="M-60 0H-22M22 0H60M0 -60V-22M0 22V60" />
-            </g>
+          <g class="stroke-white/80" stroke-width="4">
+            <path
+              v-for="line in GRID_LINES"
+              :key="line"
+              class="grid-line will-draw"
+              :d="line"
+              pathLength="1"
+            />
           </g>
+
+          <path
+            class="spiral will-draw"
+            :d="SPIRAL"
+            stroke="#d4af37"
+            stroke-width="8"
+            pathLength="1"
+          />
         </svg>
       </div>
 
-      <!-- Keeps the captions readable on any photo -->
+      <!-- TODO REMOVE -->
+      <button class="absolute top-35 right-5 cursor-pointer" @click="animation.play()">Play</button>
+      <button class="absolute top-45 right-5 cursor-pointer" @click="animation.restart()">
+        Restart
+      </button>
+
       <div
         class="pointer-events-none absolute inset-0 bg-linear-to-l from-black/70 via-black/0 via-45% to-transparent"
       />
 
-      <!-- Step captions are stacked in one place and replace each other -->
-      <div
-        class="absolute top-1/2 right-4 grid max-w-md -translate-y-1/2 text-right text-white sm:right-8"
-      >
+      <div class="absolute top-1/2 -translate-y-1/2 right-4 sm:right-8 grid text-right">
         <div
-          v-for="(step, index) in STEPS"
-          :key="step.title"
-          class="caption col-start-1 row-start-1"
+          v-for="(caption, index) in CAPTIONS"
+          :key="caption.title"
+          ref="captions"
+          class="col-start-1 row-start-1"
           :class="{ 'opacity-0': index > 0 }"
         >
-          <div class="mb-1 text-sm tracking-[0.2em] text-white/60">
-            {{ String(index + 1).padStart(2, '0') }} /
-            {{ String(STEPS.length).padStart(2, '0') }}
+          <div class="mb-1 tracking-[0.2em] text-sm text-white/60">
+            {{ `0${index + 1} / 0${CAPTIONS.length}` }}
           </div>
-          <div class="text-2xl font-bold uppercase sm:text-4xl">{{ step.title }}</div>
-          <div class="text-lg text-balance text-white/75">{{ step.text }}</div>
+          <div class="text-4xl sm:text-7xl font-bold uppercase text-white">{{ caption.title }}</div>
+          <div class="text-lg text-white/60">{{ caption.text }}</div>
         </div>
       </div>
 
       <UiScrollDownButton
-        class="absolute bottom-4 left-1/2 -translate-x-1/2"
+        class="absolute bottom-1 left-1/2 z-10 -translate-x-1/2"
         :scroll-target-id="scrollTargetId"
         screen-reader-label="Scroll to the articles"
         is-always-visible
@@ -136,24 +150,61 @@
 </template>
 
 <script setup lang="ts">
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import gsap from 'gsap'
+import GSDevTools from 'gsap/GSDevTools' // TODO Remove
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 defineProps<{ scrollTargetId: string }>()
 
-const STEPS = [
+let trigger: ScrollTrigger | undefined
+const animation = gsap.timeline({ paused: true })
+const section = useTemplateRef('section')
+const captions = useTemplateRef('captions')
+
+function showCaption(index: number) {
+  return gsap
+    .timeline({ defaults: { duration: 0.3 } })
+    .to(captions.value![index - 1]!, { opacity: 0, y: -12 })
+    .fromTo(captions.value![index]!, { opacity: 0, y: 12 }, { opacity: 1, y: 0 })
+}
+
+const CAPTIONS = [
   { title: 'Rule of thirds', text: 'The microphone sits right where the lines cross' },
-  { title: 'Golden ratio', text: 'φ = 1.618. The spiral curls straight into his face' },
   { title: 'Leading lines', text: 'The arm and the microphone both run back to his mouth' },
+  { title: 'Golden ratio', text: 'φ = 1.618. The spiral curls straight into the center of scream' },
+]
+const FRAME = { width: 1618, height: 1000 }
+const TO_DRAW = { strokeDashoffset: 0, autoRound: false }
+
+// Screen 1 - Rule of thirds
+const THIRDS_HORIZONTAL = [
+  `M0 ${FRAME.height / 3}H${FRAME.width}`,
+  `M${FRAME.width} ${(FRAME.height * 2) / 3}H0`,
+]
+const THIRDS_VERTICAL = [
+  `M${FRAME.width / 3} 0V${FRAME.height}`,
+  `M${(FRAME.width * 2) / 3} ${FRAME.height}V0`,
+]
+const THIRDS_DOTS = [
+  { x: (FRAME.width * 2) / 3, y: FRAME.height / 3 },
+  { x: (FRAME.width * 2) / 3, y: (FRAME.height * 2) / 3 },
+  { x: FRAME.width / 3, y: FRAME.height / 3, isMicrophone: true },
+  { x: FRAME.width / 3, y: (FRAME.height * 2) / 3 },
 ]
 
-const THIRDS_DOTS = [539, 1079].flatMap((x) => [333, 667].map((y) => ({ x, y })))
+// Screen 2 - Leading lines
+const ELBOW = { x: FRAME.width / 3, y: (FRAME.height * 2) / 3 }
+const FINGERTIP = { x: 1447, y: 864 }
+const MICROPHONE_END = { x: 1007, y: 269 }
+const MICROPHONE_HEAD = { x: FRAME.width / 3, y: FRAME.height / 3 }
+const LEADING_LINES = [
+  { from: FINGERTIP, to: ELBOW },
+  { from: MICROPHONE_END, to: MICROPHONE_HEAD },
+]
+const FOCAL_POINT = { x: 452, y: 359 }
 
-/**
- * Golden rectangle 1618 × 1000 cut into squares: right, bottom, left, top and so on, spiralling inwards.
- * Each quarter arc of the spiral lies in its square
- */
-const GOLDEN_LINES = [
+// Screen 3 - Golden grid
+const GRID_LINES = [
   'M618 0V1000',
   'M0 382H618',
   'M382 0V382',
@@ -176,117 +227,84 @@ const SPIRAL = [
 ].join(' ')
 const SPIRAL_EYE = { x: 452, y: 262 }
 
-/** Points of the photo in the frame coordinates, picked by eye: the mouth and the tip of the pointing finger */
-const MOUTH = { x: 452, y: 359 }
-const FINGER = { x: 1447, y: 864 }
-const LEADING_LINES = [`M${FINGER.x} ${FINGER.y}L347 534`, 'M1007 269L480 342']
-const FOCAL_POINTS = [MOUTH, FINGER]
-
-const id = useId()
-const section = useTemplateRef('section')
-let media: gsap.MatchMedia | undefined
-
-function buildTimeline() {
-  const draw = (targets: string, duration: number) =>
-    gsap.to(targets, { strokeDashoffset: 0, duration, stagger: 0.15, ease: 'none' })
-  const showCaption = (index: number) =>
-    gsap
-      .timeline()
-      .to(`.caption:nth-child(${index})`, { opacity: 0, y: -12, duration: 0.3 })
-      .fromTo(
-        `.caption:nth-child(${index + 1})`,
-        { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.3 },
-      )
-
-  return (
-    gsap
-      .timeline({ defaults: { ease: 'power1.inOut' } })
-      // 1. Rule of thirds
-      .add(draw('.thirds .draw', 1))
-      .fromTo(
-        '.thirds-dots circle',
-        { opacity: 0, scale: 0, transformOrigin: 'center' },
-        { opacity: 1, scale: 1, stagger: 0.1, duration: 0.4 },
-      )
-      // 2. Golden ratio, the light gathers into the eye of the spiral
-      .add(showCaption(1), '+=0.4')
-      .to('.thirds', { opacity: 0.25, duration: 0.5 }, '<')
-      .add(draw('.golden .draw', 1.2))
-      .add(draw('.spiral', 1.8), '<0.4')
-      .to('.shade', { attr: { opacity: 0.65 }, duration: 1.8 }, '<')
-      .to('.spotlight', { attr: { r: 520 }, duration: 1.8 }, '<')
-      // 3. Leading lines and focal points
-      .add(showCaption(2), '+=0.4')
-      .to('.shade', { attr: { opacity: 0.3 }, duration: 0.6 }, '<')
-      .add(draw('.leading .draw', 1))
-      .fromTo(
-        '.focal-point',
-        { opacity: 0, scale: 0.4, transformOrigin: 'center' },
-        { opacity: 1, scale: 1, stagger: 0.2, duration: 0.5 },
-      )
-      // A pause with everything drawn before the page scrolls on
-      .to({}, { duration: 0.6 })
-  )
-}
-
-function setupAnimation() {
-  media?.revert()
-  media = gsap.matchMedia()
-  media.add(
-    {
-      animated: '(prefers-reduced-motion: no-preference)',
-      reduced: '(prefers-reduced-motion: reduce)',
-    },
-    (context) => {
-      const timeline = buildTimeline()
-      // No scroll animation: the photo with the whole analysis drawn on it
-      if (context.conditions?.reduced) {
-        timeline.progress(1)
-        return
-      }
-      ScrollTrigger.create({
-        trigger: section.value,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 0.5,
-        animation: timeline,
-      })
-    },
-    section.value ?? undefined,
-  )
-}
-
 onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger)
-  setupAnimation()
+  gsap.registerPlugin(GSDevTools, ScrollTrigger)
+
+  const ruleOfThirds = gsap
+    .timeline()
+    .add('thirds')
+    .to('.thirds-horizontal', { ...TO_DRAW, duration: 1, ease: 'power2.out' })
+    .to('.thirds-vertical', { ...TO_DRAW, duration: 1, ease: 'power2.out' }, '-=0.3')
+    .to(
+      '.dots',
+      { opacity: 0.8, stagger: { from: 'center', amount: 0.1 }, ease: 'power2.out' },
+      '-=0.5',
+    )
+    .to('.thirds', { opacity: 0.5, strokeWidth: 1 })
+
+  const leadingLines = gsap
+    .timeline()
+    .to('.leading-line', { ...TO_DRAW, duration: 1, stagger: 0.15, ease: 'none' })
+    .fromTo(
+      '.focal-point',
+      { opacity: 0, scale: 0.4, transformOrigin: 'center' },
+      { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' },
+    )
+    .to('.focal-point', { opacity: 0, scale: 0.4, rotate: 360 })
+    .to('.leading-line', { opacity: 0.5, strokeWidth: 1 }, '<')
+
+  const goldenRatio = gsap
+    .timeline()
+    .to('.grid-line', { ...TO_DRAW, stagger: 0.15, ease: 'power1.inOut' })
+    .to('.spiral', { ...TO_DRAW, duration: 1.8, ease: 'sine.inOut' })
+    .to('.grid-line', { opacity: 0.3, strokeWidth: 1 }, '<')
+    .to('.shade', { attr: { opacity: 0.65 }, duration: 1.8, ease: 'power1.inOut' }, '<')
+    .to('.spotlight', { attr: { r: 520 }, duration: 1.8, ease: 'power1.inOut' }, '<')
+
+  animation
+    .add(ruleOfThirds, 'ruleOfThirds')
+    .add(showCaption(1), 'leadingLines')
+    .add(leadingLines, 'leadingLines')
+    .add(showCaption(2), 'goldenRatio')
+    .add(goldenRatio, 'goldenRatio')
+
+  trigger = ScrollTrigger.create({
+    trigger: section.value,
+    start: 1,
+    end: 'bottom bottom+=600',
+    scrub: 1,
+    animation: animation,
+  })
+  GSDevTools.create({ animation: animation }) // TODO Remove
 })
 
-onBeforeUnmount(() => media?.revert())
+onBeforeUnmount(() => {
+  trigger?.kill()
+  animation.kill()
+})
 </script>
 
 <style scoped>
-/*
- * The golden rectangle covers the screen like object-fit: cover, so the drawing stays glued to the photo.
- * When it is wider than the screen, it is shifted to keep the eye of the spiral (27.94% of the width) in the middle
- */
-.frame {
+.golden-ratio-frame {
+  --spiral-eye-x: 452 / 1618;
   --width: max(100cqw, 100cqh * 1.618);
   --height: calc(var(--width) / 1.618);
+  --ideal-center-position: 50cqw - var(--width) * var(--spiral-eye-x);
+  --min-left-position: calc(100cqw - var(--width));
+  --max-left-position: 0;
   width: var(--width);
   height: var(--height);
-  top: calc((100cqh - var(--height)) / 2);
-  left: clamp(100cqw - var(--width), 50cqw - var(--width) * 0.2794, 0px);
+  top: calc(50cqh - var(--height) / 2);
+  left: clamp(var(--min-left-position), var(--ideal-center-position), var(--max-left-position));
 }
 
-/* Lines start hidden already in the server html, gsap draws them by moving the dash */
-.draw {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-}
-
-.thirds-dots circle,
+.dots,
 .focal-point {
   opacity: 0;
+}
+
+.will-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
 }
 </style>
