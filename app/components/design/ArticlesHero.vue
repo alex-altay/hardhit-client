@@ -1,50 +1,59 @@
 <template>
-  <section ref="section" class="relative h-[600svh]">
+  <section ref="section" class="relative h-[600svh] bg-ink">
     <div
       class="sticky top-(--ui-header-height) h-[calc(100svh-var(--ui-header-height))] overflow-hidden @container-size"
     >
-      <div class="golden-ratio-frame absolute">
-        <NuxtImg
-          src="/images/design-hero/baest.webp"
-          alt="Example of photo to display design rules"
-          class="absolute size-full"
-          format="webp"
-          fetchpriority="high"
-          preload
-        />
+      <div ref="frame" class="golden-ratio-frame absolute will-change-transform">
+        <div class="photo absolute size-full">
+          <NuxtImg
+            src="/images/design-hero/baest.webp"
+            alt="Example of photo to display design rules"
+            class="absolute size-full"
+            format="webp"
+            fetchpriority="high"
+            preload
+          />
+
+          <svg
+            id="masks"
+            :viewBox="`0 0 ${FRAME.width} ${FRAME.height}`"
+            class="absolute inset-0 size-full"
+            aria-hidden="true"
+          >
+            <defs>
+              <radialGradient id="mouth-hole">
+                <stop offset="0.5" stop-color="black" />
+                <stop offset="1" stop-color="white" />
+              </radialGradient>
+              <mask id="mouth-spotlight">
+                <rect :width="FRAME.width" :height="FRAME.height" fill="white" />
+                <circle
+                  class="spotlight"
+                  :cx="SPIRAL_EYE.x"
+                  :cy="SPIRAL_EYE.y"
+                  r="1900"
+                  fill="url('#mouth-hole')"
+                />
+              </mask>
+            </defs>
+
+            <rect
+              class="shade fill-ink"
+              :width="FRAME.width"
+              :height="FRAME.height"
+              opacity="0"
+              mask="url(#mouth-spotlight)"
+            />
+          </svg>
+        </div>
 
         <svg
+          id="drawings"
           :viewBox="`0 0 ${FRAME.width} ${FRAME.height}`"
           class="absolute inset-0 size-full"
           fill="none"
           aria-hidden="true"
         >
-          <defs>
-            <radialGradient id="mouth-hole">
-              <stop offset="0.5" stop-color="black" />
-              <stop offset="1" stop-color="white" />
-            </radialGradient>
-            <mask id="mouth-spotlight">
-              <rect :width="FRAME.width" :height="FRAME.height" fill="white" />
-              <circle
-                class="spotlight"
-                :cx="SPIRAL_EYE.x"
-                :cy="SPIRAL_EYE.y"
-                r="1900"
-                fill="url('#mouth-hole')"
-              />
-            </mask>
-          </defs>
-
-          <rect
-            class="shade"
-            :width="FRAME.width"
-            :height="FRAME.height"
-            fill="black"
-            opacity="0"
-            mask="url(#mouth-spotlight)"
-          />
-
           <g class="thirds stroke-brand" stroke-width="3">
             <path
               v-for="line in THIRDS_HORIZONTAL"
@@ -114,7 +123,7 @@
       </div>
 
       <div
-        class="pointer-events-none absolute inset-0 bg-linear-to-l from-black/70 via-black/0 via-45% to-transparent"
+        class="pointer-events-none absolute inset-0 bg-linear-to-l from-ink/70 via-ink/0 via-45% to-transparent"
       />
 
       <div class="absolute top-1/2 -translate-y-1/2 right-4 sm:right-8 grid text-right">
@@ -137,7 +146,6 @@
         class="absolute bottom-1 left-1/2 z-10 -translate-x-1/2"
         :scroll-target-id="scrollTargetId"
         screen-reader-label="Scroll to the articles"
-        is-always-visible
       />
     </div>
   </section>
@@ -155,6 +163,7 @@ let trigger: ScrollTrigger | undefined
 const animation = gsap.timeline({ paused: true })
 const section = useTemplateRef('section')
 const captions = useTemplateRef('captions')
+const frame = useTemplateRef('frame')
 
 function showCaption(index: number) {
   return gsap
@@ -210,11 +219,11 @@ const GRID_LINES = [
   'M438 270H472',
 ]
 const SPIRAL = [
-  'M1618 0',
-  'A1000 1000 0 0 1 618 1000',
-  'A618 618 0 0 1 0 382',
-  'A382 382 0 0 1 382 0',
-  'A236 236 0 0 1 618 236',
+  'M1614 0',
+  'A996 996 0 0 1 618 996',
+  'A614 614 0 0 1 4 382',
+  'A378 378 0 0 1 382 4',
+  'A236 232 0 0 1 618 236',
   'A146 146 0 0 1 472 382',
   'A90 90 0 0 1 382 292',
   'A56 56 0 0 1 438 236',
@@ -223,6 +232,11 @@ const SPIRAL = [
 const SPIRAL_EYE = { x: 452, y: 262 }
 const SPIRAL_EASE =
   'M0,0 C0.042,0 0.137,0 0.35,0.39 C0.564,0.78 0.658,0.78 0.7,0.78 C0.811,0.78 0.889,1 1,1'
+
+// From 1 to 3 - Camera zoom
+const CAMERA_ZOOM = 0.8
+const CAMERA_EDGE_FADE = '15%'
+const CAMERA_ORIGIN = `${(SPIRAL_EYE.x / FRAME.width) * 100}% ${(SPIRAL_EYE.y / FRAME.height) * 100}%`
 
 onMounted(() => {
   gsap.registerPlugin(GSDevTools, ScrollTrigger, CustomEase) // TODO Remove GSDevTools
@@ -261,22 +275,29 @@ onMounted(() => {
     .to('.spotlight', { attr: { r: 320 }, duration: 1.8, ease: 'power1.inOut' }, '<')
     .to('.grid-line', { opacity: 0.25, strokeWidth: 1, duration: 0.8, ease: 'none' })
 
+  const cameraZoom = gsap.fromTo(
+    frame.value,
+    { scale: 1, '--edge-fade': '0%', transformOrigin: CAMERA_ORIGIN },
+    { scale: CAMERA_ZOOM, '--edge-fade': CAMERA_EDGE_FADE, ease: 'power1.in' },
+  )
+
   animation
     .add(ruleOfThirds)
     .add(showCaption(1), '-=0.5')
     .add(leadingLines, '<')
     .add(showCaption(2), '-=0.5')
     .add(goldenRatio)
+    .add(cameraZoom.duration(animation.duration()), 0)
 
   trigger = ScrollTrigger.create({
     trigger: section.value,
     start: 1,
     end: 'bottom bottom+=350',
-    scrub: 1.5,
+    scrub: 1.25,
     animation: animation,
   })
   // TODO Remove
-  GSDevTools.create({ animation: animation })
+  // GSDevTools.create({ animation: animation })
 })
 
 onBeforeUnmount(() => {
@@ -297,6 +318,13 @@ onBeforeUnmount(() => {
   height: var(--height);
   top: calc(50cqh - var(--height) / 2);
   left: clamp(var(--min-left-position), var(--ideal-center-position), var(--max-left-position));
+}
+
+.photo {
+  --to-edges: transparent, black var(--edge-fade), black calc(100% - var(--edge-fade)), transparent;
+  mask-image:
+    linear-gradient(to right, var(--to-edges)), linear-gradient(to bottom, var(--to-edges));
+  mask-composite: intersect;
 }
 
 .dots,

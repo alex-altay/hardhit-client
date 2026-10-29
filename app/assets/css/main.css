@@ -5,6 +5,7 @@
   --font-sans: 'Glacial Indifference', sans-serif;
   --color-brand-primary: var(--color-brand-600);
   --color-brand-strong: var(--color-brand-700);
+  --color-ink: #0a0a0a;
   --shadow-lifted: 0 12px 30px rgb(0 0 0 / 0.35);
   --animate-icon-hop: icon-hop 400ms ease-out;
 
@@ -44,13 +45,13 @@
   }
 
   @variant dark {
-    --ui-bg: #0a0a0a;
+    --ui-bg: var(--color-ink);
     --ui-bg-elevated: #2a2a2a;
     --ui-bg-muted: rgb(255 255 255 / 0.05);
     --ui-text: var(--color-white);
     --ui-text-highlighted: var(--color-white);
     --ui-text-muted: #747474;
-    --ui-text-inverted: #0a0a0a;
+    --ui-text-inverted: var(--color-ink);
   }
 }
 
