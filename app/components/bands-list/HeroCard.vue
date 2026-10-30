@@ -32,7 +32,7 @@ let swayVelocity = 0
 let swayFrame = 0
 
 function onPointerMove(event: PointerEvent) {
-  if (event.pointerType !== 'mouse' || reducedMotion()) {
+  if (event.pointerType !== 'mouse' || isPreferredReducedMotion()) {
     return
   }
   swayVelocity += event.movementX * SWAY_SENSITIVITY
@@ -56,10 +56,6 @@ function swayStep() {
   }
   swayAngle.value = angle
   swayFrame = requestAnimationFrame(swayStep)
-}
-
-function reducedMotion() {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
 onBeforeUnmount(() => cancelAnimationFrame(swayFrame))

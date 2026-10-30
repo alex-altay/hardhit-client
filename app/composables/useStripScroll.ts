@@ -37,7 +37,7 @@ export function useStripScroll(
     }
     cancelAnimationFrame(scrollFrame)
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (isPreferredReducedMotion()) {
       el.scrollLeft = centeredScrollLeft(el, index) ?? el.scrollLeft
       return
     }

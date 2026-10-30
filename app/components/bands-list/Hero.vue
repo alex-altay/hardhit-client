@@ -84,7 +84,7 @@ function onScroll() {
 }
 
 onMounted(() => {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (isPreferredReducedMotion()) {
     return
   }
   window.addEventListener('scroll', onScroll, { passive: true })

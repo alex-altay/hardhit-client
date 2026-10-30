@@ -1,5 +1,5 @@
 <template>
-  <section ref="section" class="relative h-[600svh] bg-ink">
+  <section ref="section" class="relative h-[600svh] motion-reduce:h-auto bg-ink">
     <div
       class="sticky top-(--ui-header-height) h-[calc(100svh-var(--ui-header-height))] overflow-hidden @container-size"
     >
@@ -330,6 +330,11 @@ onMounted(() => {
     .add(showCaption(2), '-=0.5')
     .add(goldenRatio)
     .add(cameraZoom.duration(animation.duration()), 0)
+
+  if (isPreferredReducedMotion()) {
+    animation.progress(1)
+    return
+  }
 
   trigger = ScrollTrigger.create({
     trigger: section.value,

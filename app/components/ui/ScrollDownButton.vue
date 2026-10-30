@@ -31,7 +31,7 @@ function onScroll() {
 }
 
 function scrollToTarget() {
-  const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const smooth = !isPreferredReducedMotion()
   document
     .getElementById(props.scrollTargetId)
     ?.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' })

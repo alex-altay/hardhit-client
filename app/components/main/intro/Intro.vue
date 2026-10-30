@@ -105,7 +105,7 @@ onMounted(() => {
     return
   }
   window.addEventListener('scroll', stopOnScroll, { passive: true })
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (isPreferredReducedMotion()) {
     currentFrameNumber.value = FRAMES_COUNT
   } else {
     play()
