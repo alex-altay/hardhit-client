@@ -140,11 +140,19 @@
           class="col-start-1 row-start-1"
           :class="{ 'opacity-0': index > 0 }"
         >
-          <div class="mb-1 tracking-[0.2em] text-sm text-white/60">
+          <div
+            class="mb-1 tracking-[0.2em] text-[length:clamp(0.875rem,1cqw,1.25rem)] text-white/60"
+          >
             {{ `0${index + 1} / 0${CAPTIONS.length}` }}
           </div>
-          <div class="text-4xl sm:text-7xl font-bold uppercase text-white">{{ caption.title }}</div>
-          <div class="text-lg text-white/60">{{ caption.text }}</div>
+          <div
+            class="text-[length:clamp(2.25rem,5cqw,7.5rem)] leading-none font-bold uppercase text-white"
+          >
+            {{ caption.title }}
+          </div>
+          <div class="text-[length:clamp(1.125rem,1.25cqw,1.75rem)] text-white/60">
+            {{ caption.text }}
+          </div>
         </div>
       </div>
 
@@ -159,7 +167,6 @@
 
 <script setup lang="ts">
 import gsap from 'gsap'
-import GSDevTools from 'gsap/GSDevTools' // TODO Remove
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import { CustomEase } from 'gsap/CustomEase'
 
@@ -265,7 +272,7 @@ const CAMERA_ORIGIN = `${(SPIRAL_EYE.x / FRAME.width) * 100}% ${(SPIRAL_EYE.y / 
 const SPIRAL_VIGNETTE = { x: 1100, y: 382, rx: 1100, ry: 640 }
 
 onMounted(() => {
-  gsap.registerPlugin(GSDevTools, ScrollTrigger, CustomEase) // TODO Remove GSDevTools
+  gsap.registerPlugin(ScrollTrigger, CustomEase)
 
   const ruleOfThirds = gsap
     .timeline()
@@ -331,8 +338,6 @@ onMounted(() => {
     scrub: 1.25,
     animation: animation,
   })
-  // TODO Remove
-  // GSDevTools.create({ animation: animation })
 })
 
 onBeforeUnmount(() => {
