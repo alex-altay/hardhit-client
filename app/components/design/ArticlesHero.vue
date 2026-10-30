@@ -214,6 +214,12 @@ const THIRDS_DOTS = [
   { x: FRAME.width / 3, y: FRAME.height / 3, isMicrophone: true },
   { x: FRAME.width / 3, y: (FRAME.height * 2) / 3 },
 ]
+const THIRDS_IN_SPIRAL = [
+  `M7 ${FRAME.height / 3}H1557`,
+  `M1358 ${(FRAME.height * 2) / 3}H74`,
+  `M${FRAME.width / 3} 0V991`,
+  `M${(FRAME.width * 2) / 3} 883V0`,
+]
 
 // Screen 2 - Leading lines
 const ELBOW = { x: FRAME.width / 3, y: (FRAME.height * 2) / 3 }
@@ -290,6 +296,15 @@ onMounted(() => {
       '.spiral',
       { ...TO_DRAW, duration: 1.8, ease: CustomEase.create('spiral', SPIRAL_EASE) },
       '-=1',
+    )
+    .to(
+      '.thirds-horizontal, .thirds-vertical',
+      {
+        attr: { d: (index: number) => THIRDS_IN_SPIRAL[index]! },
+        duration: 1,
+        ease: 'power1.inOut',
+      },
+      '<',
     )
     .to('.shade', { attr: { opacity: 0.65 }, duration: 1.8, ease: 'power1.inOut' }, '<')
     .to('.spotlight', { attr: { r: 320 }, duration: 1.8, ease: 'power1.inOut' }, '<')
