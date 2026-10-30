@@ -8,7 +8,7 @@
       right: 'hidden',
     }"
   >
-    <div class="grid py-8 gap-6 text-sm md:grid-cols-3">
+    <div class="relative grid py-4 sm:py-8 gap-6 text-sm md:grid-cols-3">
       <div class="flex flex-col gap-4">
         <nav class="flex flex-col gap-4">
           <ULink :active="false" to="/">Main</ULink>
@@ -43,7 +43,10 @@
       </nav>
 
       <div class="flex flex-col items-start justify-between gap-6 md:items-end">
-        <UColorModeSwitch :ui="{ base: 'cursor-pointer' }" />
+        <UColorModeSwitch
+          :ui="{ base: 'cursor-pointer' }"
+          class="absolute sm:static right-0 top-4"
+        />
         <a
           :href="BUILT_BY.url"
           target="_blank"
