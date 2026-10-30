@@ -4,7 +4,7 @@
       class="sticky top-(--ui-header-height) h-[calc(100svh-var(--ui-header-height))] overflow-hidden @container-size"
     >
       <div ref="frame" class="golden-ratio-frame absolute will-change-transform">
-        <div class="photo absolute size-full">
+        <div class="photo absolute" :style="PHOTO_POSITION">
           <NuxtImg
             src="/images/design-hero/baest.webp"
             alt="Example of photo to display design rules"
@@ -16,17 +16,28 @@
 
           <svg
             id="masks"
-            :viewBox="`0 0 ${FRAME.width} ${FRAME.height}`"
+            :viewBox="`${PHOTO.x} ${PHOTO.y} ${PHOTO.width} ${PHOTO.height}`"
             class="absolute inset-0 size-full"
             aria-hidden="true"
           >
             <defs>
+              <radialGradient
+                id="spiral-vignette"
+                gradientUnits="userSpaceOnUse"
+                cx="0"
+                cy="0"
+                r="1"
+                :gradientTransform="`translate(${SPIRAL_VIGNETTE.x} ${SPIRAL_VIGNETTE.y}) scale(${SPIRAL_VIGNETTE.rx} ${SPIRAL_VIGNETTE.ry})`"
+              >
+                <stop offset="0.8" style="stop-color: var(--color-ink)" stop-opacity="0" />
+                <stop offset="1" style="stop-color: var(--color-ink)" />
+              </radialGradient>
               <radialGradient id="mouth-hole">
                 <stop offset="0.5" stop-color="black" />
                 <stop offset="1" stop-color="white" />
               </radialGradient>
               <mask id="mouth-spotlight">
-                <rect :width="FRAME.width" :height="FRAME.height" fill="white" />
+                <rect v-bind="PHOTO" fill="white" />
                 <circle
                   class="spotlight"
                   :cx="SPIRAL_EYE.x"
@@ -37,13 +48,8 @@
               </mask>
             </defs>
 
-            <rect
-              class="shade fill-ink"
-              :width="FRAME.width"
-              :height="FRAME.height"
-              opacity="0"
-              mask="url(#mouth-spotlight)"
-            />
+            <rect v-bind="PHOTO" fill="url(#spiral-vignette)" />
+            <rect class="shade fill-ink" v-bind="PHOTO" opacity="0" mask="url(#mouth-spotlight)" />
           </svg>
         </div>
 
@@ -178,6 +184,19 @@ const CAPTIONS = [
   { title: 'Golden ratio', text: 'φ = 1.618. The spiral curls straight into the center of scream' },
 ]
 const FRAME = { width: 1618, height: 1000 }
+const PHOTO_HIDDEN_SIDES = { left: 162, right: 47, top: 100, bottom: 150 }
+const PHOTO = {
+  x: -PHOTO_HIDDEN_SIDES.left,
+  y: -PHOTO_HIDDEN_SIDES.top,
+  width: FRAME.width + PHOTO_HIDDEN_SIDES.left + PHOTO_HIDDEN_SIDES.right,
+  height: FRAME.height + PHOTO_HIDDEN_SIDES.top + PHOTO_HIDDEN_SIDES.bottom,
+}
+const PHOTO_POSITION = {
+  left: `${(PHOTO.x / FRAME.width) * 100}%`,
+  top: `${(PHOTO.y / FRAME.height) * 100}%`,
+  width: `${(PHOTO.width / FRAME.width) * 100}%`,
+  height: `${(PHOTO.height / FRAME.height) * 100}%`,
+}
 const TO_DRAW = { strokeDashoffset: 0, autoRound: false }
 
 // Screen 1 - Rule of thirds
@@ -237,6 +256,7 @@ const SPIRAL_EASE =
 const CAMERA_ZOOM = 0.8
 const CAMERA_EDGE_FADE = '15%'
 const CAMERA_ORIGIN = `${(SPIRAL_EYE.x / FRAME.width) * 100}% ${(SPIRAL_EYE.y / FRAME.height) * 100}%`
+const SPIRAL_VIGNETTE = { x: 1100, y: 382, rx: 1100, ry: 640 }
 
 onMounted(() => {
   gsap.registerPlugin(GSDevTools, ScrollTrigger, CustomEase) // TODO Remove GSDevTools
@@ -321,9 +341,8 @@ onBeforeUnmount(() => {
 }
 
 .photo {
-  --to-edges: transparent, black var(--edge-fade), black calc(100% - var(--edge-fade)), transparent;
-  mask-image:
-    linear-gradient(to right, var(--to-edges)), linear-gradient(to bottom, var(--to-edges));
+  --to-edge: black calc(100% - var(--edge-fade)), transparent;
+  mask-image: linear-gradient(to right, var(--to-edge)), linear-gradient(to bottom, var(--to-edge));
   mask-composite: intersect;
 }
 
