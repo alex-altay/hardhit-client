@@ -1,10 +1,7 @@
 <template>
   <div class="flex flex-col items-center">
     <UiBackLink to="/bands" />
-    <h1 v-animate>{{ band.name }}</h1>
-    <div v-if="band.description" class="-mt-8 mb-12 max-w-150 text-xl text-center">
-      {{ band.description }}
-    </div>
+    <ArticleHeader :title="band.name" :lead="band.description" :has-divider="hasContent" />
     <section v-for="collection in band.photos_collections" :key="collection.id" class="mb-24">
       <h3 class="mb-3 text-center sm:text-left">
         {{ collection.title }}
@@ -24,14 +21,20 @@
       </div>
     </section>
 
-    <section v-for="story in band.stories" :key="story.title" class="mb-12 sm:mb-24 w-full">
-      <div class="mb-3 sm:mb-6 sm:pb-6">
-        <h3 class="mb-3">{{ story.title }}</h3>
-        <NuxtImg format="webp" class="w-full" :src="getMediaLink(story.cover)" />
-        <RichMarkdown v-if="story.text" :value="story.text" />
-      </div>
-      <FeaturedIn v-if="story.issue" :issue="story.issue" />
-    </section>
+    <article
+      v-for="story in band.stories"
+      :key="story.title"
+      class="mb-12 sm:mb-24 w-full max-w-4xl"
+    >
+      <h2 class="mx-auto mb-8 max-w-[65ch] text-center text-balance">{{ story.title }}</h2>
+      <NuxtImg format="webp" class="mb-12 w-full" :src="getMediaLink(story.cover)" />
+      <ArticleText v-if="story.text" class="mb-14" :value="story.text" />
+      <FeaturedIn
+        v-if="story.issue"
+        class="mx-auto max-w-[65ch] border-t border-default pt-12"
+        :issue="story.issue"
+      />
+    </article>
   </div>
 </template>
 
@@ -66,4 +69,6 @@ const band = await useStrapiData(
 )
 
 const videos = [...band.value.live_links, ...band.value.interview_links]
+const hasContent =
+  band.value.photos_collections.length + videos.length + band.value.stories.length > 0
 </script>
