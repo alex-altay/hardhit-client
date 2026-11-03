@@ -2,7 +2,7 @@
   <div
     ref="curtain"
     class="fixed inset-x-0 top-0 z-100 h-svh bg-brand-strong text-brand-strong"
-    :class="isVisible ? 'pointer-events-auto' : 'invisible pointer-events-none'"
+    :class="{ invisible: !isVisible }"
     aria-hidden="true"
   >
     <svg

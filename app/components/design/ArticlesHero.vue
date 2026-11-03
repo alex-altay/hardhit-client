@@ -140,17 +140,15 @@
           class="col-start-1 row-start-1"
           :class="{ 'opacity-0': index > 0 }"
         >
-          <div
-            class="mb-1 tracking-[0.2em] text-[length:clamp(0.875rem,1cqw,1.25rem)] text-white/60"
-          >
+          <div class="mb-1 tracking-[0.2em] text-[clamp(0.875rem,1cqw,1.25rem)] text-white/60">
             {{ `0${index + 1} / 0${CAPTIONS.length}` }}
           </div>
           <div
-            class="text-[length:clamp(2.25rem,5cqw,7.5rem)] leading-none font-bold uppercase text-white"
+            class="text-[clamp(2.25rem,5cqw,7.5rem)] leading-none font-bold uppercase text-white"
           >
             {{ caption.title }}
           </div>
-          <div class="text-[length:clamp(1.125rem,1.25cqw,1.75rem)] text-white/60">
+          <div class="text-[clamp(1.125rem,1.25cqw,1.75rem)] text-white/60">
             {{ caption.text }}
           </div>
         </div>
