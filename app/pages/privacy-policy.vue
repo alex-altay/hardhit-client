@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 v-animate>PRIVACY POLICY</h1>
+    <h1>PRIVACY POLICY</h1>
 
     <p class="mb-8!">Last updated November 01, 2026</p>
 
