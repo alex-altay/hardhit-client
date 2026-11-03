@@ -83,7 +83,7 @@ const mobileItems = computed<NavigationMenuItem[]>(() => [
   { label: 'Main', to: '/', active: route.path === '/' },
   ...[
     { label: 'Photos', to: '/bands' },
-    { label: 'Metal Design', to: '/design', active: route.path.startsWith('/design') },
+    { label: 'Designed for Metal', to: '/design', active: route.path.startsWith('/design') },
     { label: 'About', to: '/about' },
   ].map((item) => ({ ...item, active: route.path.startsWith(item.to) })),
 ])

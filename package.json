@@ -37,6 +37,7 @@
     "@tiptap/starter-kit": "^3.31.3",
     "@tiptap/suggestion": "^3.31.3",
     "@tiptap/vue-3": "^3.31.3",
+    "@vueuse/core": "^14.4.0",
     "eslint": "^10.10.0",
     "gsap": "^3.13.0",
     "nuxt": "^4.5.2",

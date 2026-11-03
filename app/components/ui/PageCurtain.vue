@@ -31,6 +31,7 @@
 </template>
 
 <script setup lang="ts">
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import gsap from 'gsap'
 import type { RouteLocationNormalized } from 'vue-router'
 
@@ -105,5 +106,8 @@ function revealNextPage() {
     )
 }
 
-usePageCurtain({ coverPreviousPage, revealNextPage })
+const isFromXL = useBreakpoints(breakpointsTailwind).greaterOrEqual('xl')
+if (isFromXL.value) {
+  usePageCurtain({ coverPreviousPage, revealNextPage })
+}
 </script>
