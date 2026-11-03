@@ -5,6 +5,7 @@
       <NuxtPage />
     </NuxtLayout>
     <UiFooter />
+    <UiPageCurtain />
   </UApp>
 </template>
 
