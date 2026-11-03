@@ -60,13 +60,13 @@ function coverPreviousPage(to: RouteLocationNormalized) {
   return new Promise((resolve) => {
     gsap
       .timeline({ onComplete: resolve })
-      .fromTo(curtain.value, { y: -offset }, { y: 0, duration: 0.6, ease: 'power3.inOut' })
+      .fromTo(curtain.value, { y: -offset }, { y: 0, duration: 0.5, ease: 'power3.inOut' })
       .fromTo(
         curve,
         { bulge: 1 },
         {
           bulge: 0,
-          duration: 0.6,
+          duration: 0.5,
           ease: 'power2.in',
           onUpdate: () => bottomCurve.value?.setAttribute('d', getBottomCurve(curve.bulge)),
         },
@@ -75,7 +75,7 @@ function coverPreviousPage(to: RouteLocationNormalized) {
       .fromTo(
         labelElement.value,
         { yPercent: -100, opacity: 0 },
-        { yPercent: 0, opacity: 1, duration: 0.35, ease: 'power3.out' },
+        { yPercent: 0, opacity: 1, duration: 0.25, ease: 'power3.out' },
         '-=0.2',
       )
   })
@@ -92,12 +92,12 @@ function revealNextPage() {
       duration: 0.35,
       ease: 'power3.in',
     })
-    .to(curtain.value, { y: offset, duration: 0.6, ease: 'power3.inOut' }, '-=0.2')
+    .to(curtain.value, { y: offset, duration: 0.5, ease: 'power3.inOut' }, '-=0.2')
     .to(
       curve,
       {
         bulge: 1,
-        duration: 0.6,
+        duration: 0.5,
         ease: 'power2.out',
         onUpdate: () => topCurve.value?.setAttribute('d', getTopCurve(curve.bulge)),
       },
