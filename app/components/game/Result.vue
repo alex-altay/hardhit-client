@@ -1,7 +1,9 @@
 <template>
   <div class="flex max-w-150 flex-col items-center text-center">
     <template v-if="hasWon">
-      <h1 class="text-brand">Flawless Victory</h1>
+      <h1 class="glitch-text glitch-loop text-brand" data-text="Flawless Victory">
+        Flawless Victory
+      </h1>
       <div class="mb-12 text-xl text-balance">
         As a reward we have prepared an article just for you. It lives on a page that nobody else on
         the site can see

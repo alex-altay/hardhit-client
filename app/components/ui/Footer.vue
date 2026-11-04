@@ -52,10 +52,12 @@
           target="_blank"
           rel="noopener"
           :aria-label="`Built by ${BUILT_BY.name}, 2026`"
-          class="made-by text-muted hover:text-default transition-colors"
+          class="group text-muted hover:text-default transition-colors"
         >
           Built by
-          <span class="glitch" :data-text="BUILT_BY.name">{{ BUILT_BY.name }}</span
+          <span class="glitch-text glitch-on-hover" :data-text="BUILT_BY.name">{{
+            BUILT_BY.name
+          }}</span
           >, 2026
         </a>
       </div>
@@ -66,84 +68,3 @@
 <script setup lang="ts">
 const BUILT_BY = { name: 'Alex Trutanov', url: 'https://www.linkedin.com/in/trutanov-alex/' }
 </script>
-
-<style scoped>
-.glitch {
-  position: relative;
-  display: inline-block;
-}
-
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.glitch::before {
-  color: var(--color-brand-primary);
-}
-
-.glitch::after {
-  --direction: -1;
-  color: #00e5ff;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .made-by:is(:hover, :focus-visible) .glitch {
-    animation: glitch-jerk 400ms step-end;
-  }
-
-  .made-by:is(:hover, :focus-visible) .glitch::before,
-  .made-by:is(:hover, :focus-visible) .glitch::after {
-    animation: glitch-split 400ms step-end;
-  }
-}
-
-@keyframes glitch-jerk {
-  0% {
-    translate: 2px 0;
-  }
-  25% {
-    translate: -1px 0;
-  }
-  50% {
-    translate: 3px 0;
-  }
-  75% {
-    translate: -2px 0;
-  }
-  100% {
-    translate: 0 0;
-  }
-}
-
-@keyframes glitch-split {
-  0% {
-    opacity: 0.9;
-    translate: calc(var(--direction, 1) * 3px) 0;
-    clip-path: inset(10% 0 55% 0);
-  }
-  20% {
-    translate: calc(var(--direction, 1) * -3px) 0;
-    clip-path: inset(60% 0 5% 0);
-  }
-  40% {
-    translate: calc(var(--direction, 1) * 4px) 0;
-    clip-path: inset(30% 0 40% 0);
-  }
-  60% {
-    translate: calc(var(--direction, 1) * -2px) 0;
-    clip-path: inset(0 0 75% 0);
-  }
-  80% {
-    translate: calc(var(--direction, 1) * 2px) 0;
-    clip-path: inset(45% 0 20% 0);
-  }
-  100% {
-    opacity: 0;
-  }
-}
-</style>

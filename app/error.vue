@@ -2,8 +2,7 @@
   <div class="min-h-screen w-full flex flex-col justify-center items-center px-4 py-12">
     <GameMain v-if="hasStarted" />
     <div v-else class="max-w-150 flex flex-col items-center text-center">
-      <h1>{{ view.title }}</h1>
-      <!-- TODO Glitch on title -->
+      <h1 class="glitch-text glitch-loop" :data-text="view.title">{{ view.title }}</h1>
       <h3 class="mb-16">{{ view.text }}</h3>
       <UButton
         color="brand"
