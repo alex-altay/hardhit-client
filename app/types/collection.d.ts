@@ -8,7 +8,7 @@ type PhotosCollection = {
 type Story = {
   title: string
   cover: StrapiMedia
-  text?: string
+  text?: Markdown
   issue: IssueRef
   bands: Pick<Band, 'id' | 'name' | 'slug'>[]
 }
@@ -18,7 +18,7 @@ type Issue = {
   date?: string
   cover: StrapiMedia
   pdf: StrapiMedia
-  description?: string
+  description?: Markdown
   volume: number
   stories: Pick<Story, 'title' | 'cover' | 'text'>[]
 }
@@ -59,7 +59,7 @@ type DesignArticle = {
   summary: string
   cover: StrapiMedia
   issue?: IssueRef
-  text?: string
+  text?: Markdown
   isVerticalFeatured?: boolean | null
   isHorizontalFeatured?: boolean | null
 }

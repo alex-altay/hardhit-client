@@ -14,3 +14,5 @@ type PhotoWithDescription = {
   description: string
   photo: StrapiMedia
 }
+
+type Markdown = string

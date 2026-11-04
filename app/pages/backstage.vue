@@ -1,11 +1,20 @@
 <template>
-  <ArticleHeader
-    title="Backstage"
-    lead="You answered everything right and made it backstage. Something special is coming here soon"
-  />
+  <div>
+    <UContainer class="py-12">
+      <ArticleHeader :title="secretArticle.title" :lead="secretArticle.lead" :has-divider="true" />
+      <RichMarkdown :value="secretArticle.text" />
+    </UContainer>
+  </div>
 </template>
 
 <script setup lang="ts">
-// TODO Take the content from a strapi single type
 useSeoMeta({ robots: 'noindex, nofollow' })
+
+const { findOne } = useStrapi()
+
+const secretArticle = await useStrapiData('secret-article', () =>
+  findOne<SecretArticle>('secret-article', '', {
+    populate: '*',
+  }),
+)
 </script>

@@ -42,3 +42,9 @@ type TopTen = {
   description: string
   albums: TopAlbum[]
 }
+
+type SecretArticle = {
+  title: string
+  lead: string
+  text: Markdown
+}
