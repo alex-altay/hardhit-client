@@ -7,13 +7,14 @@ function labelFromSlug(route: RouteLocationNormalized) {
 const DEFAULT_LABEL = 'Hard Hit'
 const LABELS: Record<string, string | typeof labelFromSlug> = {
   index: DEFAULT_LABEL,
+  backstage: 'Backstage',
   bands: 'Captured Live',
   design: 'Designed for Metal',
   about: 'About Me',
   'bands-slug': labelFromSlug,
   'design-slug': labelFromSlug,
-  'privacy-policy': 'Privacy',
-  'terms-of-use': 'Terms',
+  'privacy-policy': 'Privacy Policy',
+  'terms-of-use': 'Terms of Use',
 }
 
 export function routeToLabel(route: RouteLocationNormalized): string {
