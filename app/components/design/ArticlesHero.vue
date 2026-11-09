@@ -171,7 +171,7 @@ import { CustomEase } from 'gsap/CustomEase'
 defineProps<{ scrollTargetId: string }>()
 
 let trigger: ScrollTrigger | undefined
-const animation = gsap.timeline({ paused: true })
+let animation: gsap.core.Timeline | undefined
 const section = useTemplateRef('section')
 const captions = useTemplateRef('captions')
 const frame = useTemplateRef('frame')
@@ -321,13 +321,14 @@ onMounted(() => {
     { scale: CAMERA_ZOOM, '--edge-fade': CAMERA_EDGE_FADE, ease: 'power1.in' },
   )
 
-  animation
+  animation = gsap
+    .timeline({ paused: true })
     .add(ruleOfThirds)
     .add(showCaption(1), '-=0.5')
     .add(leadingLines, '<')
     .add(showCaption(2), '-=0.5')
     .add(goldenRatio)
-    .add(cameraZoom.duration(animation.duration()), 0)
+  animation.add(cameraZoom.duration(animation.duration()), 0)
 
   if (isPreferredReducedMotion()) {
     animation.progress(1)
@@ -345,7 +346,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   trigger?.kill()
-  animation.kill()
+  animation?.kill()
 })
 </script>
 
