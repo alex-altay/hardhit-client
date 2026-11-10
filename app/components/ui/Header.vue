@@ -1,5 +1,6 @@
 <template>
   <UHeader
+    title="Hard Hit Magazine"
     :menu="menu"
     :inert="isHidden"
     class="transition-transform duration-1000 ease-out motion-reduce:transition-none"
@@ -21,7 +22,7 @@
         class="hidden xl:flex"
         color="neutral"
         :items="desktopItems"
-        :ui="{ link: linkClass }"
+        :ui="{ link: linkClass, linkLabel: linkLabelClass }"
       />
     </template>
 
@@ -57,6 +58,11 @@ const linkClass = [
   'after:origin-top after:scale-y-0 after:transition-transform after:duration-300 after:ease-out',
   'motion-reduce:after:transition-none',
 ].join(' ')
+const linkLabelClass = [
+  'rounded-xs',
+  'group-focus-visible:outline-2 group-focus-visible:outline-solid',
+  'group-focus-visible:outline-current group-focus-visible:outline-offset-6',
+].join(' ')
 const activeClass = 'uppercase tracking-wide text-white hover:text-white after:scale-y-100'
 const mobileActiveClass = [
   'text-white mb-4',
@@ -66,6 +72,8 @@ const mobileActiveClass = [
 
 const mobileMenu = useTemplateRef('mobileMenu')
 const menu = {
+  title: 'Menu',
+  description: 'Site navigation',
   transition: true,
   content: {
     onOpenAutoFocus: (event: Event) => {
