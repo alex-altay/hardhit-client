@@ -1,5 +1,6 @@
 <template>
   <UApp>
+    <UiSkipLink />
     <UiHeader />
     <NuxtLayout>
       <NuxtPage />

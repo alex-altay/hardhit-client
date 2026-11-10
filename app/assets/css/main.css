@@ -55,6 +55,10 @@
   }
 }
 
+main:focus {
+  outline: none;
+}
+
 h1 {
   @apply mb-12 text-6xl tracking-[3%] text-center font-bold uppercase;
 }
