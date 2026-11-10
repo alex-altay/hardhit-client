@@ -3,7 +3,14 @@
     <GameLogo class="mb-8 size-50 sm:size-68 select-none" />
     <div class="mb-6 text-lg text-muted">{{ number }} / {{ total }}</div>
 
-    <div class="mb-12 text-center text-2xl font-bold text-balance sm:text-4xl">
+    <div
+      ref="questionEl"
+      tabindex="-1"
+      role="heading"
+      aria-level="1"
+      class="mb-12 text-center text-2xl font-bold text-balance outline-none sm:text-4xl"
+    >
+      <span class="sr-only">Question {{ number }} of {{ total }}. </span>
       {{ question.question }}
     </div>
 
@@ -12,9 +19,9 @@
         v-for="(answer, index) in question.answers"
         :key="answer"
         type="button"
-        class="flex cursor-pointer items-center gap-4 rounded border border-default px-5 py-4 text-left text-lg transition-colors hover:border-brand-primary disabled:cursor-default disabled:hover:border-default"
+        class="flex cursor-pointer items-center gap-4 rounded border border-default px-5 py-4 text-left text-lg transition-colors hover:border-brand-primary aria-disabled:cursor-default aria-disabled:hover:border-default"
         :class="getAnswerClass(answer)"
-        :disabled="!!chosenAnswer"
+        :aria-disabled="!!chosenAnswer"
         @click="$emit('choose', answer)"
       >
         <span class="font-bold text-brand-primary">{{ LETTERS[index] }}</span>
@@ -36,6 +43,13 @@ const props = defineProps<{
 defineEmits<{ choose: [answer: string] }>()
 
 const LETTERS = ['A', 'B', 'C', 'D']
+
+const questionEl = useTemplateRef('questionEl')
+watch(
+  () => props.number,
+  () => nextTick(() => questionEl.value?.focus()),
+)
+onMounted(() => focusElementForScreenReader(questionEl.value))
 
 function getAnswerClass(answer: string) {
   if (!props.chosenAnswer) {

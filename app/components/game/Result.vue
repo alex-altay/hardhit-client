@@ -1,7 +1,12 @@
 <template>
   <div class="flex max-w-150 flex-col items-center text-center">
     <template v-if="hasWon">
-      <h1 class="glitch-text glitch-loop text-brand" data-text="Flawless Victory">
+      <h1
+        ref="heading"
+        tabindex="-1"
+        class="glitch-text glitch-loop text-brand outline-none"
+        data-text="Flawless Victory"
+      >
         Flawless Victory
       </h1>
       <div class="mb-12 text-xl text-balance">
@@ -18,7 +23,7 @@
       </UButton>
     </template>
     <template v-else>
-      <h1>{{ correctCount }} / {{ total }}</h1>
+      <h1 ref="heading" tabindex="-1" class="outline-none">{{ correctCount }} / {{ total }}</h1>
       <h3 class="mb-16">Game over. Wanna listen to some Taylor Swift?</h3>
       <UButton color="brand" size="xl" class="mb-6 cursor-pointer" @click="$emit('restart')">
         Play again
@@ -31,4 +36,7 @@
 <script setup lang="ts">
 defineProps<{ hasWon: boolean; correctCount: number; total: number }>()
 defineEmits<{ restart: [] }>()
+
+const heading = useTemplateRef('heading')
+onMounted(() => focusElementForScreenReader(heading.value))
 </script>
