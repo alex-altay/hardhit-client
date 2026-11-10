@@ -13,7 +13,12 @@ export default defineAppConfig({
     button: {
       slots: { base: 'justify-center rounded-none' },
       compoundVariants: [
-        { color: 'brand', variant: 'solid', class: 'text-white hover:bg-brand-strong' },
+        {
+          color: 'brand',
+          variant: 'solid',
+          class:
+            'text-white hover:bg-brand-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted',
+        },
       ],
       defaultVariants: { color: 'brand' },
     },

@@ -2,16 +2,15 @@
   <div
     class="relative max-w-screen h-full overflow-hidden scrollbar-none [&::-webkit-scrollbar]:hidden"
   >
-    <UiIconBack
+    <button
+      type="button"
       :class="{ hidden: !canScrollLeft }"
-      class="absolute left-0 top-[calc(50%-0.25rem)] w-8 h-8 cursor-pointer z-10"
+      class="absolute left-0 top-[calc(50%-0.25rem)] z-10 size-8 cursor-pointer rounded-full outline-none focus-visible:outline-2 focus-visible:outline-solid focus-visible:-outline-offset-2 focus-visible:outline-white"
+      aria-label="Previous issue"
       @click.stop="selectPrevious"
-    />
-    <UiIconBack
-      :class="{ hidden: !canScrollRight }"
-      class="absolute right-0 top-[calc(50%-0.25rem)] w-8 h-8 rotate-180 cursor-pointer z-10"
-      @click.stop="selectNext"
-    />
+    >
+      <UiIconBack class="size-full" aria-hidden="true" />
+    </button>
     <div
       ref="strip"
       class="relative flex gap-5 pt-4 min-w-full overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden"
@@ -24,6 +23,15 @@
         @toggle="select(index)"
       />
     </div>
+    <button
+      type="button"
+      :class="{ hidden: !canScrollRight }"
+      class="absolute right-0 top-[calc(50%-0.25rem)] z-10 size-8 rotate-180 cursor-pointer rounded-full outline-none focus-visible:outline-2 focus-visible:outline-solid focus-visible:-outline-offset-2 focus-visible:outline-white"
+      aria-label="Next issue"
+      @click.stop="selectNext"
+    >
+      <UiIconBack class="size-full" aria-hidden="true" />
+    </button>
   </div>
 </template>
 

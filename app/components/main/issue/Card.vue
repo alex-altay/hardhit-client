@@ -1,7 +1,10 @@
 <template>
   <div class="h-full flex flex-row shrink-0">
-    <div
-      class="h-80 shrink-0 cursor-pointer aspect-[1/1.414] hover-light-streak hover-zoom"
+    <button
+      type="button"
+      class="block h-80 shrink-0 cursor-pointer aspect-[1/1.414] hover-light-streak hover-zoom outline-none focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-4 focus-visible:outline-brand-primary"
+      :aria-expanded="isOpen"
+      :aria-controls="panelId"
       @click="$emit('toggle')"
     >
       <NuxtImg
@@ -9,10 +12,11 @@
         class="block h-full w-full object-cover"
         sizes="320px"
         format="webp"
-        alt=""
+        :alt="`Hard Hit volume ${issue.volume}`"
       />
-    </div>
+    </button>
     <div
+      :id="panelId"
       :class="isOpen ? 'grid-cols-[1fr]' : 'grid-cols-[0fr]'"
       class="grid transition-[grid-template-columns] ease-out motion-reduce:transition-none"
       :style="transitionStyle"
@@ -34,5 +38,6 @@
 defineProps<{ issue: Issue; isOpen: boolean }>()
 defineEmits<{ toggle: [] }>()
 
+const panelId = useId()
 const transitionStyle = { transitionDuration: `${PANEL_TRANSITION_MS}ms` }
 </script>
