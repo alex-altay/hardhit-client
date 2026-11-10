@@ -20,6 +20,10 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'full-width' })
+useSeoMeta({
+  description:
+    'Designed for Metal: design principles explained on metal photos and album covers, artwork analysis and interviews with designers',
+})
 
 const scrollTargetId = useId()
 const { find } = useStrapi()

@@ -52,6 +52,9 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'full-width' })
+useSeoMeta({
+  description: 'Concert photos of metal bands by Hard Hit Magazine with live videos and interviews',
+})
 
 const searchString = ref('')
 const withInterview = ref(false)

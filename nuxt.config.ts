@@ -12,6 +12,13 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Hard Hit Magazine',
+      meta: [
+        {
+          name: 'description',
+          content:
+            'Hard Hit Magazine: concert photos, band interviews and design analysis of metal artwork',
+        },
+      ],
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
       htmlAttrs: {
         lang: 'en',

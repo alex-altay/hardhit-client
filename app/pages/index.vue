@@ -10,5 +10,9 @@
 
 <script setup lang="ts">
 definePageMeta({ layout: 'full-width' })
+useSeoMeta({
+  description:
+    'Hard Hit Magazine. Download every issue for free and follow us for new interviews and concert photos',
+})
 const id = useId()
 </script>
