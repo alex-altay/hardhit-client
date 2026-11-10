@@ -30,7 +30,7 @@
                 <span>{{ formatCount(instagram.followingCount, 'following', 'following') }}</span>
               </div>
               <div class="whitespace-pre-line">{{ instagram.description }}</div>
-              <div class="mb-2 flex flex-row items-center text-blue-500">
+              <div class="mb-2 flex flex-row items-center text-blue-300">
                 <UiIconLink class="mr-2 size-4" />
                 hardhit.de
               </div>
@@ -45,7 +45,7 @@
             <div
               class="h-10 w-10 flex items-center justify-center bg-neutral-700 rounded-xl text-white"
             >
-              <UiIconInstagramSimilar class="" />
+              <UiIconInstagramSimilar />
             </div>
           </div>
           <div class="mb-8 flex flex-row justify-start gap-5">

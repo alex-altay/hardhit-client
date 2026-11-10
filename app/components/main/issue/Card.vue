@@ -9,6 +9,7 @@
         class="block h-full w-full object-cover"
         sizes="320px"
         format="webp"
+        alt=""
       />
     </div>
     <div

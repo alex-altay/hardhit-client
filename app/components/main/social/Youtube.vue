@@ -15,6 +15,7 @@
             class="block w-full aspect-6/1 object-cover object-left hover-zoom"
             format="webp"
             sizes="1180px"
+            alt=""
           />
         </div>
         <div class="flex flex-row gap-6">
@@ -22,6 +23,7 @@
             class="h-20 w-20 sm:h-40 sm:w-40"
             :src="getMediaLink(youtube.logo)"
             sizes="160px"
+            alt=""
           />
           <div class="flex flex-col justify-between">
             <div class="text-2xl font-bold">Hard Hit Magazine</div>
@@ -33,7 +35,7 @@
               <span>•&nbsp;{{ formatCount(youtube.videosCount, 'video') }}</span>
             </div>
             <div>{{ youtube.description }}</div>
-            <div class="mb-2 text-blue-500">hardhit.de</div>
+            <div class="mb-2 text-blue-300">hardhit.de</div>
             <div
               class="h-10 w-30 flex items-center justify-center bg-white rounded-3xl text-black transition-colors group-hover:bg-brand-primary group-hover:text-white group-focus-visible:bg-brand-primary group-focus-visible:text-white hover-hop"
             >
