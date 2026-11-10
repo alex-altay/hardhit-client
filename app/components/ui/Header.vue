@@ -26,7 +26,7 @@
     </template>
 
     <template #body>
-      <nav class="flex flex-col items-end gap-2">
+      <nav ref="mobileMenu" class="flex flex-col items-end gap-2">
         <NuxtLink
           v-for="(item, index) in mobileItems"
           :key="item.label"
@@ -64,9 +64,15 @@ const mobileActiveClass = [
   'after:[clip-path:polygon(0_0,100%_0,100%_100%,0_75%)]',
 ].join(' ')
 
+const mobileMenu = useTemplateRef('mobileMenu')
 const menu = {
   transition: true,
-  content: { onOpenAutoFocus: (event: Event) => event.preventDefault() },
+  content: {
+    onOpenAutoFocus: (event: Event) => {
+      event.preventDefault()
+      mobileMenu.value?.querySelector('a')?.focus()
+    },
+  },
 }
 
 const menuContentClass = [
