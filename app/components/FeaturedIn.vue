@@ -7,7 +7,7 @@
         target="_blank"
         rel="noopener"
         :aria-label="`Download ${issue.title}`"
-        class="shrink-0 self-start hover-light-streak outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-primary"
+        class="shrink-0 self-start hover-light-streak outline-none focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-4 focus-visible:outline-brand-primary"
       >
         <NuxtImg
           class="block h-72 w-auto"
