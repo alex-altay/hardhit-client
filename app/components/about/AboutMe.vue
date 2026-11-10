@@ -2,7 +2,7 @@
   <section class="mb-12">
     <h1>{{ about.title }}</h1>
     <p class="pb-8 text-center">{{ about.description }}</p>
-    <UiPhotoGallery :images="about.photos.map(getMediaLink)" />
+    <UiPhotoGallery :images="about.photos.map(getMediaLink)" :label="`${about.title} photos`" />
   </section>
 </template>
 

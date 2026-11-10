@@ -5,7 +5,11 @@
         ref="carousel"
         v-slot="{ item, index }"
         :items="images"
+        :aria-label="label"
         class="relative w-full"
+        :ui="{
+          root: 'focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-4 focus-visible:outline-inverted',
+        }"
         @select="select"
       >
         <div class="w-full aspect-3/2 overflow-hidden">
@@ -31,6 +35,7 @@
     <div
       v-if="images.length > 1"
       ref="previewStrip"
+      aria-hidden="true"
       class="relative flex gap-5 pt-4 w-full overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden"
     >
       <NuxtPicture
@@ -56,7 +61,10 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ images: string[] }>()
+defineProps<{
+  images: string[]
+  label: string
+}>()
 
 const carousel = useTemplateRef('carousel')
 const previewStrip = useTemplateRef('previewStrip')

@@ -7,7 +7,10 @@
         {{ collection.title }}
         <span v-if="collection.date">{{ transformDateString(collection.date) }}</span>
       </h3>
-      <UiPhotoGallery :images="collection.photos.map(getMediaLink)" />
+      <UiPhotoGallery
+        :images="collection.photos.map(getMediaLink)"
+        :label="`${collection.title} photos`"
+      />
     </section>
 
     <section v-if="videos.length" class="mb-12 sm:mb-24 w-full">
