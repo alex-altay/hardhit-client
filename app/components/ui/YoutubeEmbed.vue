@@ -2,6 +2,7 @@
   <div class="relative w-full aspect-video overflow-hidden rounded-2xl bg-black">
     <iframe
       v-if="isPlaying"
+      ref="player"
       class="absolute inset-0 h-full w-full"
       :src="`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`"
       :title="title"
@@ -13,7 +14,7 @@
       type="button"
       class="group absolute inset-0 h-full w-full cursor-pointer"
       :aria-label="`Play ${title}`"
-      @click="isPlaying = true"
+      @click="play"
     >
       <img
         class="h-full w-full object-cover"
@@ -32,4 +33,11 @@
 defineProps<{ videoId: string; title: string }>()
 
 const isPlaying = ref(false)
+const player = useTemplateRef('player')
+
+async function play() {
+  isPlaying.value = true
+  await nextTick()
+  player.value?.focus()
+}
 </script>
