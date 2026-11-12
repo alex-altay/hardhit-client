@@ -34,4 +34,6 @@ const article = await useStrapiData(
   },
   { watch: [() => route.params.slug] },
 )
+
+useSeoMeta({ title: () => article.value?.title })
 </script>

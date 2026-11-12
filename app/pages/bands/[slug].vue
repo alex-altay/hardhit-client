@@ -71,6 +71,8 @@ const band = await useStrapiData(
   { watch: [() => route.params.slug] },
 )
 
+useSeoMeta({ title: () => band.value?.name })
+
 const videos = [...band.value.live_links, ...band.value.interview_links]
 const hasContent =
   band.value.photos_collections.length + videos.length + band.value.stories.length > 0

@@ -21,6 +21,7 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'full-width' })
 useSeoMeta({
+  title: 'Designed for Metal',
   description:
     'Designed for Metal: design principles explained on metal photos and album covers, artwork analysis and interviews with designers',
 })

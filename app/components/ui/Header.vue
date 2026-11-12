@@ -72,6 +72,7 @@ const mobileActiveClass = [
 ].join(' ')
 
 const mobileMenu = useTemplateRef('mobileMenu')
+let menuOpenedOnPath = ''
 const menu = {
   title: 'Menu',
   description: 'Site navigation',
@@ -79,7 +80,13 @@ const menu = {
   content: {
     onOpenAutoFocus: (event: Event) => {
       event.preventDefault()
+      menuOpenedOnPath = route.path
       mobileMenu.value?.querySelector('a')?.focus()
+    },
+    onCloseAutoFocus: (event: Event) => {
+      if (route.path !== menuOpenedOnPath) {
+        event.preventDefault()
+      }
     },
   },
 }

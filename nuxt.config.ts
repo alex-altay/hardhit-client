@@ -11,7 +11,6 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'Hard Hit Magazine',
       meta: [
         {
           name: 'description',

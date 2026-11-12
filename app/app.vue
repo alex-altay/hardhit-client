@@ -12,4 +12,8 @@
 
 <script setup lang="ts">
 import '~/assets/css/main.css'
+
+useHead({
+  titleTemplate: (title) => `${title ? title + ' · ' : ''}Hard Hit Magazine`,
+})
 </script>

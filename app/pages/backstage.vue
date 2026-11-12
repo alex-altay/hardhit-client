@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-useSeoMeta({ robots: 'noindex, nofollow' })
+useSeoMeta({ title: 'Backstage', robots: 'noindex, nofollow' })
 
 const { findOne } = useStrapi()
 

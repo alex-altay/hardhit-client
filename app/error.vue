@@ -39,4 +39,6 @@ const view = computed(() => {
       }
   }
 })
+
+useSeoMeta({ title: () => view.value.title })
 </script>

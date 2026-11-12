@@ -53,6 +53,7 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'full-width' })
 useSeoMeta({
+  title: 'Captured Live',
   description: 'Concert photos of metal bands by Hard Hit Magazine with live videos and interviews',
 })
 
