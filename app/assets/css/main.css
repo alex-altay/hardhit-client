@@ -82,7 +82,7 @@ main:focus {
 }
 
 @utility title-page {
-  @apply mb-12 text-6xl tracking-[3%] text-center font-bold uppercase;
+  @apply mb-12 text-4xl sm:text-6xl tracking-[3%] text-center font-bold uppercase hyphens-auto wrap-break-word;
 }
 
 @utility title-small {
@@ -90,7 +90,7 @@ main:focus {
 }
 
 @utility title-section {
-  @apply text-2xl sm:text-[40px] font-bold uppercase;
+  @apply text-2xl sm:text-[2.5rem] font-bold uppercase hyphens-auto wrap-break-word;
 }
 
 @layer base {
