@@ -16,11 +16,34 @@ export default defineAppConfig({
         {
           color: 'brand',
           variant: 'solid',
-          class:
-            'text-white hover:bg-brand-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverted',
+          class: 'text-white hover:bg-brand-strong',
+        },
+        {
+          class: 'outline-focus focus-visible:outline-2 focus-visible:outline-offset-2',
         },
       ],
       defaultVariants: { color: 'brand' },
+    },
+    link: {
+      base: 'outline-focus focus-visible:outline-2 focus-visible:outline-offset-2',
+    },
+    input: {
+      compoundVariants: [
+        {
+          class: {
+            base: 'focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-focus',
+          },
+        },
+      ],
+    },
+    switch: {
+      compoundVariants: [
+        {
+          class: {
+            base: 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus',
+          },
+        },
+      ],
     },
   },
 })
