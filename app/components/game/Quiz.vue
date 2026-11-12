@@ -8,7 +8,7 @@
       tabindex="-1"
       role="heading"
       aria-level="1"
-      class="mb-12 text-center text-2xl font-bold text-balance outline-none sm:text-4xl"
+      class="mb-12 text-center text-2xl font-bold text-balance sm:text-4xl"
     >
       <span class="sr-only">Question {{ number }} of {{ total }}. </span>
       {{ question.question }}

@@ -8,6 +8,7 @@
   --color-ink: #0a0a0a;
   --shadow-lifted: 0 12px 30px rgb(0 0 0 / 0.35);
   --animate-icon-hop: icon-hop 400ms ease-out;
+  --color-focus: var(--color-white);
 
   @keyframes icon-hop {
     0%,
@@ -42,6 +43,7 @@
 
   @variant light {
     --ui-bg: var(--color-white);
+    --color-focus: var(--color-ink);
   }
 
   @variant dark {
@@ -57,6 +59,18 @@
 
 main:focus {
   outline: none;
+}
+
+@layer base {
+  :focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  [tabindex='-1']:focus-visible {
+    outline: none;
+  }
 }
 
 h1 {
