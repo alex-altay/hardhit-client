@@ -23,7 +23,7 @@
         </div>
       </UCarousel>
       <UiIconExpand
-        class="absolute bottom-2 right-2 z-10 w-12 h-12 cursor-pointer"
+        class="absolute bottom-2 right-2 z-10 w-12 h-12 cursor-pointer rounded-full focus-ring-contrast"
         role="button"
         tabindex="0"
         aria-label="Open photo fullscreen"

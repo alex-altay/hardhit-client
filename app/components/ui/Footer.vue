@@ -10,7 +10,7 @@
   >
     <div class="relative grid py-4 sm:py-8 gap-6 text-sm md:grid-cols-3">
       <div class="flex flex-col gap-4">
-        <nav class="flex flex-col gap-4 text-red-500">
+        <nav class="flex flex-col items-start gap-4 text-red-500">
           <ULink class="text-default/70" :active="false" to="/">Main</ULink>
           <ULink class="text-default/70" :active="false" to="/bands">Photos</ULink>
           <ULink class="text-default/70" :active="false" to="/design">Designed for Metal</ULink>
@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      <nav class="flex flex-col gap-4 md:justify-self-center">
+      <nav class="flex flex-col items-start gap-4 md:justify-self-center">
         <ULink class="text-default/70" :active="false" to="/privacy-policy">Privacy Policy</ULink>
         <ULink class="text-default/70" :active="false" to="/terms-of-use">Terms of Use</ULink>
       </nav>
