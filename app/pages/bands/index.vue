@@ -18,6 +18,12 @@
         />
         <BandsListSlideshowAll :bands class="w-full sm:w-64 justify-center" />
       </div>
+      <BandsListVoiceAnnounce
+        :count="filteredBands.length"
+        :search-string="searchString"
+        :with-interview="withInterview"
+        :with-live="withLive"
+      />
 
       <nav
         class="mb-8 flex flex-row flex-wrap items-center gap-x-3 gap-y-1"

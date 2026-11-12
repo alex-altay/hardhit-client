@@ -48,9 +48,14 @@
 
         <div
           class="absolute bottom-4 inset-x-4 flex flex-col items-center gap-1 text-center text-sm text-white/60"
+          aria-live="polite"
+          aria-atomic="true"
         >
           <span v-if="photo?.caption" class="text-white/90">{{ photo.caption }}</span>
-          <span>{{ index + 1 }} / {{ photos.length }}</span>
+          <span aria-hidden="true">{{ index + 1 }} / {{ photos.length }}</span>
+          <span class="sr-only">
+            Photo {{ index + 1 }} of {{ photos.length }}{{ photo?.alt ? `. ${photo.alt}` : '' }}
+          </span>
         </div>
       </div>
     </template>

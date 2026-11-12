@@ -28,7 +28,7 @@
         tabindex="0"
         aria-label="Open photo fullscreen"
         @click="isFullscreen = true"
-        @keydown.enter="isFullscreen = true"
+        @keydown.enter.prevent="isFullscreen = true"
         @keydown.space.prevent="isFullscreen = true"
       />
     </div>
@@ -52,6 +52,8 @@
       />
     </div>
 
+    <p class="sr-only" aria-live="polite">{{ slideAnnouncement }}</p>
+
     <UiPhotoLightbox
       v-model:open="isFullscreen"
       v-model:index="activeIndex"
@@ -66,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   photos: StrapiMedia[]
   label: string
 }>()
@@ -75,6 +77,7 @@ const carousel = useTemplateRef('carousel')
 const previewStrip = useTemplateRef('previewStrip')
 const activeIndex = ref(0)
 const isFullscreen = ref(false)
+const slideAnnouncement = ref('')
 
 function select(index: number) {
   activeIndex.value = index
@@ -93,6 +96,10 @@ function revealThumb(index: number) {
 }
 
 watch(activeIndex, (index) => {
+  if (!isFullscreen.value) {
+    const alt = props.photos[index]?.alternativeText
+    slideAnnouncement.value = `Photo ${index + 1} of ${props.photos.length}${alt ? `. ${alt}` : ''}`
+  }
   carousel.value?.emblaApi?.scrollTo(index)
   revealThumb(index)
 })
