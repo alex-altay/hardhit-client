@@ -1,6 +1,11 @@
 <template>
   <div>
-    <NuxtLink :to="instagram.link" target="_blank" class="group block [overflow-anchor:none]">
+    <NuxtLink
+      :to="instagram.link"
+      target="_blank"
+      aria-label="Hard Hit Magazine on Instagram (opens in new tab)"
+      class="group block [overflow-anchor:none]"
+    >
       <div class="mb-8 flex flex-row items-center justify-center">
         <UiIconInstagram
           class="mr-2 w-8 h-auto transition-colors group-hover:text-brand-primary group-focus-visible:text-brand-primary hover-hop"
@@ -45,7 +50,7 @@
             <div
               class="h-10 w-10 flex items-center justify-center bg-neutral-700 rounded-xl text-white"
             >
-              <UiIconInstagramSimilar />
+              <UiIconInstagramSimilar aria-hidden="true" />
             </div>
           </div>
           <div class="mb-8 flex flex-row justify-start gap-5">

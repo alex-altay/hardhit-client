@@ -1,10 +1,10 @@
 <template>
-  <div v-if="images.length" class="relative flex-1 w-full">
+  <div v-if="photos.length" class="relative flex-1 w-full">
     <div class="relative w-full">
       <UCarousel
         ref="carousel"
         v-slot="{ item, index }"
-        :items="images"
+        :items="photos"
         :aria-label="label"
         class="relative w-full"
         :ui="{
@@ -14,9 +14,9 @@
       >
         <div class="w-full aspect-3/2 overflow-hidden">
           <NuxtPicture
-            :src="item"
+            :src="getMediaLink(item)"
             class="contents"
-            :img-attrs="{ class: 'w-full h-full object-cover' }"
+            :img-attrs="{ class: 'w-full h-full object-cover', alt: item.alternativeText ?? '' }"
             sizes="sm:720px md:976px lg:1216px"
             :preload="index === 0"
           />
@@ -33,18 +33,18 @@
       />
     </div>
     <div
-      v-if="images.length > 1"
+      v-if="photos.length > 1"
       ref="previewStrip"
       aria-hidden="true"
       class="relative flex gap-5 pt-4 w-full overflow-x-auto scrollbar-none [&::-webkit-scrollbar]:hidden"
     >
       <NuxtPicture
-        v-for="(item, index) in images"
+        v-for="(item, index) in photos"
         :key="index"
-        :src="item"
+        :src="getMediaLink(item)"
         :class="{ 'opacity-100!': activeIndex === index }"
         class="shrink-0 basis-[calc((100%-5rem)/5)] cursor-pointer opacity-30"
-        :img-attrs="{ class: 'w-full object-cover aspect-square' }"
+        :img-attrs="{ class: 'w-full object-cover aspect-square', alt: '' }"
         sizes="sm:128px md:179px lg:228px"
         loading="lazy"
         placeholder
@@ -55,14 +55,19 @@
     <UiPhotoLightbox
       v-model:open="isFullscreen"
       v-model:index="activeIndex"
-      :photos="images.map((src) => ({ src }))"
+      :photos="
+        photos.map((photo) => ({
+          src: getMediaLink(photo),
+          alt: photo.alternativeText ?? '',
+        }))
+      "
     />
   </div>
 </template>
 
 <script setup lang="ts">
 defineProps<{
-  images: string[]
+  photos: StrapiMedia[]
   label: string
 }>()
 

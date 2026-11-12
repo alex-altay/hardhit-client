@@ -6,13 +6,14 @@
         :href="getMediaLink(issue.pdf)"
         target="_blank"
         rel="noopener"
-        :aria-label="`Download ${issue.title}`"
+        :aria-label="`Download ${issue.title} (PDF, opens in new tab)`"
         class="shrink-0 self-start hover-light-streak focus-visible:outline-offset-4"
       >
         <NuxtImg
           class="block h-72 w-auto"
           format="webp"
           :src="getMediaLink(issue.cover)"
+          alt=""
           sizes="sm:128px md:179px lg:228px"
         />
       </a>

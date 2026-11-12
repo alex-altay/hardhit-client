@@ -21,7 +21,7 @@
           <a
             href="https://www.instagram.com/hard_hit_mag/"
             target="_blank"
-            aria-label="Instagram"
+            aria-label="Instagram (opens in new tab)"
             class="text-default/70 hover:text-default transition-colors"
           >
             <UiIconInstagram class="size-6" aria-hidden="true" />
@@ -29,7 +29,7 @@
           <a
             href="https://www.youtube.com/@HardHitMag"
             target="_blank"
-            aria-label="YouTube"
+            aria-label="YouTube (opens in new tab)"
             class="text-default/70 hover:text-default transition-colors"
           >
             <UiIconYoutubeOutline class="h-5 w-auto" aria-hidden="true" />
@@ -51,7 +51,7 @@
           :href="BUILT_BY.url"
           target="_blank"
           rel="noopener"
-          :aria-label="`Built by ${BUILT_BY.name}, 2026`"
+          :aria-label="`Built by ${BUILT_BY.name}, 2026 (opens in new tab)`"
           class="group text-default/70 hover:text-default transition-colors"
         >
           Built by

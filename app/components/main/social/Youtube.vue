@@ -1,6 +1,11 @@
 <template>
   <div>
-    <NuxtLink :to="youtube.link" target="_blank" class="group block [overflow-anchor:none]">
+    <NuxtLink
+      :to="youtube.link"
+      target="_blank"
+      aria-label="Hard Hit Magazine on YouTube (opens in new tab)"
+      class="group block [overflow-anchor:none]"
+    >
       <div class="mb-8 flex flex-row items-center justify-center">
         <UiIconYoutube
           class="mr-2 w-8 h-auto transition-colors group-hover:text-brand-primary group-focus-visible:text-brand-primary hover-hop"

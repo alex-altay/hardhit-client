@@ -18,7 +18,7 @@
     >
       <NuxtImg
         :src="getMediaLink(article.cover)"
-        :alt="article.cover.alternativeText || article.title"
+        alt=""
         class="absolute inset-0 size-full object-cover hover-zoom"
         :sizes="
           article.isVerticalFeatured || article.isHorizontalFeatured

@@ -9,6 +9,7 @@
       <div class="shrink-0 w-full aspect-square overflow-hidden">
         <NuxtImg
           :src="getPreviewUrl(band)"
+          alt=""
           class="h-full w-full object-cover hover-zoom"
           sizes="360px"
           format="webp"
