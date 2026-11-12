@@ -24,7 +24,7 @@
     </template>
     <template v-else>
       <h1 ref="heading" tabindex="-1">{{ correctCount }} / {{ total }}</h1>
-      <h3 class="mb-16">Game over. Wanna listen to some Taylor Swift?</h3>
+      <p class="title-section mb-16">Game over. Wanna listen to some Taylor Swift?</p>
       <UButton color="brand" size="xl" class="mb-6 cursor-pointer" @click="$emit('restart')">
         Play again
       </UButton>

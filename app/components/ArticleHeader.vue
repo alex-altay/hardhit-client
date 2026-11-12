@@ -1,6 +1,6 @@
 <template>
   <header class="mx-auto mb-16 flex max-w-3xl flex-col items-center text-center">
-    <h1 class="mb-8 text-balance">{{ title }}</h1>
+    <h1 class="text-balance">{{ title }}</h1>
     <p v-if="lead" class="lead">{{ lead }}</p>
     <div v-if="hasDivider" class="mt-10 h-1 w-16 bg-brand-primary" aria-hidden="true" />
   </header>

@@ -2,7 +2,7 @@
   <div>
     <h1>PRIVACY POLICY</h1>
 
-    <p class="mb-8!">Last updated November 01, 2026</p>
+    <p class="mb-8">Last updated November 01, 2026</p>
 
     <p>
       This Privacy Notice for our website describes how and why we might access, collect, store,

@@ -3,10 +3,10 @@
     <UiBackLink to="/bands" />
     <ArticleHeader :title="band.name" :lead="band.description" :has-divider="hasContent" />
     <section v-for="collection in band.photos_collections" :key="collection.id" class="mb-24">
-      <h3 class="mb-3 text-center sm:text-left">
+      <h2 class="title-section mb-3 text-center sm:text-left">
         {{ collection.title }}
         <span v-if="collection.date">{{ transformDateString(collection.date) }}</span>
-      </h3>
+      </h2>
       <UiPhotoGallery
         :images="collection.photos.map(getMediaLink)"
         :label="`${collection.title} photos`"
@@ -15,7 +15,7 @@
 
     <section v-if="videos.length" class="mb-12 sm:mb-24 w-full">
       <div v-for="video in videos" :key="video.id" class="mb-12">
-        <h3 v-if="video.title" class="mb-3">{{ video.title }}</h3>
+        <h2 v-if="video.title" class="title-section mb-3">{{ video.title }}</h2>
         <UiYoutubeEmbed
           v-if="getYoutubeId(video.url)"
           :video-id="getYoutubeId(video.url)!"
@@ -29,7 +29,7 @@
       :key="story.title"
       class="mb-12 sm:mb-24 w-full max-w-4xl"
     >
-      <h2 class="mx-auto mb-8 max-w-[65ch] text-center text-balance">{{ story.title }}</h2>
+      <h2 class="mx-auto max-w-[65ch] text-center text-balance">{{ story.title }}</h2>
       <NuxtImg format="webp" class="mb-12 w-full" :src="getMediaLink(story.cover)" />
       <ArticleText v-if="story.text" class="mb-14" :value="story.text" />
       <FeaturedIn

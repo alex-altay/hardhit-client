@@ -2,7 +2,7 @@
   <div>
     <h1 v-animate>TERMS OF USE</h1>
 
-    <p class="mb-8!">Last updated November 1, 2026</p>
+    <p class="mb-8">Last updated November 1, 2026</p>
 
     <h2 class="mt-6">1. Introduction</h2>
     <p>Welcome to this website and related services (the "Service").</p>

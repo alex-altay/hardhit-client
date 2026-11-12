@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 class="sr-only">Hard Hit Magazine</h1>
     <MainIntro :scroll-target-id="id" />
     <UContainer class="pt-36 pb-12">
       <MainIssueMagazine :id="id" class="mb-48 scroll-mt-[calc(var(--ui-header-height)+4rem)]" />

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="mb-4! font-bold">Featured In</p>
+    <p class="mb-4 font-bold">Featured In</p>
     <div class="flex flex-row flex-wrap gap-6">
       <a
         :href="getMediaLink(issue.pdf)"

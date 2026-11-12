@@ -19,6 +19,7 @@
 
     <template #right>
       <UNavigationMenu
+        aria-label="Main"
         class="hidden xl:flex"
         color="neutral"
         :items="desktopItems"
@@ -27,7 +28,7 @@
     </template>
 
     <template #body>
-      <nav ref="mobileMenu" class="flex flex-col items-end gap-2">
+      <nav ref="mobileMenu" aria-label="Main" class="flex flex-col items-end gap-2">
         <NuxtLink
           v-for="(item, index) in mobileItems"
           :key="item.label"

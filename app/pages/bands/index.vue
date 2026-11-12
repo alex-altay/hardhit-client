@@ -5,7 +5,7 @@
       <h1
         id="captured-live"
         v-animate.delayed
-        class="mb-8 scroll-mt-[calc(var(--ui-header-height)+16px)]"
+        class="scroll-mt-[calc(var(--ui-header-height)+16px)]"
       >
         Captured Live
       </h1>

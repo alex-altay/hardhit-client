@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 v-animate>Magazine Issues</h1>
+    <h2 v-animate class="title-page">Magazine Issues</h2>
     <p class="pb-8 text-center">Click on any magazine to download it. They are all FREE</p>
     <MainIssueSlider :issues />
   </section>

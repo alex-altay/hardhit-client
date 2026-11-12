@@ -81,20 +81,34 @@ main:focus {
   }
 }
 
-h1 {
+@utility title-page {
   @apply mb-12 text-6xl tracking-[3%] text-center font-bold uppercase;
 }
 
-h2 {
+@utility title-small {
   @apply mb-2 text-3xl font-bold uppercase;
 }
 
-h3 {
+@utility title-section {
   @apply text-2xl sm:text-[40px] font-bold uppercase;
 }
 
-p {
-  @apply my-0 text-xl;
+@layer base {
+  h1 {
+    @apply title-page;
+  }
+
+  h2 {
+    @apply title-small;
+  }
+
+  h3 {
+    @apply title-section;
+  }
+
+  p {
+    @apply my-0 text-xl;
+  }
 }
 
 /* v-animate directive, app/plugins/animate.ts */

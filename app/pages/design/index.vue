@@ -5,7 +5,7 @@
       <h1
         :id="scrollTargetId"
         v-animate.delayed
-        class="mb-24! scroll-mt-[calc(var(--ui-header-height)+64px)]"
+        class="mb-24 scroll-mt-[calc(var(--ui-header-height)+64px)]"
       >
         Designed for Metal
       </h1>
