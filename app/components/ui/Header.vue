@@ -33,7 +33,7 @@
           v-for="(item, index) in mobileItems"
           :key="item.label"
           :to="item.to"
-          class="relative w-[min(250px,50%)] isolate pl-10 pr-4 pt-4 pb-12 text-end text-xl font-bold uppercase tracking-wide animate-[enter-from-right_400ms_var(--ease-out)_both]"
+          class="relative w-[min(250px,50%)] isolate pl-10 pr-4 pt-4 pb-12 text-end text-xl font-bold uppercase tracking-wide animate-[enter-from-right_400ms_var(--ease-out)_both] motion-reduce:animate-none"
           :class="item.active && mobileActiveClass"
           :style="{ animationDelay: `${index * 60}ms` }"
         >

@@ -24,6 +24,16 @@ export default defineAppConfig({
       ],
       defaultVariants: { color: 'brand' },
     },
+    modal: {
+      variants: {
+        transition: {
+          true: {
+            content:
+              'motion-reduce:data-[state=open]:animate-[fade-in_200ms_var(--ease-out)] motion-reduce:data-[state=closed]:animate-[fade-out_200ms_var(--ease-out)]',
+          },
+        },
+      },
+    },
     link: {
       base: 'outline-focus focus-visible:outline-2 focus-visible:outline-offset-2',
     },

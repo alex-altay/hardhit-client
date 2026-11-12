@@ -92,7 +92,10 @@ function revealThumb(index: number) {
 
   const centered = preview.offsetLeft - (strip.clientWidth - preview.offsetWidth) / 2
   const max = strip.scrollWidth - strip.clientWidth
-  strip.scrollTo({ left: Math.min(Math.max(centered, 0), max), behavior: 'smooth' })
+  strip.scrollTo({
+    left: Math.min(Math.max(centered, 0), max),
+    behavior: isPreferredReducedMotion() ? 'instant' : 'smooth',
+  })
 }
 
 watch(activeIndex, (index) => {
@@ -100,7 +103,7 @@ watch(activeIndex, (index) => {
     const alt = props.photos[index]?.alternativeText
     slideAnnouncement.value = `Photo ${index + 1} of ${props.photos.length}${alt ? `. ${alt}` : ''}`
   }
-  carousel.value?.emblaApi?.scrollTo(index)
+  carousel.value?.emblaApi?.scrollTo(index, isPreferredReducedMotion())
   revealThumb(index)
 })
 </script>

@@ -182,7 +182,12 @@ main:focus {
     background: var(--color-brand-primary);
     transform-origin: left;
     scale: 0 1;
-    transition: scale 300ms var(--ease-out);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &::after {
+      transition: scale 300ms var(--ease-out);
+    }
   }
 
   @media (hover: hover) {
