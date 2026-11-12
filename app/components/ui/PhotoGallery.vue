@@ -8,7 +8,7 @@
         :aria-label="label"
         class="relative w-full"
         :ui="{
-          root: 'focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-4 focus-visible:outline-inverted',
+          root: 'focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-4 focus-visible:outline-focus',
         }"
         @select="select"
       >

@@ -21,7 +21,7 @@
           type="button"
           aria-label="Previous photo"
           :disabled="index === 0"
-          class="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer p-2 text-white/70 hover:text-white disabled:cursor-default disabled:opacity-25"
+          class="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer p-2 text-white/70 hover:text-white focus-visible:outline-white disabled:cursor-default disabled:opacity-25"
           @click="showPrevious"
         >
           <UiIconChevronLeft />
@@ -31,7 +31,7 @@
           type="button"
           aria-label="Next photo"
           :disabled="index === photos.length - 1"
-          class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer p-2 text-white/70 hover:text-white disabled:cursor-default disabled:opacity-25"
+          class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer p-2 text-white/70 hover:text-white focus-visible:outline-white disabled:cursor-default disabled:opacity-25"
           @click="showNext"
         >
           <UiIconChevronRight />
@@ -40,7 +40,7 @@
         <button
           type="button"
           aria-label="Close"
-          class="absolute top-4 right-4 cursor-pointer p-2 text-white/70 hover:text-white"
+          class="absolute top-4 right-4 cursor-pointer p-2 text-white/70 hover:text-white focus-visible:outline-white"
           @click="close"
         >
           <UiIconClose />

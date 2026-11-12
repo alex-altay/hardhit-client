@@ -4,7 +4,7 @@
     class="group block w-fit [overflow-anchor:none] outline-none"
   >
     <div
-      class="flex flex-col w-[min(90vw,390px)] p-[min(3vw,15px)] pb-0 overflow-hidden dark:bg-white light:bg-elevated aspect-6/7 group-focus-visible:outline-2 group-focus-visible:outline-offset-4 group-focus-visible:outline-brand-primary"
+      class="flex flex-col w-[min(90vw,390px)] p-[min(3vw,15px)] pb-0 overflow-hidden dark:bg-white light:bg-elevated aspect-6/7 group-focus-visible:outline-2 group-focus-visible:outline-offset-4 group-focus-visible:outline-focus"
     >
       <div class="shrink-0 w-full aspect-square overflow-hidden">
         <NuxtImg

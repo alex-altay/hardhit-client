@@ -8,7 +8,7 @@
     }"
   >
     <div
-      class="relative mb-4 aspect-square overflow-hidden group-focus-visible:outline-2 group-focus-visible:outline-offset-4 group-focus-visible:outline-brand-primary"
+      class="relative mb-4 aspect-square overflow-hidden group-focus-visible:outline-2 group-focus-visible:outline-offset-4 group-focus-visible:outline-focus"
       :class="{
         '@min-[608px]:aspect-auto @min-[608px]:min-h-[calc((100cqw-3rem)/2)] @min-[936px]:min-h-[calc((100cqw-6rem)/3)] @min-[608px]:flex-1':
           article.isVerticalFeatured,

@@ -2,7 +2,7 @@
   <div class="h-full flex flex-row shrink-0">
     <button
       type="button"
-      class="block h-80 shrink-0 cursor-pointer aspect-[1/1.414] hover-light-streak hover-zoom outline-none focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-4 focus-visible:outline-brand-primary"
+      class="block h-80 shrink-0 cursor-pointer aspect-[1/1.414] hover-light-streak hover-zoom focus-visible:outline-offset-4"
       :aria-expanded="isOpen"
       :aria-controls="panelId"
       @click="$emit('toggle')"

@@ -6,7 +6,7 @@
         v-for="(album, index) in albums"
         :key="album.position"
         type="button"
-        class="absolute top-0 left-0 size-(--cover) cursor-pointer focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-4 focus-visible:outline-brand-primary perspective-[1600px] transition-[transform,filter] duration-600 ease-in-out motion-reduce:transition-none"
+        class="absolute top-0 left-0 size-(--cover) cursor-pointer focus-visible:outline-offset-4 perspective-[1600px] transition-[transform,filter] duration-600 ease-in-out motion-reduce:transition-none"
         :style="getAlbumStyle(index)"
         :inert="index !== currentAlbumIndex && index !== leftStack[0] && index !== rightStack[0]"
         :aria-pressed="index === currentAlbumIndex ? isFlipped : undefined"

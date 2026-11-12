@@ -2,7 +2,7 @@
   <button
     v-if="frontAlbum && backAlbum"
     type="button"
-    class="relative block aspect-square w-full cursor-pointer perspective-[1600px] focus-visible:outline-2 focus-visible:outline-solid focus-visible:outline-offset-4 focus-visible:outline-brand-primary"
+    class="relative block aspect-square w-full cursor-pointer perspective-[1600px] focus-visible:outline-offset-4"
     :aria-label="
       isFlipped
         ? `${backAlbum.band} — ${backAlbum.album}: next album`

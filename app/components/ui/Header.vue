@@ -61,7 +61,8 @@ const linkClass = [
 const linkLabelClass = [
   'rounded-xs',
   'group-focus-visible:outline-2 group-focus-visible:outline-solid',
-  'group-focus-visible:outline-current group-focus-visible:outline-offset-6',
+  'group-focus-visible:outline-focus group-focus-visible:outline-offset-2',
+  'group-aria-[current=page]:group-focus-visible:outline-current',
 ].join(' ')
 const activeClass = 'uppercase tracking-wide text-white hover:text-white after:scale-y-100'
 const mobileActiveClass = [

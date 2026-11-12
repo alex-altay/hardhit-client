@@ -49,5 +49,5 @@ const withInterview = defineModel<boolean>('withInterview', { default: false })
 const withLive = defineModel<boolean>('withLive', { default: false })
 
 const toggleClass =
-  'flex flex-row items-center whitespace-nowrap cursor-pointer font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary'
+  'flex flex-row items-center whitespace-nowrap cursor-pointer font-medium transition-colors'
 </script>

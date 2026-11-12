@@ -1,5 +1,7 @@
 <template>
-  <div class="relative w-full aspect-video overflow-hidden rounded-2xl bg-black">
+  <div
+    class="relative w-full aspect-video overflow-hidden rounded-2xl bg-black has-focus-visible:outline-2 has-focus-visible:outline-offset-4 has-focus-visible:outline-focus"
+  >
     <iframe
       v-if="isPlaying"
       ref="player"
@@ -12,7 +14,7 @@
     <button
       v-else
       type="button"
-      class="group absolute inset-0 h-full w-full cursor-pointer"
+      class="group absolute inset-0 h-full w-full cursor-pointer outline-none"
       :aria-label="`Play ${title}`"
       @click="play"
     >
