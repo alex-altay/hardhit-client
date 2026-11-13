@@ -40,12 +40,8 @@ export default defineAppConfig({
     input: {
       compoundVariants: [
         {
-          highlight: false,
-          class: { base: 'ring-(--ui-text-muted)' },
-        },
-        {
           class: {
-            base: 'placeholder:text-muted focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-focus',
+            base: 'focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-focus',
           },
         },
       ],

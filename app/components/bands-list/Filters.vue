@@ -1,11 +1,21 @@
 <template>
-  <div class="w-full sm:w-auto flex flex-row items-center gap-x-4 sm:gap-x-8">
+  <div role="search" class="w-full sm:w-auto flex flex-row items-center gap-x-4 sm:gap-x-8">
     <UInput
+      ref="searchInput"
       v-model="search"
+      type="search"
+      aria-label="Search bands"
       color="brand"
       :highlight="search.length > 0"
       placeholder="Search for a bandname"
-      :ui="{ base: 'h-8 rounded-none', trailing: 'pe-1' }"
+      :ui="{
+        base: [
+          'h-8 rounded-none [&::-webkit-search-cancel-button]:appearance-none',
+          'placeholder:text-muted focus-visible:ring-brand',
+          search.length ? '' : 'ring-(--ui-text-muted)',
+        ].join(' '),
+        trailing: 'pe-1',
+      }"
       class="min-w-0 flex-1 sm:flex-none sm:w-64"
     >
       <template v-if="search.length" #trailing>
@@ -15,8 +25,8 @@
           size="sm"
           class="cursor-pointer"
           icon="i-lucide-circle-x"
-          aria-label="Clear input"
-          @click="search = ''"
+          aria-label="Clear search"
+          @click="clearSearch"
         />
       </template>
     </UInput>
@@ -47,6 +57,13 @@
 const search = defineModel<string>('search', { default: '' })
 const withInterview = defineModel<boolean>('withInterview', { default: false })
 const withLive = defineModel<boolean>('withLive', { default: false })
+
+const searchInput = useTemplateRef('searchInput')
+
+function clearSearch() {
+  search.value = ''
+  searchInput.value?.inputRef?.focus()
+}
 
 const toggleClass =
   'flex flex-row items-center whitespace-nowrap cursor-pointer font-medium transition-colors'
