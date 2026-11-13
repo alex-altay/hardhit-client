@@ -52,7 +52,7 @@
     --ui-bg-muted: rgb(255 255 255 / 0.05);
     --ui-text: var(--color-white);
     --ui-text-highlighted: var(--color-white);
-    --ui-text-muted: #747474;
+    --ui-text-muted: #7a7a7a;
     --ui-text-inverted: var(--color-ink);
   }
 }

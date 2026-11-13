@@ -20,11 +20,20 @@
         :key="answer"
         type="button"
         class="flex cursor-pointer items-center gap-4 rounded border border-default px-5 py-4 text-left text-lg transition-colors hover:border-brand-primary aria-disabled:cursor-default aria-disabled:hover:border-default"
-        :class="getAnswerClass(answer)"
+        :class="{
+          'border-success! bg-success/15': getAnswerState(answer) === 'right',
+          'border-error! bg-error/15': getAnswerState(answer) === 'wrong',
+          'opacity-40': getAnswerState(answer) === 'dimmed',
+        }"
         :aria-disabled="!!chosenAnswer"
         @click="$emit('choose', answer)"
       >
-        <span class="font-bold text-brand-primary">{{ LETTERS[index] }}</span>
+        <span
+          class="font-bold"
+          :class="{ 'text-brand-primary': ['idle', 'dimmed'].includes(getAnswerState(answer)) }"
+        >
+          {{ LETTERS[index] }}
+        </span>
         {{ answer }}
       </button>
     </div>
@@ -51,17 +60,17 @@ watch(
 )
 onMounted(() => focusElementForScreenReader(questionEl.value))
 
-function getAnswerClass(answer: string) {
+function getAnswerState(answer: string) {
   if (!props.chosenAnswer) {
-    return undefined
+    return 'idle'
   }
   if (answer === props.question.answer) {
-    return 'border-success! bg-success/15'
+    return 'right'
   }
   if (answer === props.chosenAnswer) {
-    return 'border-error! bg-error/15'
+    return 'wrong'
   }
-  return 'opacity-40'
+  return 'dimmed'
 }
 
 const screenReaderAnnouncement = computed(() => {

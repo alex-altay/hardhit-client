@@ -40,7 +40,7 @@
               <span>•&nbsp;{{ formatCount(youtube.videosCount, 'video') }}</span>
             </div>
             <div>{{ youtube.description }}</div>
-            <div class="mb-2 text-blue-300">hardhit.de</div>
+            <div class="mb-2 text-blue-600 dark:text-blue-300">hardhit.de</div>
             <div
               class="h-10 w-30 flex items-center justify-center bg-white rounded-3xl text-black transition-colors group-hover:bg-brand-primary group-hover:text-white group-focus-visible:bg-brand-primary group-focus-visible:text-white hover-hop"
             >
