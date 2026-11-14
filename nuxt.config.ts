@@ -24,6 +24,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  routeRules: {
+    '/fonts/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+  },
   features: {
     inlineStyles: false,
   },
@@ -45,6 +48,13 @@ export default defineNuxtConfig({
     domains: [process.env.NUXT_PUBLIC_STRAPI_ORIGIN] as string[],
     presets: {
       fullscreen: { modifiers: { width: 1920, format: 'webp' } },
+    },
+    ipx: {
+      maxAge: 60 * 60 * 24 * 30,
+      http: {
+        ignoreCacheControl: true,
+        maxAge: 60 * 60 * 24 * 30,
+      },
     },
   },
   colorMode: {
