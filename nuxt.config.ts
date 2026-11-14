@@ -24,6 +24,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  features: {
+    inlineStyles: false,
+  },
   nitro: {
     compressPublicAssets: true,
   },
