@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 function skipToMain() {
-  const main = document.querySelector('main')
+  const main = document.getElementById('main')
   if (!main) {
     return
   }

@@ -1,5 +1,5 @@
 <template>
-  <main class="min-h-screen w-full flex flex-col justify-center items-center px-4 py-12">
+  <main id="main" class="min-h-screen w-full flex flex-col justify-center items-center px-4 py-12">
     <GameMain v-if="hasStarted" />
     <div v-else class="max-w-150 flex flex-col items-center text-center">
       <h1 class="glitch-text glitch-loop" :data-text="view.title">{{ view.title }}</h1>

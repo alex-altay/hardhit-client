@@ -1,5 +1,5 @@
 <template>
-  <UMain>
+  <UMain id="main">
     <slot />
   </UMain>
 </template>
