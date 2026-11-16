@@ -32,7 +32,6 @@
 
 <script setup lang="ts">
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import gsap from 'gsap'
 import type { RouteLocationNormalized } from 'vue-router'
 
 const CURVE_HEIGHT = 0.4
@@ -45,6 +44,13 @@ const labelElement = useTemplateRef('label')
 const label = ref('')
 const isVisible = ref(false)
 
+let gsapModule: Promise<typeof import('gsap')> | undefined
+
+function loadGsap() {
+  gsapModule ??= import('gsap')
+  return gsapModule
+}
+
 function getTopCurve(bulge: number) {
   return `M0 100 Q50 ${100 - bulge * 100} 100 100Z`
 }
@@ -53,7 +59,8 @@ function getBottomCurve(bulge: number) {
   return `M0 0 Q50 ${bulge * 100} 100 0Z`
 }
 
-function coverPreviousPage(to: RouteLocationNormalized) {
+async function coverPreviousPage(to: RouteLocationNormalized) {
+  const { gsap } = await loadGsap()
   label.value = routeToLabel(to)
   isVisible.value = true
   const offset = window.innerHeight * (1 + CURVE_HEIGHT)
@@ -82,7 +89,8 @@ function coverPreviousPage(to: RouteLocationNormalized) {
   })
 }
 
-function revealNextPage() {
+async function revealNextPage() {
+  const { gsap } = await loadGsap()
   const offset = window.innerHeight * (1 + CURVE_HEIGHT)
   const curve = { bulge: 0 }
   return gsap
@@ -109,5 +117,6 @@ function revealNextPage() {
 const isFromXL = useBreakpoints(breakpointsTailwind).greaterOrEqual('xl')
 if (isFromXL.value) {
   usePageCurtain({ coverPreviousPage, revealNextPage })
+  onMounted(loadGsap)
 }
 </script>
