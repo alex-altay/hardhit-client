@@ -18,11 +18,16 @@ type Issue = {
   date?: string
   cover: StrapiMedia
   pdf: StrapiMedia
-  description?: Markdown
+  highlights: IssueHighlight[]
   volume: number
   stories: Pick<Story, 'title' | 'cover' | 'text'>[]
 }
-type IssueRef = Pick<Issue, 'title' | 'volume' | 'date' | 'cover' | 'pdf' | 'description'>
+type IssueRef = Pick<Issue, 'title' | 'volume' | 'date' | 'cover' | 'pdf' | 'highlights'>
+
+type IssueHighlight = {
+  id: number
+  highlight: string
+}
 
 type VideoLink = {
   id: string

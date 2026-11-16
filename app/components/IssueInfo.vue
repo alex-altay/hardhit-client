@@ -3,7 +3,11 @@
     <p class="title-section mb-2 uppercase text-brand-strong font-bold">
       volume {{ issue.volume }}
     </p>
-    <RichMarkdown :value="issue.description" class="mb-2" />
+    <ul v-if="issue.highlights.length" class="highlights my-5 text-xl leading-7 text-pretty">
+      <li v-for="item in issue.highlights" :key="item.id" class="flex gap-2">
+        {{ item.highlight }}
+      </li>
+    </ul>
     <UButton
       class="w-74 h-9 uppercase"
       :href="getMediaLink(issue.pdf)"
@@ -16,5 +20,12 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ issue: Pick<Issue, 'volume' | 'description' | 'pdf'> }>()
+defineProps<{ issue: Pick<Issue, 'volume' | 'highlights' | 'pdf'> }>()
 </script>
+
+<style scoped>
+.highlights li::before {
+  content: '🤘';
+  content: '🤘' / '';
+}
+</style>

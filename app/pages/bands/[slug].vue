@@ -59,7 +59,7 @@ const band = await useStrapiData(`band-${route.params.slug}`, async () => {
       stories: {
         populate: {
           cover: { fields: ['url', 'name', 'alternativeText'] },
-          issue: { populate: ['cover', 'pdf'] },
+          issue: { populate: ['cover', 'pdf', 'highlights'] },
         },
       },
     },

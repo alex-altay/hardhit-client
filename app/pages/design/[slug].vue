@@ -21,7 +21,7 @@ const article = await useStrapiData(`article-${route.params.slug}`, async () => 
     // @ts-expect-error: type expects only required fields, but there can be no issue
     populate: {
       cover: { fields: ['url'] },
-      issue: { populate: ['cover', 'pdf'] },
+      issue: { populate: ['cover', 'pdf', 'highlights'] },
     },
   })
   const article = data[0]
