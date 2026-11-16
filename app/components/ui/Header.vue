@@ -82,7 +82,7 @@ const menu = {
     onOpenAutoFocus: (event: Event) => {
       event.preventDefault()
       menuOpenedOnPath = route.path
-      mobileMenu.value?.querySelector('a')?.focus()
+      mobileMenu.value?.querySelector('a')?.focus({ preventScroll: true })
     },
     onCloseAutoFocus: (event: Event) => {
       if (route.path !== menuOpenedOnPath) {
