@@ -10,6 +10,7 @@
         height: `${frame.height}%`,
       }"
       :sizes
+      densities="x1"
       format="webp"
       alt=""
     />
