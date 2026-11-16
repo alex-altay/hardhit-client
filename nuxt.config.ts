@@ -25,6 +25,17 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
+    '/**': {
+      headers: {
+        'strict-transport-security': 'max-age=31536000',
+        'x-content-type-options': 'nosniff',
+        'x-frame-options': 'DENY',
+        'referrer-policy': 'strict-origin-when-cross-origin',
+        'permissions-policy': 'camera=(), microphone=(), geolocation=()',
+        'content-security-policy':
+          "frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'",
+      },
+    },
     '/fonts/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
   },
   features: {
