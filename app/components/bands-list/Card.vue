@@ -13,6 +13,7 @@
           class="h-full w-full object-cover hover-zoom"
           sizes="360px"
           format="webp"
+          loading="lazy"
         />
       </div>
       <div class="flex-1 h-full flex flex-col justify-center text-black">
