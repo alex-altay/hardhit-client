@@ -35,7 +35,7 @@ const props = defineProps<{ band: Band }>()
 const media = computed(() => getBandMedia(props.band))
 
 function getPreviewUrl(band: Band) {
-  const firstMedia = band!.photos_collections[0]?.photos[0]
+  const firstMedia = band.photos_collections[0]?.photos[0]
   return firstMedia ? getMediaLink(firstMedia) : ''
 }
 </script>

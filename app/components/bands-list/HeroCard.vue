@@ -30,9 +30,12 @@ const SWAY_CALMING = 0.15
 const swayAngle = ref(0)
 let swayVelocity = 0
 let swayFrame = 0
+let isReducedMotion = false
+
+onMounted(() => (isReducedMotion = isPreferredReducedMotion()))
 
 function onPointerMove(event: PointerEvent) {
-  if (event.pointerType !== 'mouse' || isPreferredReducedMotion()) {
+  if (event.pointerType !== 'mouse' || isReducedMotion) {
     return
   }
   swayVelocity += event.movementX * SWAY_SENSITIVITY
