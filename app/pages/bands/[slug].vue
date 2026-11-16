@@ -28,6 +28,7 @@
     >
       <h2 class="mx-auto max-w-[65ch] text-center text-balance">{{ story.title }}</h2>
       <NuxtImg
+        v-if="story.cover"
         format="webp"
         class="mb-12 w-full"
         :src="getMediaLink(story.cover)"
@@ -52,6 +53,7 @@ const band = await useStrapiData(
   async () => {
     const { data } = await find<Band>('bands', {
       filters: { slug: { $eq: route.params.slug as string } },
+      // @ts-expect-error: type expects only required fields, but there can be no cover or issue
       populate: {
         photos_collections: { populate: 'photos' },
         live_links: { fields: ['url', 'title'] },

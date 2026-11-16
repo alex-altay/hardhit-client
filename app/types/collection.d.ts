@@ -7,9 +7,9 @@ type PhotosCollection = {
 
 type Story = {
   title: string
-  cover: StrapiMedia
+  cover?: StrapiMedia
   text?: Markdown
-  issue: IssueRef
+  issue?: IssueRef
   bands: Pick<Band, 'id' | 'name' | 'slug'>[]
 }
 
