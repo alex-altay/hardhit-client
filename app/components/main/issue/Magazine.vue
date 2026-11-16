@@ -10,6 +10,10 @@
 const { find } = useStrapi()
 
 const issues = await useStrapiData('magazine-issues', () =>
-  find<Issue>('issues', { populate: '*', sort: 'volume:asc' }),
+  find<Issue>('issues', {
+    populate: '*',
+    sort: 'volume:asc',
+    pagination: { page: 1, pageSize: 100 },
+  }),
 )
 </script>

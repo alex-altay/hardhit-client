@@ -69,20 +69,25 @@ const withLive = ref(false)
 const { find } = useStrapi()
 
 const bands = await useStrapiData('bands', () =>
-  find<Band>('bands', {
-    filters: {
-      // @ts-expect-error bug: nuxt/strapi expects arrays of filters, strapi expects an object
-      photos_collections: { photos: { id: { $notNull: true } } },
-    },
-    fields: ['name', 'slug'],
-    sort: 'name:asc',
-    populate: {
-      photos_collections: { fields: ['title', 'date'], populate: { photos: { fields: ['url'] } } },
-      live_links: { fields: ['url'] },
-      interview_links: { fields: ['url'] },
-    },
-    pagination: { page: 1, pageSize: 100 },
-  }),
+  findAllPages((pagination) =>
+    find<Band>('bands', {
+      filters: {
+        // @ts-expect-error bug: nuxt/strapi expects arrays of filters, strapi expects an object
+        photos_collections: { photos: { id: { $notNull: true } } },
+      },
+      fields: ['name', 'slug'],
+      sort: 'name:asc',
+      populate: {
+        photos_collections: {
+          fields: ['title', 'date'],
+          populate: { photos: { fields: ['url'] } },
+        },
+        live_links: { fields: ['url'] },
+        interview_links: { fields: ['url'] },
+      },
+      pagination,
+    }),
+  ),
 )
 
 const filteredBands = computed(() => {

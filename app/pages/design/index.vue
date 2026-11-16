@@ -29,6 +29,6 @@ useSeoMeta({
 const scrollTargetId = useId()
 const { find } = useStrapi()
 const articles = await useStrapiData('design-articles', () =>
-  find<DesignArticle>('design-articles', { populate: '*' }),
+  find<DesignArticle>('design-articles', { populate: '*', pagination: { page: 1, pageSize: 100 } }),
 )
 </script>
