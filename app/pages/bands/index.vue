@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BandsListHero scroll-target-id="captured-live" />
+    <BandsListHero :hero scroll-target-id="captured-live" />
     <UContainer class="py-12">
       <h1
         id="captured-live"
@@ -66,29 +66,39 @@ useSeoMeta({
 const searchString = ref('')
 const withInterview = ref(false)
 const withLive = ref(false)
-const { find } = useStrapi()
+const { find, findOne } = useStrapi()
 
-const bands = await useStrapiData('bands', () =>
-  findAllPages((pagination) =>
-    find<Band>('bands', {
-      filters: {
-        // @ts-expect-error bug: nuxt/strapi expects arrays of filters, strapi expects an object
-        photos_collections: { photos: { id: { $notNull: true } } },
-      },
-      fields: ['name', 'slug'],
-      sort: 'name:asc',
-      populate: {
-        photos_collections: {
-          fields: ['title', 'date'],
-          populate: { photos: { fields: ['url'] } },
+const [bands, hero] = await Promise.all([
+  useStrapiData('bands', () =>
+    findAllPages((pagination) =>
+      find<Band>('bands', {
+        filters: {
+          // @ts-expect-error bug: nuxt/strapi expects arrays of filters, strapi expects an object
+          photos_collections: { photos: { id: { $notNull: true } } },
         },
-        live_links: { fields: ['url'] },
-        interview_links: { fields: ['url'] },
+        fields: ['name', 'slug'],
+        sort: 'name:asc',
+        populate: {
+          photos_collections: {
+            fields: ['title', 'date'],
+            populate: { photos: { fields: ['url'] } },
+          },
+          live_links: { fields: ['url'] },
+          interview_links: { fields: ['url'] },
+        },
+        pagination,
+      }),
+    ),
+  ),
+  useStrapiData('photos-hero', () =>
+    findOne<PhotosHero>('photos-hero', '', {
+      populate: {
+        backgroundPhoto: { fields: ['url'] },
+        bands: { populate: { photo: { fields: ['url'] } } },
       },
-      pagination,
     }),
   ),
-)
+])
 
 const filteredBands = computed(() => {
   const query = toSearchable(searchString.value.trim())

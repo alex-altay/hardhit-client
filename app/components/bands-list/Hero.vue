@@ -25,18 +25,10 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ scrollTargetId: string }>()
-
-const { findOne } = useStrapi()
-
-const hero = await useStrapiData('photos-hero', () =>
-  findOne<PhotosHero>('photos-hero', '', {
-    populate: {
-      backgroundPhoto: { fields: ['url'] },
-      bands: { populate: { photo: { fields: ['url'] } } },
-    },
-  }),
-)
+const { hero } = defineProps<{
+  hero: PhotosHero
+  scrollTargetId: string
+}>()
 
 type CardPlacement = { x: number; y: number; rotate: number; z: number; speed: number }
 const CARD_LAYOUT: CardPlacement[] = [
