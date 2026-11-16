@@ -15,25 +15,21 @@
 const route = useRoute()
 const { find } = useStrapi()
 
-const article = await useStrapiData(
-  `article-${route.params.slug}`,
-  async () => {
-    const { data } = await find<DesignArticle>('design-articles', {
-      filters: { slug: { $eq: route.params.slug as string } },
-      // @ts-expect-error: type expects only required fields, but there can be no issue
-      populate: {
-        cover: { fields: ['url'] },
-        issue: { populate: ['cover', 'pdf'] },
-      },
-    })
-    const article = data[0]
-    if (!article) {
-      throw createError({ status: 404, statusText: 'Article not found' })
-    }
-    return { data: article }
-  },
-  { watch: [() => route.params.slug] },
-)
+const article = await useStrapiData(`article-${route.params.slug}`, async () => {
+  const { data } = await find<DesignArticle>('design-articles', {
+    filters: { slug: { $eq: route.params.slug as string } },
+    // @ts-expect-error: type expects only required fields, but there can be no issue
+    populate: {
+      cover: { fields: ['url'] },
+      issue: { populate: ['cover', 'pdf'] },
+    },
+  })
+  const article = data[0]
+  if (!article) {
+    throw createError({ status: 404, statusText: 'Article not found' })
+  }
+  return { data: article }
+})
 
 useSeoMeta({ title: () => article.value?.title })
 </script>

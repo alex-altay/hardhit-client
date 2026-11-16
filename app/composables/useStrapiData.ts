@@ -1,4 +1,4 @@
-import type { AsyncDataOptions, NuxtApp } from '#app'
+import type { NuxtApp } from '#app'
 import type { ComputedRef } from 'vue'
 
 /**
@@ -9,7 +9,6 @@ const STRAPI_TIMEOUT_MS = 10_000
 export async function useStrapiData<T>(
   key: string,
   request: () => Promise<{ data: T }>,
-  options?: Pick<AsyncDataOptions<T>, 'watch'>,
 ): Promise<ComputedRef<T>> {
   const { data, error } = await useAsyncData(
     key,
@@ -21,10 +20,7 @@ export async function useStrapiData<T>(
         throw toAppError(err)
       }
     },
-    {
-      ...options,
-      getCachedData: getSessionCachedData,
-    },
+    { getCachedData: getSessionCachedData },
   )
 
   if (error.value) {

@@ -48,32 +48,28 @@
 const route = useRoute()
 const { find } = useStrapi()
 
-const band = await useStrapiData(
-  `band-${route.params.slug}`,
-  async () => {
-    const { data } = await find<Band>('bands', {
-      filters: { slug: { $eq: route.params.slug as string } },
-      // @ts-expect-error: type expects only required fields, but there can be no cover or issue
-      populate: {
-        photos_collections: { populate: 'photos' },
-        live_links: { fields: ['url', 'title'] },
-        interview_links: { fields: ['url', 'title'] },
-        stories: {
-          populate: {
-            cover: { fields: ['url', 'name', 'alternativeText'] },
-            issue: { populate: ['cover', 'pdf'] },
-          },
+const band = await useStrapiData(`band-${route.params.slug}`, async () => {
+  const { data } = await find<Band>('bands', {
+    filters: { slug: { $eq: route.params.slug as string } },
+    // @ts-expect-error: type expects only required fields, but there can be no cover or issue
+    populate: {
+      photos_collections: { populate: 'photos' },
+      live_links: { fields: ['url', 'title'] },
+      interview_links: { fields: ['url', 'title'] },
+      stories: {
+        populate: {
+          cover: { fields: ['url', 'name', 'alternativeText'] },
+          issue: { populate: ['cover', 'pdf'] },
         },
       },
-    })
-    const band = data[0]
-    if (!band) {
-      throw createError({ status: 404, statusText: 'Band not found' })
-    }
-    return { data: band }
-  },
-  { watch: [() => route.params.slug] },
-)
+    },
+  })
+  const band = data[0]
+  if (!band) {
+    throw createError({ status: 404, statusText: 'Band not found' })
+  }
+  return { data: band }
+})
 
 useSeoMeta({ title: () => band.value?.name })
 
