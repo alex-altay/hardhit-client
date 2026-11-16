@@ -19,6 +19,7 @@
             :img-attrs="{ class: 'w-full h-full object-cover', alt: item.alternativeText ?? '' }"
             sizes="sm:720px md:976px lg:1216px"
             :preload="index === 0"
+            :loading="Math.abs(index - activeIndex) <= 1 ? 'eager' : 'lazy'"
           />
         </div>
       </UCarousel>
