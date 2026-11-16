@@ -15,5 +15,5 @@ useSeoMeta({
   description:
     'Hard Hit Magazine. Download every issue for free and follow us for new interviews and concert photos',
 })
-const id = useId()
+const id = 'magazine-issues'
 </script>
