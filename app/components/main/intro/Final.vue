@@ -1,12 +1,7 @@
 <template>
   <div class="absolute inset-0">
     <UiLogo has-glitch class="absolute top-1/2 left-1/2 w-4/5 -translate-1/2 text-highlighted" />
-    <div class="absolute inset-x-4 bottom-8 grid grid-cols-3 items-center">
-      <UiScrollDownButton
-        class="col-start-2 justify-self-center"
-        :scroll-target-id
-        screen-reader-label="Scroll to the magazine"
-      />
+    <div class="absolute inset-x-4 bottom-8 grid min-h-14 grid-cols-3 items-center">
       <UButton
         icon="i-lucide-rotate-ccw"
         color="neutral"
@@ -21,7 +16,6 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ scrollTargetId: string }>()
 defineEmits<{ replay: [] }>()
 </script>
 

@@ -3,7 +3,7 @@
     ref="section"
     class="@container relative -mt-(--ui-header-height) h-screen overflow-hidden"
   >
-    <MainIntroFinal v-if="isFinalFrame" :scroll-target-id @replay="replay" />
+    <MainIntroFinal v-if="isFinalFrame" @replay="replay" />
     <template v-else>
       <MainIntroLoader v-if="isLoading" />
       <MainIntroFrame
@@ -19,6 +19,16 @@
         {{ word }}
       </div>
     </template>
+    <div
+      v-if="!isLoading"
+      class="pointer-events-none absolute inset-x-4 bottom-8 grid grid-cols-3 items-center"
+    >
+      <UiScrollDownButton
+        class="pointer-events-auto col-start-2 justify-self-center"
+        :scroll-target-id
+        screen-reader-label="Scroll to the magazine"
+      />
+    </div>
   </section>
 </template>
 
