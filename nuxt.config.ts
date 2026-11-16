@@ -56,7 +56,7 @@ export default defineNuxtConfig({
   },
   image: {
     format: ['webp'],
-    domains: [process.env.NUXT_PUBLIC_STRAPI_ORIGIN] as string[],
+    domains: [process.env.NUXT_PUBLIC_STRAPI_ORIGIN, 'i.ytimg.com'] as string[],
     presets: {
       fullscreen: { modifiers: { width: 1920, format: 'webp' } },
     },

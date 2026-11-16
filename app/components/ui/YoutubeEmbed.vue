@@ -18,10 +18,11 @@
       :aria-label="`Play ${title}`"
       @click="play"
     >
-      <img
+      <NuxtImg
         class="h-full w-full object-cover"
         :src="`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`"
         :alt="title"
+        format="webp"
         loading="lazy"
       />
       <UiIconYoutube
