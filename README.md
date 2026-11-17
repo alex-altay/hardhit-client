@@ -1,75 +1,45 @@
-# Nuxt Minimal Starter
+# Hard Hit Magazine — client
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Website of Hard Hit Magazine: magazine issues, concert photos of metal bands, interviews and design articles.
 
-## Setup
+Built with Nuxt, Nuxt UI and GSAP. All content comes from Strapi 5, which lives in the sibling repository `hardhit-strapi-server`.
 
-Make sure to install dependencies:
+## Requirements
+
+- Node.js 22 or newer
+- A running Strapi instance and an API token for it
+
+## Setup and local development
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+cp .env.example .env
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+Fill in `.env` and start the dev server on `http://localhost:3000`:
+The API token only needs read access: `find` and `findOne` for the content types. Do not give it write permissions.
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+### Data
 
-Build the application for production:
+The browser and the server never call Strapi directly. All requests go through `server/api/strapi/[...path].ts`: a GET-only proxy that adds the API token. The Strapi module is configured to use it (`strapi.url: '/api/strapi'`).
 
-```bash
-# npm
-npm run build
+Pages and components fetch data with `useStrapiData` (`app/composables/useStrapiData.ts`):
 
-# pnpm
-pnpm build
+- requests time out after 10 seconds
+- 404 and connection errors are turned into the error page with a mini game
+- `{ optional: true }` is for secondary blocks (YouTube, Instagram, Top 10, Hall of Fame, the hero on `/bands`): if their request fails, the block is hidden and the error is logged on the server, the rest of the page still renders
+- data is kept for the whole session, so going back to a page does not refetch it.
 
-# yarn
-yarn build
+### Security headers and compression
 
-# bun
-bun run build
-```
+Security headers for all routes are set in `routeRules` in `nuxt.config.ts`. Static assets are precompressed at build time (`nitro.compressPublicAssets`), HTML pages are gzipped by `server/plugins/compress-html.ts`.
 
-Locally preview production build:
+## Deployment
 
-```bash
-# npm
-npm run preview
+The site runs on Railway. Set both environment variables on the service, they are needed for the build and at runtime.
 
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+When a change touches the Strapi schema (a new field, a renamed component), deploy `hardhit-strapi-server` first and the client after it. Strapi rejects unknown fields in queries (`strictParams`), so a new client in front of an old Strapi gets 400 errors.
