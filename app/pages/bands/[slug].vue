@@ -30,7 +30,9 @@
       <NuxtImg
         v-if="story.cover"
         format="webp"
-        class="mb-12 w-full"
+        class="mb-12 w-full aspect-square object-cover"
+        width="896"
+        height="896"
         sizes="xs:100vw md:896px"
         :src="getMediaLink(story.cover)"
         :alt="story.cover.alternativeText ?? ''"
