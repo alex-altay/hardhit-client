@@ -7,17 +7,11 @@ export default defineNuxtConfig({
     apiSecret: '',
     public: {
       strapiOrigin: '',
+      siteUrl: '',
     },
   },
   app: {
     head: {
-      meta: [
-        {
-          name: 'description',
-          content:
-            'Hard Hit Magazine: concert photos, band interviews and design analysis of metal artwork',
-        },
-      ],
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
       htmlAttrs: {
         lang: 'en',
@@ -38,6 +32,10 @@ export default defineNuxtConfig({
     },
     '/fonts/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     '/images/design-hero/**': { headers: { 'cache-control': 'public, max-age=2592000' } },
+    '/index.html': { redirect: { to: '/', statusCode: 301 } },
+    '/gallery.html': { redirect: { to: '/bands', statusCode: 301 } },
+    '/Alphabet.html': { redirect: { to: '/about', statusCode: 301 } },
+    '/ueber.html': { redirect: { to: '/about', statusCode: 301 } },
   },
   features: {
     inlineStyles: false,
