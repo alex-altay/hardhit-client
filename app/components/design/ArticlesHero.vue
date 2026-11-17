@@ -170,8 +170,7 @@ import { CustomEase } from 'gsap/CustomEase'
 
 defineProps<{ scrollTargetId: string }>()
 
-let trigger: ScrollTrigger | undefined
-let animation: gsap.core.Timeline | undefined
+let context: gsap.Context | undefined
 const section = useTemplateRef('section')
 const captions = useTemplateRef('captions')
 const frame = useTemplateRef('frame')
@@ -269,9 +268,7 @@ const CAMERA_EDGE_FADE = '15%'
 const CAMERA_ORIGIN = `${(SPIRAL_EYE.x / FRAME.width) * 100}% ${(SPIRAL_EYE.y / FRAME.height) * 100}%`
 const SPIRAL_VIGNETTE = { x: 1100, y: 382, rx: 1100, ry: 640 }
 
-onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger, CustomEase)
-
+function createAnimation() {
   const ruleOfThirds = gsap
     .timeline()
     .to('.thirds-horizontal', { ...TO_DRAW, duration: 1, ease: 'power2.out' })
@@ -321,7 +318,7 @@ onMounted(() => {
     { scale: CAMERA_ZOOM, '--edge-fade': CAMERA_EDGE_FADE, ease: 'power1.in' },
   )
 
-  animation = gsap
+  const animation = gsap
     .timeline({ paused: true })
     .add(ruleOfThirds)
     .add(showCaption(1), '-=0.5')
@@ -335,19 +332,21 @@ onMounted(() => {
     return
   }
 
-  trigger = ScrollTrigger.create({
+  ScrollTrigger.create({
     trigger: section.value,
     start: 1,
     end: 'bottom bottom+=350',
     scrub: 1.25,
     animation: animation,
   })
+}
+
+onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger, CustomEase)
+  context = gsap.context(createAnimation, section.value!)
 })
 
-onBeforeUnmount(() => {
-  trigger?.kill()
-  animation?.kill()
-})
+onBeforeUnmount(() => context?.revert())
 </script>
 
 <style scoped>
