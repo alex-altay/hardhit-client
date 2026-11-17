@@ -43,6 +43,9 @@ export default defineNuxtConfig({
   },
   nitro: {
     compressPublicAssets: true,
+    storage: {
+      strapi: { driver: 'lru-cache', max: 500, maxSize: 20 * 1024 * 1024 },
+    },
   },
   router: {
     options: {

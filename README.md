@@ -34,6 +34,14 @@ Pages and components fetch data with `useStrapiData` (`app/composables/useStrapi
 - `{ optional: true }` is for secondary blocks (YouTube, Instagram, Top 10, Hall of Fame, the hero on `/bands`): if their request fails, the block is hidden and the error is logged on the server, the rest of the page still renders
 - data is kept for the whole session, so going back to a page does not refetch it.
 
+## Cache
+
+Nitro saves strapi data in cache via lru-cache driver (cache size and number of cached record set in `nuxt.config.ts`). Cache time in `useStrapiData`, the same place where data handler lives
+
+- Pros: Using this strategy we become better time to first byte (TTFB) and reducing a number of requests to Strapi dramatically.
+
+- Cons: The content updates only after cache time (right now 5 minutes)
+
 ### Security headers and compression
 
 Security headers for all routes are set in `routeRules` in `nuxt.config.ts`. Static assets are precompressed at build time (`nitro.compressPublicAssets`), HTML pages are gzipped by `server/plugins/compress-html.ts`.
