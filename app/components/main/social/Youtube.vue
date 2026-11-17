@@ -59,7 +59,10 @@ const { findOne } = useStrapi()
 
 const youtube = await useStrapiData(
   'youtube',
-  () => findOne<Youtube>('youtube', '', { populate: '*' }),
+  () =>
+    findOne<Youtube>('youtube', '', {
+      populate: { banner: { fields: ['url'] }, logo: { fields: ['url'] } },
+    }),
   {
     optional: true,
   },

@@ -104,7 +104,13 @@ const { findOne } = useStrapi()
 
 const instagram = await useStrapiData(
   'instagram',
-  () => findOne<Instagram>('instagram', '', { populate: '*' }),
+  () =>
+    findOne<Instagram>('instagram', '', {
+      populate: {
+        logo: { fields: ['url'] },
+        photos: { fields: ['url', 'alternativeText'] },
+      },
+    }),
   {
     optional: true,
   },

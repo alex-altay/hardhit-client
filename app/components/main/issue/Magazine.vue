@@ -11,7 +11,12 @@ const { find } = useStrapi()
 
 const issues = await useStrapiData('magazine-issues', () =>
   find<Issue>('issues', {
-    populate: '*',
+    fields: ['volume', 'title'],
+    populate: {
+      cover: { fields: ['url'] },
+      pdf: { fields: ['url'] },
+      highlights: { fields: ['highlight'] },
+    },
     sort: 'volume:asc',
     pagination: { page: 1, pageSize: 100 },
   }),
