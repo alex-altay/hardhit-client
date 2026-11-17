@@ -22,6 +22,7 @@
               :src="getMediaLink(instagram.logo)"
               alt="Hard Hit Magazine"
               sizes="160px"
+              format="webp"
             />
             <div class="mb-2 flex flex-col justify-between">
               <div class="text-2xl font-bold">
@@ -88,7 +89,7 @@
             :src="getMediaLink(photo)"
             :alt="photo.alternativeText ?? ''"
             format="webp"
-            sizes="33vw lg:400px"
+            sizes="xs:30vw lg:400px"
             loading="lazy"
             class="w-full h-auto aspect-square object-cover object-top"
           />

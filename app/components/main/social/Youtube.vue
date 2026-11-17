@@ -28,6 +28,7 @@
             class="h-20 w-20 sm:h-40 sm:w-40"
             :src="getMediaLink(youtube.logo)"
             sizes="160px"
+            format="webp"
             alt=""
           />
           <div class="flex flex-col justify-between">
