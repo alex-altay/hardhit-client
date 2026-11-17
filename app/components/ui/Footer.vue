@@ -10,7 +10,7 @@
   >
     <div class="relative grid py-4 sm:py-8 gap-6 text-sm md:grid-cols-3">
       <div class="flex flex-col gap-4">
-        <nav aria-label="Footer" class="flex flex-col items-start gap-4 text-red-500">
+        <nav aria-label="Footer" class="flex flex-col items-start gap-4 text-brand-primary">
           <ULink class="text-default/75" :active="false" to="/">Main</ULink>
           <ULink class="text-default/75" :active="false" to="/bands">Photos</ULink>
           <ULink class="text-default/75" :active="false" to="/design">Designed for Metal</ULink>

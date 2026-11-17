@@ -23,7 +23,7 @@
 defineProps<{ band: PhotoWithDescription }>()
 
 const MAX_SWAY_DEGREE = 5
-const SWAY_SENSITIVITY = 0.02 // нow strong the card reacts to the mouse
+const SWAY_SENSITIVITY = 0.02 // how strong the card reacts to the mouse
 const SWAY_SPEED = 0.08
 const SWAY_CALMING = 0.15
 
