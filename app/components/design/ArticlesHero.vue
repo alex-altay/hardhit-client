@@ -5,14 +5,19 @@
     >
       <div ref="frame" class="golden-ratio-frame absolute will-change-transform">
         <div class="photo absolute" :style="PHOTO_POSITION">
-          <NuxtImg
-            src="/images/design-hero/baest.webp"
-            alt="Example of photo to display design rules"
-            class="absolute size-full"
-            format="webp"
-            fetchpriority="high"
-            preload
-          />
+          <picture>
+            <source type="image/avif" :srcset="HERO_PHOTO.avif" :sizes="HERO_PHOTO.sizes" />
+            <img
+              :src="getHeroPath(2918, 'webp')"
+              :srcset="HERO_PHOTO.webp"
+              :sizes="HERO_PHOTO.sizes"
+              width="2918"
+              height="1996"
+              alt="Example of photo to display design rules"
+              class="absolute size-full"
+              fetchpriority="high"
+            />
+          </picture>
 
           <svg
             id="masks"
@@ -202,6 +207,18 @@ const PHOTO_POSITION = {
   height: `${(PHOTO.height / FRAME.height) * 100}%`,
 }
 const TO_DRAW = { strokeDashoffset: 0, autoRound: false }
+
+// Using custom widths with avif to avoid IPX and to get maximum TTFB and LCP
+const HERO_WIDTHS = [1600, 2400, 2918]
+const getHeroPath = (width: number, format: string) =>
+  `/images/design-hero/baest-${width}.${format}`
+const getHeroSrcset = (format: string) =>
+  HERO_WIDTHS.map((width) => `${getHeroPath(width, format)} ${width}w`).join(', ')
+const HERO_PHOTO = {
+  avif: getHeroSrcset('avif'),
+  webp: getHeroSrcset('webp'),
+  sizes: `max(${((PHOTO.width / FRAME.width) * 100).toFixed(1)}vw, calc((100vh - 4rem) * ${((1.618 * PHOTO.width) / FRAME.width).toFixed(3)}))`,
+}
 
 // Screen 1 - Rule of thirds
 const THIRDS_HORIZONTAL = [

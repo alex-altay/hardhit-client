@@ -37,6 +37,7 @@ export default defineNuxtConfig({
       },
     },
     '/fonts/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/images/design-hero/**': { headers: { 'cache-control': 'public, max-age=2592000' } },
   },
   features: {
     inlineStyles: false,
