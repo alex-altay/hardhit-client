@@ -31,6 +31,7 @@
         v-if="story.cover"
         format="webp"
         class="mb-12 w-full"
+        sizes="xs:100vw md:896px"
         :src="getMediaLink(story.cover)"
         :alt="story.cover.alternativeText ?? ''"
       />
