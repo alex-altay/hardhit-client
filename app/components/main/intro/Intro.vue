@@ -47,7 +47,8 @@ if (import.meta.client && !useNuxtApp().isHydrating) {
   hasIntroFinished.value = true
 }
 
-let timer: ReturnType<typeof setTimeout> | undefined
+let preloadTimer: ReturnType<typeof setTimeout> | undefined
+let nextFotoTimer: ReturnType<typeof setTimeout> | undefined
 const section = useTemplateRef('section')
 const isPlaying = ref(false)
 const currentFrameNumber = ref(hasIntroFinished.value ? FRAMES_COUNT : 0)
@@ -70,7 +71,7 @@ function stopOnScroll() {
 }
 
 function scheduleNext() {
-  timer = setTimeout(() => {
+  nextFotoTimer = setTimeout(() => {
     currentFrameNumber.value++
     if (!isFinalFrame.value) {
       scheduleNext()
@@ -84,10 +85,10 @@ async function waitForPhotos() {
   const areLoaded = Promise.all(photos.map((photo) => photo.decode().catch(() => {}))).then(
     () => true,
   )
-  const areTimeouted = new Promise<boolean>((resolve) =>
-    setTimeout(() => resolve(false), PRELOAD_TIMEOUT),
-  )
-  return Promise.race([areLoaded, areTimeouted])
+  const areTimeouted = new Promise<boolean>((resolve) => {
+    preloadTimer = setTimeout(() => resolve(false), PRELOAD_TIMEOUT)
+  })
+  return Promise.race([areLoaded, areTimeouted]).finally(() => clearTimeout(preloadTimer))
 }
 
 async function play() {
@@ -104,7 +105,7 @@ async function play() {
 }
 
 function replay() {
-  clearTimeout(timer)
+  clearTimeout(nextFotoTimer)
   currentFrameNumber.value = 0
   isPlaying.value = false
   play()
@@ -123,7 +124,8 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  clearTimeout(timer)
+  clearTimeout(preloadTimer)
+  clearTimeout(nextFotoTimer)
   window.removeEventListener('scroll', stopOnScroll)
 })
 </script>
