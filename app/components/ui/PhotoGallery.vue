@@ -17,7 +17,7 @@
             :src="getMediaLink(item)"
             class="contents"
             :img-attrs="{ class: 'w-full h-full object-cover', alt: item.alternativeText ?? '' }"
-            sizes="sm:720px md:976px lg:1216px"
+            sizes="xs:100vw sm:720px md:976px lg:1216px"
             :preload="index === 0"
             :loading="Math.abs(index - activeIndex) <= 1 ? 'eager' : 'lazy'"
           />
@@ -46,7 +46,7 @@
         :class="{ 'opacity-100!': activeIndex === index }"
         class="shrink-0 basis-[calc((100%-5rem)/5)] cursor-pointer opacity-30"
         :img-attrs="{ class: 'w-full object-cover aspect-square', alt: '' }"
-        sizes="sm:128px md:179px lg:228px"
+        sizes="xs:20vw sm:128px md:179px lg:228px"
         loading="lazy"
         placeholder
         @click="select(index)"

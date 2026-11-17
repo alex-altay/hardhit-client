@@ -55,6 +55,7 @@ export default defineNuxtConfig({
     },
   },
   image: {
+    screens: { xs: 320 },
     format: ['webp'],
     domains: [process.env.NUXT_PUBLIC_STRAPI_ORIGIN, 'i.ytimg.com'] as string[],
     presets: {
