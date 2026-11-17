@@ -19,7 +19,7 @@
             :src="getMediaLink(youtube.banner)"
             class="block w-full aspect-6/1 object-cover object-left hover-zoom"
             format="webp"
-            sizes="1180px"
+            sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:1180px"
             alt=""
           />
         </div>
