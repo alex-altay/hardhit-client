@@ -12,10 +12,20 @@
           v-if="photo"
           :src="photo.src"
           :alt="photo.alt ?? ''"
-          preset="fullscreen"
+          sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:100vw 2xl:1920px"
+          densities="x1"
+          format="webp"
           class="max-h-full max-w-full object-contain"
         />
-        <NuxtImg v-if="nextPhoto" :src="nextPhoto.src" preset="fullscreen" alt="" class="hidden" />
+        <NuxtImg
+          v-if="nextPhoto"
+          :src="nextPhoto.src"
+          sizes="xs:100vw sm:100vw md:100vw lg:100vw xl:100vw 2xl:1920px"
+          densities="x1"
+          format="webp"
+          alt=""
+          class="hidden"
+        />
 
         <button
           type="button"

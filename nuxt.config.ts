@@ -58,9 +58,6 @@ export default defineNuxtConfig({
     screens: { xs: 320 },
     format: ['webp'],
     domains: [process.env.NUXT_PUBLIC_STRAPI_ORIGIN, 'i.ytimg.com'] as string[],
-    presets: {
-      fullscreen: { modifiers: { width: 1920, format: 'webp' } },
-    },
     ipx: {
       maxAge: 60 * 60 * 24 * 30,
       http: {
