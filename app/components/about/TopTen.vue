@@ -1,5 +1,5 @@
 <template>
-  <section class="min-h-[50vh] bg-inverted text-inverted">
+  <section v-if="topTen" class="min-h-[50vh] bg-inverted text-inverted">
     <UContainer class="py-12">
       <h2 v-animate.delayed class="title-page">{{ topTen.header }}</h2>
       <p class="text-center">{{ topTen.description }}</p>
@@ -12,11 +12,14 @@
 <script setup lang="ts">
 const { findOne } = useStrapi()
 
-const topTen = await useStrapiData('top-ten', () =>
-  findOne<TopTen>('top-ten', '', {
-    populate: {
-      albums: { populate: { cover: { fields: ['url'] } } },
-    },
-  }),
+const topTen = await useStrapiData(
+  'top-ten',
+  () =>
+    findOne<TopTen>('top-ten', '', {
+      populate: {
+        albums: { populate: { cover: { fields: ['url'] } } },
+      },
+    }),
+  { optional: true },
 )
 </script>

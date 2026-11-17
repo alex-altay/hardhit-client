@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BandsListHero :hero scroll-target-id="captured-live" />
+    <BandsListHero v-if="hero" :hero scroll-target-id="captured-live" />
     <UContainer class="py-12">
       <h1
         id="captured-live"
@@ -90,13 +90,16 @@ const [bands, hero] = await Promise.all([
       }),
     ),
   ),
-  useStrapiData('photos-hero', () =>
-    findOne<PhotosHero>('photos-hero', '', {
-      populate: {
-        backgroundPhoto: { fields: ['url'] },
-        bands: { populate: { photo: { fields: ['url'] } } },
-      },
-    }),
+  useStrapiData(
+    'photos-hero',
+    () =>
+      findOne<PhotosHero>('photos-hero', '', {
+        populate: {
+          backgroundPhoto: { fields: ['url'] },
+          bands: { populate: { photo: { fields: ['url'] } } },
+        },
+      }),
+    { optional: true },
   ),
 ])
 

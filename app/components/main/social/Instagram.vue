@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="instagram">
     <NuxtLink
       :to="instagram.link"
       target="_blank"
@@ -102,7 +102,11 @@
 <script setup lang="ts">
 const { findOne } = useStrapi()
 
-const instagram = await useStrapiData('instagram', () =>
-  findOne<Instagram>('instagram', '', { populate: '*' }),
+const instagram = await useStrapiData(
+  'instagram',
+  () => findOne<Instagram>('instagram', '', { populate: '*' }),
+  {
+    optional: true,
+  },
 )
 </script>

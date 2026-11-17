@@ -6,10 +6,22 @@ import type { ComputedRef } from 'vue'
  */
 const STRAPI_TIMEOUT_MS = 10_000
 
+type StrapiRequest<T> = () => Promise<{ data: T }>
+
 export async function useStrapiData<T>(
   key: string,
-  request: () => Promise<{ data: T }>,
-): Promise<ComputedRef<T>> {
+  request: StrapiRequest<T>,
+): Promise<ComputedRef<T>>
+export async function useStrapiData<T>(
+  key: string,
+  request: StrapiRequest<T>,
+  options: { optional: true },
+): Promise<ComputedRef<T | undefined>>
+export async function useStrapiData<T>(
+  key: string,
+  request: StrapiRequest<T>,
+  { optional = false }: { optional?: boolean } = {},
+): Promise<ComputedRef<T | undefined>> {
   const { data, error } = await useAsyncData(
     key,
     async () => {
@@ -22,6 +34,18 @@ export async function useStrapiData<T>(
     },
     { getCachedData: getSessionCachedData },
   )
+
+  if (optional) {
+    if (error.value) {
+      reportHiddenBlock(key, error.value)
+    }
+    watch(error, (e) => {
+      if (e) {
+        reportHiddenBlock(key, e)
+      }
+    })
+    return computed(() => (error.value ? undefined : (data.value as T | undefined)))
+  }
 
   if (error.value) {
     throw toAppError(error.value)
@@ -39,6 +63,10 @@ export async function useStrapiData<T>(
     }
     return data.value as T
   })
+}
+
+function reportHiddenBlock(key: string, err: unknown) {
+  console.error(`useStrapiData: "${key}" failed, the block is hidden`, err)
 }
 
 /**

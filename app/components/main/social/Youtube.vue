@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="youtube">
     <NuxtLink
       :to="youtube.link"
       target="_blank"
@@ -57,7 +57,11 @@
 <script setup lang="ts">
 const { findOne } = useStrapi()
 
-const youtube = await useStrapiData('youtube', () =>
-  findOne<Youtube>('youtube', '', { populate: '*' }),
+const youtube = await useStrapiData(
+  'youtube',
+  () => findOne<Youtube>('youtube', '', { populate: '*' }),
+  {
+    optional: true,
+  },
 )
 </script>
