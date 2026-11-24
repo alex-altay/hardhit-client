@@ -305,3 +305,9 @@ main:focus {
     opacity: 0;
   }
 }
+
+@custom-variant bands-hero-motion {
+  @media (prefers-reduced-motion: no-preference) and (min-aspect-ratio: 3/2) {
+    @slot;
+  }
+}
