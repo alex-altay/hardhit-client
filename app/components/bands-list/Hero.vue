@@ -58,13 +58,17 @@ const FLIGHT_DURATION_PART = 0.4
 const NEXT_CARD_DELAY = (1 - FLIGHT_DURATION_PART) / (CARD_LAYOUT.length - 1)
 const BACKGROUND_HOLD_LENGTH = 0.6
 
+function roundForStyle(value: number) {
+  return Math.round(value * 1000) / 1000
+}
+
 function getCardStyle({ x, y, rotate, z }: CardPlacement) {
   const fromOriginX = x - SPREAD_ORIGIN.x
   const fromOriginY = (y - SPREAD_ORIGIN.y) * HEIGHT_TO_WIDTH
   const length = Math.hypot(fromOriginX, fromOriginY)
-  const dx = (fromOriginX / length) * FLIGHT_DISTANCE
-  const dy = (fromOriginY / length) * FLIGHT_DISTANCE
-  const flightStart = (CARD_LAYOUT.length - z) * NEXT_CARD_DELAY
+  const dx = roundForStyle((fromOriginX / length) * FLIGHT_DISTANCE)
+  const dy = roundForStyle((fromOriginY / length) * FLIGHT_DISTANCE)
+  const flightStart = roundForStyle((CARD_LAYOUT.length - z) * NEXT_CARD_DELAY)
   return {
     left: `${x}%`,
     top: `${y}%`,
