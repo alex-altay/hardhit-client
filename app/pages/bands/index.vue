@@ -57,6 +57,7 @@
       </section>
       <div v-if="!filteredBands.length" class="text-brand">No bands found</div>
     </UContainer>
+    <UiBackToTop target-id="captured-live" />
   </div>
 </template>
 
