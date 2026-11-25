@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :style="{ '--filters-height': `${filtersHeight}px` }">
     <BandsListHero v-if="hero" :hero scroll-target-id="captured-live" />
     <UContainer class="py-12">
       <h1
@@ -10,13 +10,34 @@
         Captured Live
       </h1>
 
-      <div class="mb-8 flex flex-row flex-wrap justify-between items-center gap-4">
+      <div
+        ref="filtersBar"
+        class="sticky top-(--ui-header-height) z-20 mb-8 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 flex flex-col gap-3 bg-default/75 backdrop-blur border-b border-default"
+      >
         <BandsListFilters
           v-model:search="searchString"
           v-model:with-interview="withInterview"
           v-model:with-live="withLive"
         />
-        <BandsListSlideshowAll :bands class="w-full sm:w-64 justify-center" />
+        <div class="flex flex-row flex-wrap justify-between items-center gap-4">
+          <nav
+            class="min-w-0 flex-1 flex flex-row flex-wrap items-center gap-x-3 gap-y-1"
+            aria-label="Jump to letter"
+          >
+            <span class="mr-1">Jump to letter:</span>
+            <template v-for="letter in INDEX_LETTERS" :key="letter">
+              <NuxtLink
+                v-if="bandsByLetter.has(letter)"
+                :to="{ hash: `#${getLetterId(letter)}` }"
+                class="font-bold hover:text-brand-primary"
+              >
+                {{ letter }}
+              </NuxtLink>
+              <span v-else class="font-bold text-dimmed" aria-hidden="true">{{ letter }}</span>
+            </template>
+          </nav>
+          <BandsListSlideshowAll :bands class="w-full sm:w-64 justify-center" />
+        </div>
       </div>
       <BandsListVoiceAnnounce
         :count="filteredBands.length"
@@ -25,28 +46,11 @@
         :with-live="withLive"
       />
 
-      <nav
-        class="mb-8 flex flex-row flex-wrap items-center gap-x-3 gap-y-1"
-        aria-label="Jump to letter"
-      >
-        <span class="mr-1">Jump to letter:</span>
-        <template v-for="letter in INDEX_LETTERS" :key="letter">
-          <NuxtLink
-            v-if="bandsByLetter.has(letter)"
-            :to="{ hash: `#${getLetterId(letter)}` }"
-            class="font-bold hover:text-brand-primary"
-          >
-            {{ letter }}
-          </NuxtLink>
-          <span v-else class="font-bold text-dimmed" aria-hidden="true">{{ letter }}</span>
-        </template>
-      </nav>
-
       <section
         v-for="[letter, group] in bandsByLetter"
         :id="getLetterId(letter)"
         :key="letter"
-        class="mb-8 scroll-mt-[calc(var(--ui-header-height)+16px)] grid grid-cols-[repeat(auto-fill,min(90vw,390px))] gap-4"
+        class="mb-8 scroll-mt-[calc(var(--ui-header-height)+var(--filters-height)+16px)] grid grid-cols-[repeat(auto-fill,min(90vw,390px))] gap-4"
       >
         <div class="mb-1 col-span-full text-5xl font-bold">{{ letter }}</div>
         <BandsListCard v-for="band in group" :key="band.id" :band />
@@ -57,6 +61,8 @@
 </template>
 
 <script setup lang="ts">
+import { useElementSize } from '@vueuse/core'
+
 definePageMeta({ layout: 'full-width' })
 useSeoMeta({
   title: 'Captured Live',
@@ -67,6 +73,9 @@ const searchString = ref('')
 const withInterview = ref(false)
 const withLive = ref(false)
 const { find, findOne } = useStrapi()
+
+const filtersBar = useTemplateRef('filtersBar')
+const { height: filtersHeight } = useElementSize(filtersBar, undefined, { box: 'border-box' })
 
 const [bands, hero] = await Promise.all([
   useStrapiData('bands', () =>
